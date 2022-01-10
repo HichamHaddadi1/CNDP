@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 class MainController extends Controller
 {
-    
+
 /**This one is for landing page  */
     function index()
     {
@@ -45,21 +45,21 @@ class MainController extends Controller
        ->join('events','rooms.id','=','events.id_room')
        ->select('users.*','rooms.*','events.*')
        ->get();
-    //    dd($events);  
+    //    dd($events);
         return view('Viewer.viewer_home' , compact('events'));
     }
 
 /**this one for auth forms for a normal user  */
     function register_user()
     {
-      
+
         return view('normal_users.userRegister');
     }
     function login_user()
     {
         return view('normal_users.userLogin');
     }
-    
+
     function admin()
     {
         $s_requests = User::where('status' , '=' , 'pending')->get();
@@ -99,7 +99,7 @@ class MainController extends Controller
         $all_users= DB::table('users')->paginate(10);
         return view('admin_users' , compact(['all_users' , 'pending', 'streamers_requests' , 'pending_events']));
     }
-    
+
      function admin_streams()
     {
         $events = Event::all();
@@ -152,47 +152,47 @@ class MainController extends Controller
 
     function streamer_presentation()
     {
-       
+
 
         return view('streamers.streamer_prasent');
     }
      function streamer_present_upload(Request $request)
      {
-        
+
         $rooms=Room::where('id_user', '=' , Auth::user()->id)->first();
-    
+
         //$r_count=$rooms->count();
         $request->validate([
             'file_upload'  =>  'required',
-          ]); 
-        
-     
+          ]);
+
+
        if($request->hasFile('file_upload') ) {
             $file = $request->file('file_upload');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
-          
-            
+
+
             $file->move('uploads/images/', $filename);
             $rooms->update(['presentations' => $filename]);
-            
+
           }
-          
+
         return back()->with(['success'=>'successfully added']);
-       
+
 
      }
     /*Streamer Part  */
      function streamer_planning()
     {
         $room = Room::where('id_user' , '<=' , Auth::user()->id)->first();
-            
-       
+
+
 
         $data = ['LoggedUserInfo'=>User::where('id','=',session('LoggedUser'))->first()];
          return view('streamers.planning',$data);
     }
-    
+
      function streamer()
     {
         $data = ['LoggedUserInfo'=>User::where('id','=',session('LoggedUser'))->first()];
@@ -244,10 +244,10 @@ class MainController extends Controller
     {
         return view('streamer_confirmation');
     }
-   
+
     function check(Request $request)
     {
-        
+
 
             // if (Auth::user()->role == 1)
             // {
@@ -256,12 +256,12 @@ class MainController extends Controller
             // }
             // else if(Auth::user()->role == 2 )
             // {
-                   
+
             // // return redirect()->intended(RouteServiceProvider::HOME);
-            
+
             //     // return redirect()->route('streamer.profile');
             // }
-            
+
             // else if(Auth::user()->role == 3)
             // {
             //     return redirect()->intended(RouteServiceProvider::HOME);
@@ -272,9 +272,9 @@ class MainController extends Controller
             //     return redirect()->intended(RouteServiceProvider::HOME);
 
             // }
-           
-        
- 
+
+
+
     }
     /***updating avatar  */
     function update_avatar()
@@ -284,11 +284,11 @@ class MainController extends Controller
         //     $filename = request()->image->getClientOriginalName();
         //     // request()->image->storeAs('images' , $user->id.'/'.$filename , 'public');
         //     request()->image->move('upload' , $filename );
-            
+
         //     $user->update(['avatar' => $filename]);
 
         // }
-     
+
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -296,16 +296,16 @@ class MainController extends Controller
             $file->move('upload/', $filename);
             $image = $filename;
             $user->update(['avatar' => $image]);
-        } 
-            
+        }
+
         return redirect()->back();
     }
-    /**End Update Avatar */ 
+    /**End Update Avatar */
 
 
     public function update_profile($id)
     {
-       
+
         DB::table('users')
         ->where('id', $id)
         ->update([
@@ -314,7 +314,7 @@ class MainController extends Controller
             'fname' =>  request()->get('fname'),
             'lname' =>  request()->get('lname')
         ]);
-        
+
     return back();
     }
 
@@ -325,13 +325,13 @@ class MainController extends Controller
         $streamers_requests = $s_requests->count();
         $pending_rooms = Room::where('verified', '=', 'pending')->get();
         $pending = $pending_rooms->count();
-        
+
         $events = Event::where('isVerified', '=', 'Pending')->get();
 
         $pending_events=$events->count();
         return view('admin_events_req',compact(['events','pending','streamers_requests','pending_events']));
     }
-    
+
     public function admin_verify_event( $id,$mode,Request $request)
     {
         $event = Event::find($id);
@@ -374,7 +374,7 @@ class MainController extends Controller
             // Mail::to()->send(new EventsNotification($details));
             return back();
         }
-       
+
     }
 }
 /******************************************************************/

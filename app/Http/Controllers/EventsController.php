@@ -33,38 +33,38 @@ class EventsController extends Controller
     }
     public function adminEvents()
     {
-       
+
         return $this->eventsToArrayAdmin(Event::all());
     }
     public function eventsToArray($events)
     {
         $eventsArray=[];
-       
+
           foreach($events as $event)
         {
              if ($event->id_user == Auth::user()->id && $event->isVerified == 'Verified')
               {
-            
+
             $data=[
                 'title' => $event->event_theme,
                 'start' => $event->starting_at,
                 'end'   => $event->ending_at,
-                'id_user' =>$event->id_user, 
+                'id_user' =>$event->id_user,
                 'id_room' =>$event->id_room
             ];
            array_push($eventsArray,$data);
-            }      
+            }
         }
-        
+
         return response()->json($eventsArray);
 
-          
+
     }
-    
+
     public function eventsToArrayAdmin($events)
     {
         $eventsArray=[];
-        // dd($user);  
+        // dd($user);
           foreach($events as $event)
         {
             if ($event->isVerified == 'Verified' )
@@ -81,27 +81,27 @@ class EventsController extends Controller
            array_push($eventsArray,$data);
         }
         }
-        
+
         return response()->json($eventsArray);
 
-          
+
     }
     // Another test for fullCalendar
     public function showEvents()
 
     {
-        
-        if(request()->ajax()) 
+
+        if(request()->ajax())
         {
             $start = (!empty($_GET["starting_at"])) ? ($_GET["starting_at"]) : ('');
             $end =   (!empty($_GET["ending_at"])) ? ($_GET["ending_at"]) : ('');
 
             $data = Event::whereDate('starting_at', '>=', $start)->whereDate('ending_at',   '<=', $end)->get(['id' , 'title','starting_at', 'ending_at' , 'id_room' , 'id_user' ]);
             return Response::json($data);
-        }   
-        
+        }
 
-        
+
+
 
     }
 
@@ -121,20 +121,20 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function     store(Request $request)
     {
-        
+
         // //dd($request);
         $this->validate($request,[
             'event_theme' => 'required',
             'event_desc' => 'required|max:120',
             'starting_at' => 'required',
-            'ending_at' => 'required | after_or_equal:starting_at' 
-            
+            'ending_at' => 'required | after_or_equal:starting_at'
+
         ]);
-        
+
              $event = new Event([
-           
+
             'event_theme' => $request->get('event_theme'),
             'event_desc' => $request->get('event_desc'),
             'starting_at' => Carbon::parse($request->get('starting_at'))->format('Y-m-d G:i'),
@@ -143,7 +143,7 @@ class EventsController extends Controller
             'id_user' => Auth::user()->id
         ]);
         // dd($event);
-        $event->save();  
+        $event->save();
         return redirect()->route('streamers.events' )->with('success', __('Successfully Added'));
     }
 
@@ -155,7 +155,7 @@ class EventsController extends Controller
      */
     public function show()
     {
-        
+
         $data = DB::table('events')->get();
         //  $name = DB::table('users')->select('user_name')->where('id_user','=',$data->id_user);
         $events = DB::table('events')->orderByRaw('created_at DESC')->paginate(10);
@@ -163,7 +163,7 @@ class EventsController extends Controller
         $rooms_count = $rooms->count();
         //dd($events);
          return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count'));
-         
+
     }
 
     public function search_event_streamer()
@@ -217,7 +217,7 @@ class EventsController extends Controller
                       'max_viewers' =>$request->get('max_viewersupdate'),
                       'viewer_pw' =>$request->get('viewer_pwupdate'),
                       'room_desc'=>$request->get('room_descUpdate'),
-                     
+
         ]);
         return response()->json(['status' => 1, 'message' => "AZERTYUIOP"]);
 
@@ -225,7 +225,7 @@ class EventsController extends Controller
             return response()->json(['status' => 0, 'errors' => $validator->errors()->toArray()]);
         }
 
-        
+
 
     }
     /**
@@ -235,7 +235,7 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   
+
     public function update(Request $request ,$id)
     {
         DB::table('events')
@@ -246,12 +246,12 @@ class EventsController extends Controller
                   'ending_at' =>Carbon::parse($request->get('ending_at_Update'))->format('Y-m-d G:i'),
                   'event_desc'=>$request->get('event_desc_Update'),
                   'id_user' =>Auth::user()->id,
-                  'id_room' =>$request->get('id_room')    
+                  'id_room' =>$request->get('id_room')
     ]);
     return back()->with('success', __('Successfully Updated'));
     }
 
-    
+
     public function admin_eventUpdate(Request $request ,$id)
     {
         $event = Event::where('id' , $id);
@@ -277,7 +277,7 @@ class EventsController extends Controller
     public function destroy($id)
     {
         $event = Event::find($id);
-        
+
         $event->delete();
         return back()->with('success', __('Successfully Deleted'));
     }

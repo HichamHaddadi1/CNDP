@@ -1,6 +1,4 @@
-@extends('streamers.streamer')
-
-@section('streamer_content')
+<?php $__env->startSection('streamer_content'); ?>
 <style>
   .link_guide{
 color:rgb(39, 39, 39) !important;
@@ -158,20 +156,21 @@ footer p {
   </style>
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-     <strong>Note :</strong> Make sure you have created your room before creating your first event, go back to ><b><span ><a style="color: rgb(37, 37, 37)" class="link_guide" href="{{ url('streamer/rooms') }}"> <i class="nav-icon fas fa-door-open"></i> Rooms</a></span></b>
+     <strong>Note :</strong> Make sure you have created your room before creating your first event, go back to ><b><span ><a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/rooms')); ?>"> <i class="nav-icon fas fa-door-open"></i> Rooms</a></span></b>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-@if (Session::get('success'))
+<?php if(Session::get('success')): ?>
       <div class="alert alert-success mt-3" role="alert">
-        {{ Session::get('success') }}
+        <?php echo e(Session::get('success')); ?>
+
       </div>
-      @endif
+      <?php endif; ?>
   <div class="btn mb-4 mr-4" style="float: right">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Event</button>
   </div>
-  <form action="{{ route('search_event_streamer') }}" method="GET">
+  <form action="<?php echo e(route('search_event_streamer')); ?>" method="GET">
     <div class="row">
      <div class="col-lg-4 col-lg-offset-4">
        <div class="input-group">
@@ -193,36 +192,37 @@ footer p {
       </tr>
     </thead>
     <tbody>
-      @foreach ($events as $event )
-      @if ($event->id_user == Auth::user()->id)
+      <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <?php if($event->id_user == Auth::user()->id): ?>
         <tr>
-            <td>{{ $event->event_theme }}</td>
-            <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
-            <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
-            <td>{{ $event->isVerified}}</td>
+            <td><?php echo e($event->event_theme); ?></td>
+            <td><?php echo e(str_replace('00:', '',$event->starting_at)); ?></td>
+            <td><?php echo e(str_replace('00:', '',$event->ending_at)); ?></td>
+            <td><?php echo e($event->isVerified); ?></td>
             <td colspan="2">
-                @if($event->isVerified!='Pending' && $event->isVerified!='Denied')
-                    <a class="btn btn-primary btn-sm" href="{{ route('streamers.event_start' , [$event->id_room , $event->id ])}}"><i class="fa fa-play fa-sm"></i> Start Room</a>
-                    <button  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}"><i class="fas fa-pen"></i> Edit Event</button>
-                    <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="{{ route('join' , $event->id_room)}}">
+                <?php if($event->isVerified!='Pending' && $event->isVerified!='Denied'): ?>
+                    <a class="btn btn-primary btn-sm" href="<?php echo e(route('streamers.event_start' , [$event->id_room , $event->id ])); ?>"><i class="fa fa-play fa-sm"></i> Start Room</a>
+                    <button  class="btn btn-success btn-sm editBtn" data-id="<?php echo e($event->id); ?>"><i class="fas fa-pen"></i> Edit Event</button>
+                    <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="<?php echo e(route('join' , $event->id_room)); ?>">
                         Copy Link
                     </button>
                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"> Share link&nbsp;<i class="fas fa-share-alt"></i> </button>
-                @endif
-                @if($event->isVerified !='Pending' )
-                    <a class="btn btn-danger btn-sm" href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i> Delete</a>
-                @endif
+                <?php endif; ?>
+                <?php if($event->isVerified !='Pending' ): ?>
+                    <a class="btn btn-danger btn-sm" href="<?php echo e(route('delete.event' , $event->id)); ?>"><i class="fas fa-trash"></i> Delete</a>
+                <?php endif; ?>
             </td>
         </tr>
-      @endif
+      <?php endif; ?>
 
 
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </tbody>
 
   </table>
    <span class="pagination justify-content-center" >
-    {{$events->links()}}
+    <?php echo e($events->links()); ?>
+
     </span>
 
   <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -236,15 +236,16 @@ footer p {
         </button>
       </div>
 
-          <form action="{{ route('streamers.events_add')}}" method="POST" id="create_form">
-            @csrf
-            {{ csrf_field() }}
+          <form action="<?php echo e(route('streamers.events_add')); ?>" method="POST" id="create_form">
+            <?php echo csrf_field(); ?>
+            <?php echo e(csrf_field()); ?>
+
             <div class="row">
             <div class="col">
               <div class="modal-body mx-3">
                 <div class="md-form">
                     <label data-error="wrong" data-success="right" for="orangeForm-email">User</label>
-                    <input type="text" id="UserName" name="UserName" class="form-control validate" value="{{Auth::user()->name}}" readonly  >
+                    <input type="text" id="UserName" name="UserName" class="form-control validate" value="<?php echo e(Auth::user()->name); ?>" readonly  >
                 </div>
               </div>
               </div>
@@ -253,13 +254,13 @@ footer p {
                 <div class="md-form">
                     <label data-error="wrong" data-success="right" for="orangeForm-email">Room</label>
                     <select class="form-control validate" name="id_room" aria-label="Default select example">
-                      {{-- <option selected>Select a Room Please</option> --}}
-                      @foreach ($rooms as $room )
-                      @if ($room->id_user == Auth::user()->id)
-                          <option value="{{$room->id}}">{{ $room->room_name}}</option>
-                      @endif
+                      
+                      <?php $__currentLoopData = $rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $room): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <?php if($room->id_user == Auth::user()->id): ?>
+                          <option value="<?php echo e($room->id); ?>"><?php echo e($room->room_name); ?></option>
+                      <?php endif; ?>
 
-                      @endforeach
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
               </div>
@@ -268,12 +269,26 @@ footer p {
             <div class="modal-body mx-3">
           <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Event Theme</label>
-            <input type="text" id="RoomName" name="event_theme" class="form-control @error('event_theme') is-invalid @enderror" >
-           @error('event_theme')
+            <input type="text" id="RoomName" name="event_theme" class="form-control <?php $__errorArgs = ['event_theme'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" >
+           <?php $__errorArgs = ['event_theme'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong><?php echo e($message); ?></strong>
                         </span>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         </div>
 
         <div class="time-picker">
@@ -283,23 +298,51 @@ footer p {
               <div class="col">
                 <div class="md-orm ">
                   <label class="col-form-label text-right">Start at</label>
-                  <input type="text" id="starting_at" name="starting_at" autocomplete="off" class="form-control @error('starting_at') is-invalid @enderror form-control-solid datetimepicker-input" id="kt_datetimepicker_5" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_5" onfocusout="checkDates()" />
-                  @error('starting_at')
+                  <input type="text" id="starting_at" name="starting_at" autocomplete="off" class="form-control <?php $__errorArgs = ['starting_at'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> form-control-solid datetimepicker-input" id="kt_datetimepicker_5" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_5" onfocusout="checkDates()" />
+                  <?php $__errorArgs = ['starting_at'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong><?php echo e($message); ?></strong>
                         </span>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
                 </div>
                 <div class="col">
             <div class="md-orm ">
                   <label class="col-form-label text-right">End at</label>
-                  <input type="text"  id="ending_at" name="ending_at" autocomplete="off" class="form-control @error('ending_at') is-invalid @enderror form-control-solid datetimepicker-input" id="kt_datetimepicker_4" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_4"  onfocusout="compareDates()" />
-                  @error('ending_at')
+                  <input type="text"  id="ending_at" name="ending_at" autocomplete="off" class="form-control <?php $__errorArgs = ['ending_at'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> form-control-solid datetimepicker-input" id="kt_datetimepicker_4" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_4"  onfocusout="compareDates()" />
+                  <?php $__errorArgs = ['ending_at'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong><?php echo e($message); ?></strong>
                         </span>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                 </div>
                 </div>
         </div>
@@ -308,13 +351,27 @@ footer p {
         </div>
         <div class="md-form ">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description</label>
-            <textarea name="event_desc" id="event_desc" class="form-control @error('event_desc') is-invalid @enderror" cols="30" rows="6"  maxlength="300" ></textarea>
+            <textarea name="event_desc" id="event_desc" class="form-control <?php $__errorArgs = ['event_desc'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" cols="30" rows="6"  maxlength="300" ></textarea>
 
-            @error('event_desc')
+            <?php $__errorArgs = ['event_desc'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong><?php echo e($message); ?></strong>
                         </span>
-                    @enderror
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                     <div class="countArea">
 
                     </div>
@@ -333,9 +390,9 @@ footer p {
 </div>
 </form>
 
-<!-- {{-- Edit Event and update  --}} -->
+<!--  -->
   <form id="updateForm" action="streamer/events/" method="GET">
-    @csrf
+    <?php echo csrf_field(); ?>
   <div class="modal fade" id="EditEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -346,13 +403,13 @@ footer p {
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-{{-- First Row Start --}}
+
       <div class="row">
     <div class="col">
       <div class="modal-body mx-3">
         <div class="md-form">
             <label data-error="wrong" data-success="right" for="orangeForm-email">User</label>
-            <input type="text" id="UserName" name="UserName" class="form-control validate" value="{{Auth::user()->name}}" readonly  >
+            <input type="text" id="UserName" name="UserName" class="form-control validate" value="<?php echo e(Auth::user()->name); ?>" readonly  >
         </div>
       </div>
       </div>
@@ -361,19 +418,19 @@ footer p {
         <div class="md-form">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Room</label>
             <select class="form-control validate" name="id_room" aria-label="Default select example" readonly>
-              {{-- <option selected>Select a Room Please</option> --}}
-              @foreach ($rooms as $room )
-              @if ($room->id_user == Auth::user()->id)
-                  <option value="{{$room->id}}" >{{ $room->room_name}}</option>
-              @endif
-              @endforeach
+              
+              <?php $__currentLoopData = $rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $room): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <?php if($room->id_user == Auth::user()->id): ?>
+                  <option value="<?php echo e($room->id); ?>" ><?php echo e($room->room_name); ?></option>
+              <?php endif; ?>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
         </div>
       </div>
       </div>
 
     </div>
-{{-- First Row END --}}
+
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Event Theme</label>
@@ -399,7 +456,7 @@ footer p {
         </div>
         <div class="md-form ">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description</label>
-            {{-- <input type="text" id="RoomDesc" class="form-control validate"> --}}
+            
             <textarea name="event_desc_Update" id="DescUpdate" class="form-control validate " cols="30" rows="6" maxlength="300" ></textarea>
           <div id="countL1"></div>
         </div>
@@ -415,74 +472,8 @@ footer p {
 </form>
 </div>
  <!--Model pour partage-->
-    {{-- <?php
-        $url = new \ImLiam\ShareableLink(route('join' , $event->id_room), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
-    ?> --}}
-{{--
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content col-12">
-                <div class="modal-header">
-                    <h5 class="modal-title">Partager</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
-                </div>
-                <div class="modal-body">
-                    <div class="icon-container1 d-flex">
-                        <!-- Twitter -->
-                        <div class="smd">
-                            <a href='{{$url->twitter}}' target='_blank'>
-                                <i class=" img-thumbnail fab fa-twitter fa-2x" style="color:#4c6ef5;background-color: aliceblue"></i>
-                                <p>Twitter</p>
-                            </a>
-                        </div>
-                        <!-- Facebook -->
-                        <div class="smd">
-                            <a href='{{$url->facebook}}' target='_blank'>
-                               <i class="img-thumbnail fab fa-facebook fa-2x" style="color: #3b5998;background-color: #eceff5;"></i>
-                               <p>Facebook</p>
-                            </a>
-                        </div>
-                        <!-- linkedin -->
-                        <div class="smd">
-                            <a href='{{$url->linkedin}}' target='_blank'>
-                               <i class="img-thumbnail fab fa-linkedin-in fa-2x" style="color: #2379aa;background-color: #eceff5;"></i>
-                               <p>linkedin</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="icon-container2 d-flex">
-                        <!-- whatsapp -->
-                        <div class="smd">
-                            <a href='{{$url->whatsapp}}' target='_blank'>
-                                <i class="img-thumbnail fab fa-whatsapp fa-2x" style="color: #25D366;background-color: #cef5dc;"></i>
-                                <p>Whatsapp</p>
-                            </a>
-                        </div>
-                        <!-- Telegram -->
-                        <div class="smd">
-                            <a href='{{$url->telegram}}' target='_blank'>
-                              <i class="img-thumbnail fab fa-telegram fa-2x" style="color: #4c6ef5;background-color: aliceblue"></i>
-                              <p>Telegram</p>
-                            </a>
-                        </div>
-                        <!-- E-mail -->
-                        <div class="smd">
-                            <a href="mailto:?subject=Lien de partage du salle :&amp;body=Check out this site" title="Lien de partage du salle :" target='_blank'>
-                                <i class="img-thumbnail fas fa-envelope fa-2x" style="color: #6c6e71;background-color: #eceff5;"></i>
-                                <p>E-mail</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer"> <label style="font-weight: 600">Lien de page <span class="message"></span></label><br />
+    
 
-                    <div class="copy-text">
-                        <input type="text" class="text" value="{{route('join' , $event->id_room)}}" />
-                        <button data-clipboard-text="{{ route('join' , $event->id_room)}}"><i class="far fa-clone"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <!--fin Model pour partage-->
 
 
@@ -519,10 +510,10 @@ $("#EndingUpdate").flatpickr({
     dateFormat: "Y-m-d H:i",
 });
 </script>
-<!-- {{-- <script src="{{ asset('main.js') }}"></script> --}} -->
+<!--  -->
 <script>
   function compareDates() {
-    var events = {!! json_encode($events->toArray()) !!};
+    var events = <?php echo json_encode($events->toArray()); ?>;
     var startDate = new Date($('#starting_at').val());
     var endDate = new Date($('#ending_at').val());
 
@@ -547,7 +538,7 @@ $("#EndingUpdate").flatpickr({
   e.preventDefault();
 });
   function checkDates() {
-    var events = {!! json_encode($events->toArray()) !!};
+    var events = <?php echo json_encode($events->toArray()); ?>;
     var startDate = new Date($('#starting_at').val());
     var endDate = new Date($('#ending_at').val());
     let t1 = startDate.toISOString();
@@ -576,4 +567,6 @@ $("#EndingUpdate").flatpickr({
   new ClipboardJS('.btn');
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('streamers.streamer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\plateforme-seminaire\resources\views/streamers/events.blade.php ENDPATH**/ ?>

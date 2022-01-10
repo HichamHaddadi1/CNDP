@@ -166,7 +166,7 @@
               <div class="collapse navbar-collapse " id="ftco-nav">
                 <ul class="navbar-nav mr-auto" id="navbar_left">
                     <li class="nav-item" id="img_logo_bg">
-                      <a href="<?php echo e(route('index')); ?>" class="nav-logo"><img class="navbar-brand"  src="\img\cndp-logo.png" id="logo_png"/> </a>
+                      <a href="<?php echo e(route('index')); ?>" class="nav-logo "><img class="navbar-brand h-100"  src="\img\cndp-logo.png" id="logo_png"/> </a>
                     </li>
                     <li class="nav-item" id="nav_home"><a href="<?php echo e(route('index')); ?>" class="nav-link">Home</a></li>
                     <li class="nav-item" id="nav_events"><a href="<?php echo e(route('viewer_events')); ?>" class="nav-link">EVENTS</a></li>
