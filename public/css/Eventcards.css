@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo:400,700|Open+Sans:400,700');
+
+:root {
+  --color: #ffffff;
+
+  --transition-time: 0.5s;
+}
+
+a {
+  color: inherit;
+}
+
+/*.cards-wrapper {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: auto;
+  grid-gap: 4rem;
+  padding: 1rem;
+  margin: 0 auto;
+  width:max-content;
+}
+*/
+.card1 {
+  font-family: 'Heebo';
+  --bg-filter-opacity: 0.5;
+  background-image: linear-gradient(rgba(0,0,0,var(--bg-filter-opacity)),rgba(0,0,0,var(--bg-filter-opacity))), var(--bg-img);
+  height: 22em;
+  width: 20em;
+  font-size: 1em;
+  color: white;
+  border-radius: 1em;
+  padding: .5em;
+  display: flex;
+  align-items: flex-end;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 1em -1em black;
+  transition: all, var(--transition-time);
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #fff/*#FA7851*/;
+  text-decoration: none;
+}
+
+.card1:hover {
+  transform: rotate(0);
+}
+
+.card1 h1 {
+  color:black;
+  padding: 7px;
+  width: 140%;
+  text-align: center;
+  margin-top: 100px;
+  border-radius: 20px;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.2em;
+  text-shadow: white;
+}
+
+.card1 p {
+  font-size: 0.75em;
+  font-family: 'Open Sans';
+  margin-right: -10px;
+  margin-top: 0.5em;
+  line-height: 2em;
+  width: 200px;
+  height: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card1 .tags {
+  text-align: center;
+  margin-top:80px;
+  margin-right:-48%;
+}
+
+.card1 .tags .tag {
+  width: 100%;
+  font-size: 1em;
+  background: rgba(255,255,255,0.5);
+  border-radius: 0.3rem;
+  padding: .5em 1em;
+ font-weight: bold;
+  line-height: 2em;
+  transition: all, var(--transition-time);
+}
+
+.card1:hover .tags .tag {
+  background: var(--color);
+  color: rgb(0, 0, 0);
+}
+.card1:hover,.live-dot{
+  background-color: #2f589ea8; 
+}
+.card1:hover h1{
+  background-color: transparent;
+  transition: all, var(--transition-time);
+  transition-timing-function: ease-in-out;
+}
+.card1 .date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.75em;
+  padding: 1em;
+  line-height: 1em;
+  opacity: .8;
+}
+
+.card1:before, .card1:after {
+  content: '';
+  transform: scale(0);
+  transform-origin: top left;
+  border-radius: 50%;
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  z-index: -5;
+  transition: all, var(--transition-time);
+  transition-timing-function: ease-in-out;
+}
+
+.card1:before {
+  background: rgba(221, 221, 221, 0.438);
+  width: 250%;
+  height: 250%;
+}
+
+.card1:after {
+  background: #2f589ea8;
+  width: 200%;
+  height: 200%;
+}
+
+.card1:hover {
+  color: var(--color);
+}
+
+.card1:hover:before, .card1:hover:after {
+  transform: scale(1);
+}
+
+.card1-grid-space .num {
+  font-size: 3em;
+  margin-bottom: 1.2rem;
+  margin-left: 0rem;
+}
+
+.info {
+  font-size: 1.2em;
+  display: flex;
+  padding: 1em 3em;
+  height: 3em;
+}
+
+.info img {
+  height: 3em;
+  margin-right: 0.5em;
+}
+
+.info h1 {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 1285px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .info {
+    justify-content: center;
+  }
+  .card1-grid-space .num {
+    /margin-left: 0;
+    /text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .cards-wrapper {
+    padding: 4rem 2rem;
+  }
+  .card1 {
+    max-width: calc(100vw - 4rem);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .info {
+    display: block;
+    text-align: center;
+  }
+  .info h1 {
+    margin: 0;
+  }
+}
+
+/*******Dot Animation ******/
+.live-dot {
+  height: .5rem;
+  position: absolute;
+  width: .5rem;
+  margin-top: 55px;
+  border-radius: 100%;
+  background-color: rgb(255, 0, 0);
+  margin-left: 4px;
+}
+  
+  .live-dot::after {
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      border-radius: 100%;
+      background-color: inherit;
+      -webkit-animation:1s ease-out signal infinite;
+              animation: 1s ease-out signal infinite;
+      opacity: .5;
+  }
+
+@-webkit-keyframes signal {
+  20%, 100% {
+      opacity: 0;
+      transform: scale(5);
+  }
+}
+
+@keyframes signal {
+  20%, 100% {
+      opacity: 0;
+      transform: scale(5);
+  }
+}
