@@ -206,25 +206,33 @@ class EventsController extends Controller
             'max_viewersupdate' => 'required',
             'viewer_pwupdate' => 'required',
             'room_descUpdate' => 'required||max:300' ,
-            'room_id' => 'required'
+            'room_id' => 'required',
+            //'file_uploadUpdate'  =>  'required',
         ]);
-
+        $filenameglobe="";
+        if($request->hasFile('file_uploadUpdate') ) {
+            $file = $request->file('file_uploadUpdate');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('uploads/images/', $filename);
+            $filenameglobe=$filename;
+           }
         if ($validator->passes()) {
             DB::table('rooms')
             ->where('id', $request->get('room_id'))
             ->update([
-                      'room_name' => $request->get('room_nameupdate'),
-                      'max_viewers' =>$request->get('max_viewersupdate'),
-                      'viewer_pw' =>$request->get('viewer_pwupdate'),
-                      'room_desc'=>$request->get('room_descUpdate'),
-
+                      'room_name'     =>  $request->get('room_nameupdate'),
+                      'max_viewers'   =>  $request->get('max_viewersupdate'),
+                      'viewer_pw'     =>  $request->get('viewer_pwupdate'),
+                      'room_desc'     =>  $request->get('room_descUpdate'),
+                      'presentations' =>  $filenameglobe,
         ]);
+
         return response()->json(['status' => 1, 'message' => "AZERTYUIOP"]);
 
         } else {
             return response()->json(['status' => 0, 'errors' => $validator->errors()->toArray()]);
         }
-
 
 
     }
