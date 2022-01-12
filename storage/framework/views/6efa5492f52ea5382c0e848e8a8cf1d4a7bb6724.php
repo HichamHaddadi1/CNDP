@@ -335,7 +335,7 @@ unset($__errorArgs, $__bag); ?>
       url: '/room/'+id+'/edit/',
       method:"GET",
       success:function (result){
-        console.log(url);//.val(result.event.event_theme);
+        //console.log(result.event.event_theme);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value  = result.room.room_name;
         MaxViewerUpdate.value = result.room.max_viewers;

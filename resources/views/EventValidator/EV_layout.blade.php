@@ -118,6 +118,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 Pending Rooms <span class="badge badge-dark" style="color:red;">{{$pending_rooms}}</span>
               </p>
             </a>
+            <a href="{{ url('validator/streamers/pending') }}" class="nav-link active">
+                <i class="nav-icon fas fa-clock"></i>
+                <p>
+                  Pending Seminarists <span class="badge badge-dark" style="color:red;">{{ $streamers_requests }}</span>
+                </p>
+              </a>
             <a href="{{ url('validator/events') }}" class="nav-link active">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
@@ -128,6 +134,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                   All Rooms
+                </p>
+              </a>
+              <a href="{{ url('validator/seminarists') }}" class="nav-link active">
+                <i class="nav-icon fas fa-list"></i>
+                <p>
+                  All Seminarists
                 </p>
               </a>
 

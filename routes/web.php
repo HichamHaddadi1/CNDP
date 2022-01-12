@@ -157,12 +157,17 @@ Route::group( ['middleware' =>['auth','can:dashboard_validator']],function(){
 Route::get('validator/profile', [EVController::class , 'validator_profile'])->name('validator.profile');
 Route::get('validator/events/pending',[EVController::class , 'events_validation'])->name('validator.PendingEvents');
 Route::get('validator/rooms/pending',[EVController::class , 'validator_pending_rooms'])->name('validator.PendingRooms');
+Route::get('validator/streamers/pending',[EVController::class , 'validator_pending_seminarists'])->name('validator.PendingSeminarists');
 Route::get('validator/events',[EVController::class , 'validator_all_events'])->name('validator.events');
 Route::get('validator/rooms',[EVController::class , 'validator_all_rooms'])->name('validator.events');
 Route::get('validator/events/{id}/{mode}', [EVController ::class ,'verify_event'])->name('verify_event');
 Route::get('validator/rooms/pending/{id}/{mode}', [EVController ::class ,'verify_Room'])->name('update.verify_Room');
 Route::post('/rooms/update_', [EVController::class ,'updateRoomValidator'])->name('validator.room_update');
 Route::get('/rooms/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
+Route::get('/validator/streamers/pending/{id}/{mode}', [EVController ::class ,'verify_streamer'])->name('validator_verify_streamer');
+Route::get('/validator/seminarists' , [EVController::class , 'validator_all_users'])->name('validator.users');
+
+
 
 
 });

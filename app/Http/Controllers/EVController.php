@@ -34,7 +34,9 @@ class EVController extends Controller
         $rooms = Room::all();
         $p_rooms = Room::where('verified', '=', 'pending')->get();
         $pending_rooms = $p_rooms->count();
-        return view('EventValidator.pending_events' , compact('pending_events','pending_rooms', 'events'));
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        return view('EventValidator.pending_events' , compact('pending_events','streamers_requests','pending_rooms', 'events'));
     }
     public function validator_pending_rooms()
     {
@@ -44,19 +46,94 @@ class EVController extends Controller
         $rooms = Room::all();
         $p_rooms = Room::where('verified', '=', 'pending')->get();
         $pending_rooms = $p_rooms->count();
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
         //dd($pending_events);
-        return view('EventValidator.pending_rooms' , compact('pending_rooms','pending_events', 'rooms'));
+        return view('EventValidator.pending_rooms' , compact('pending_rooms','streamers_requests','pending_events', 'rooms'));
     }
-    public function validator_all_events()
+    public function validator_pending_seminarists()
     {
-        $events = Db::table('events')->orderByDesc('starting_at')->paginate(10);
-        //dd($events);
+        $events = Event::all();
         $p_events = Event::where('isVerified', '=', 'Pending')->get();
         $pending_events = $p_events->count();
         $rooms = Room::all();
         $p_rooms = Room::where('verified', '=', 'pending')->get();
         $pending_rooms = $p_rooms->count();
-        return view('EventValidator.events' , compact('pending_events','pending_rooms', 'events'));
+        $streamers = User::where('status' , '<=' , 'Pending')
+        ->paginate(10);
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        // dd($pending_users);
+        return view('EventValidator.pending_user_validator' , compact('pending_rooms','streamers_requests','streamers', 'pending_events', 'rooms'));
+    }
+    public function validator_all_events()
+    {
+         $events = Event::all();
+        $p_events = Event::where('isVerified', '=', 'Pending')->get();
+        $pending_events = $p_events->count();
+        $rooms = Room::all();
+        $p_rooms = Room::where('verified', '=', 'pending')->get();
+        $pending_rooms = $p_rooms->count();
+        $streamers = User::where('status' , '<=' , 'Pending')
+        ->paginate(10);
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        // dd($pending_users);
+        $all_users= DB::table('users')->where('role' , '=' , 2)->paginate(10);
+        return view('EventValidator.events' , compact('pending_events','pending_rooms','streamers_requests','streamers','all_users', 'events'));
+
+    }
+    public function validator_all_users()
+    {
+        $events = Event::all();
+        $p_events = Event::where('isVerified', '=', 'Pending')->get();
+        $pending_events = $p_events->count();
+        $rooms = Room::all();
+        $p_rooms = Room::where('verified', '=', 'pending')->get();
+        $pending_rooms = $p_rooms->count();
+        $streamers = User::where('status' , '<=' , 'Pending')
+        ->paginate(10);
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        // dd($pending_users);
+        $all_users= DB::table('users')->where('role' , '=' , 2)->paginate(10);
+        return view('EventValidator.all_streamers' , compact('pending_events','pending_rooms','streamers_requests','streamers','all_users', 'events'));
+    }
+    public function verify_streamer( $id,$mode,Request $request)
+    {
+        $streamer = User::where('id', '=', $id)->first();
+        // dd($room . ' ^^^ '.$user);
+
+
+        if($mode=='v')
+        {
+            $details = [
+            'greeting' =>'Hello ' .$streamer->name  ,
+            'message' => 'your account has been approved you can access it from here '
+            ];
+            $streamer = User::find($id);
+            $streamer->status='verified';
+            $streamer->update();
+            Mail::to($streamer->email)->send(new RoomVerification($details));
+
+
+            return back()->with('success' , 'User '.$streamer->name .'has been verified');
+        }
+        elseif($mode=='d')
+        {
+            $details = [
+                'greeting' =>'Hello ' .$streamer->name  ,
+                'message' => 'unfortunatly your acount has been denied , create a new account or contact us '
+                ];
+                $streamer = User::find($id);
+                $streamer->status='denied';
+                $streamer->update();
+                Mail::to($streamer->email)->send(new RoomVerification($details));
+
+
+                return back()->with('errorsUnique' , 'User '.$streamer->name .'has been Denied');
+        }
+
     }
     public function validator_all_rooms()
     {

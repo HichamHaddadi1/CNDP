@@ -1,7 +1,8 @@
-@extends('layouts.admin')
+@extends('EventValidator.EV_layout')
 
 
-@section('admin_content')
+
+@section('validator_content')
 <div class="container">
 <h3 class="m-3">Users</h3>
 @if (Session::get('success'))
@@ -12,16 +13,7 @@
 
       <table class="table table-hover">
   <div class="search mb-3">
-<form action="{{ route('search_users') }}" method="GET">
- <div class="row">
-  <div class="col-lg-4 col-lg-offset-4">
-    <div class="input-group">
-      <input type="search" id="search" name="search" class="form-control" placeholder="Search ">
-      <button type="submit" class="btn btn-outline-primary">search</button>
-    </div>
-  </div>
-</div>
-</form>
+
 </div>
     <thead>
       <tr>
@@ -31,7 +23,6 @@
         <th scope="col">Gender</th>
         <th scope="col">Language</th>
         <th scope="col">Role</th>
-        <th scope="col">Options</th>
       </tr>
     </thead>
 
@@ -52,9 +43,9 @@
             @if ($one_user->role == 3)
             <td class="bg-info bg-opacity-25" >Normal User </td>
             @endif
-            <td colspan="2">
+            {{-- <td colspan="2">
                 <a class="btn btn-danger btn-sm" href="{{ route('delete.user' , $one_user->id)}}"><i class="fas fa-times"></i> Delete</a>
-              </td>
+              </td> --}}
               @endif
         @endforeach
     </tbody>
