@@ -144,7 +144,9 @@ class EVController extends Controller
         $rooms = Room::all();
         $p_rooms = Room::where('verified', '=', 'pending')->get();
         $pending_rooms = $p_rooms->count();
-        return view('EventValidator.rooms' , compact('pending_events','pending_rooms', 'rooms'));
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        return view('EventValidator.rooms' , compact('pending_events','streamers_requests','pending_rooms', 'rooms'));
     }
 
      public function verify_event( $id,$mode,Request $request)

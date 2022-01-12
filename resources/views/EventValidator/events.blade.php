@@ -18,7 +18,7 @@
     </thead>
     <tbody>
       @foreach ($events as $event )
-      <tr>  
+      <tr>
       <td>{{ $event->event_theme }}</td>
       <td>{{ str_replace('00:', '',$event->starting_at)  }}</td>
       <td>{{ str_replace('00:', '',$event->ending_at)   }}</td>
@@ -38,9 +38,9 @@
 
   </table>
    <span class="pagination justify-content-center" >
-    {{$events->links()}}
+    {{-- {{$events->links()}} --}}
     </span>
 
 
-  </div> 
+  </div>
 @endsection

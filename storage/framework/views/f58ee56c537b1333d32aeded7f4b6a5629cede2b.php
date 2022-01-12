@@ -1,7 +1,3 @@
-
-
-
-
 <?php $__env->startSection('validator_content'); ?>
 <div class="container">
 <table class="table table-hover">
@@ -18,7 +14,7 @@
     </thead>
     <tbody>
       <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <tr>  
+      <tr>
       <td><?php echo e($event->event_theme); ?></td>
       <td><?php echo e(str_replace('00:', '',$event->starting_at)); ?></td>
       <td><?php echo e(str_replace('00:', '',$event->ending_at)); ?></td>
@@ -38,11 +34,11 @@
 
   </table>
    <span class="pagination justify-content-center" >
-    <?php echo e($events->links()); ?>
-
+    
     </span>
 
 
-  </div> 
+  </div>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('EventValidator.EV_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\plateforme-seminaire\resources\views/EventValidator/events.blade.php ENDPATH**/ ?>
