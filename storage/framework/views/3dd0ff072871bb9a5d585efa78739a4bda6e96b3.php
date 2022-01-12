@@ -134,7 +134,7 @@ color:rgb(90, 30, 255) !important;
 
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <a id='specialURL1' href="streamer/events/"> <button type="submit" class="btn btn-success">Update Room</button></a>
+        <a id='specialURL1' href="streamer/rooms"> <button type="submit" class="btn btn-success">Update Room</button></a>
       </div>
     </div>
   </div>
@@ -166,10 +166,11 @@ color:rgb(90, 30, 255) !important;
     $('#updateRoomForm').find('small.text-error').text(" ");
     var id = $(this).data('id');
     $.ajax({
-      url: 'validator/room/'+id+'/edit/',
+      url: '/rooms/'+id+'/edit/',
       method:"GET",
+
       success:function (result){
-         // console.log(result.event.event_theme);//.val(result.event.event_theme);
+        console.log(result.room.room_name);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value=result.room.room_name;
         MaxViewerUpdate.value=result.room.max_viewers;
@@ -182,7 +183,7 @@ $('#updateRoomForm').submit(function (e) {
   var form =this;
 e.preventDefault();
 $.ajax({
-      url: "<?php echo e(route('validator.room_update')); ?>",
+      url: "<?php echo e(route('streamers.room_update')); ?>",
       method:"POST",
       processData: false,
       contentType: false,

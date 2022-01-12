@@ -161,8 +161,8 @@ Route::get('validator/events',[EVController::class , 'validator_all_events'])->n
 Route::get('validator/rooms',[EVController::class , 'validator_all_rooms'])->name('validator.events');
 Route::get('validator/events/{id}/{mode}', [EVController ::class ,'verify_event'])->name('verify_event');
 Route::get('validator/rooms/pending/{id}/{mode}', [EVController ::class ,'verify_Room'])->name('update.verify_Room');
-Route::post('validator/rooms/update_', [EVController::class ,'updateRoomValidator'])->name('validator.room_update');
-Route::get('validator/room/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
+Route::post('/rooms/update_', [EVController::class ,'updateRoomValidator'])->name('validator.room_update');
+Route::get('/rooms/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
 
 
 });

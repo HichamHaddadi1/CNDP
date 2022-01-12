@@ -156,8 +156,7 @@ class EVController extends Controller
         $room = Room::find($id);
         return response()->json(['etat'=>true , 'room'=>$room]);
     }
-    /***Validator  Update room */
-    public function updateRoomValidator(Request $request)
+    public function updateRoom(Request $request)
     {
         $validator = FacadesValidator::make(request()->all(), [
             'room_nameupdate' => 'required',

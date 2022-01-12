@@ -1,6 +1,3 @@
-
-
-
 <?php $__env->startSection('streamer_content'); ?>
 <style>
   .room_desc{
@@ -97,15 +94,15 @@ label[for="file-uploadupdate"]:hover {
       </div>
       <?php endif; ?>
     <?php if($c == 0): ?>
-    <div class="btn mb-4 mr-4" style="float: right">   
+    <div class="btn mb-4 mr-4" style="float: right">
           <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Room</button>
     </div>
     <?php else: ?>
     <div class="alert alert-danger mt-3" role="alert">
       You Have Reached Your Limit (1/1 Room)
     </div>
-    <?php endif; ?>  
-    <table class="table table-hover"> 
+    <?php endif; ?>
+    <table class="table table-hover">
  
  <form action="<?php echo e(route('search_room_streamer')); ?>" method="GET">
  <div class="row">
@@ -130,47 +127,47 @@ label[for="file-uploadupdate"]:hover {
     <tbody>
         <?php $__currentLoopData = $rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $room): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php if(Auth::user()->id == $room->user->id  ): ?>
-            
-        <tr> 
+
+        <tr>
         <td><?php echo e($room->room_name); ?></td>
         <td class="room_desc"><?php echo e($room->room_desc); ?></td>
         <td ><?php echo e($room->max_viewers); ?></td>
         <td><?php echo e($room->viewer_pw); ?></td>
         <td><?php echo e($room->verified); ?></td>
-      
-         
+
+
         <td colspan="3">
           <?php if($room->verified!='Pending' && $room->verified!='Denied'): ?>
 
-           
-       <?php endif; ?> 
+
+       <?php endif; ?>
 
        <?php if($room->verified!='Pending'): ?>
        
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" style="background-color: Green" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
-       <?php endif; ?> 
+       <?php endif; ?>
 
         </td>
-        
+
         <!-- Trigger -->
-        
-      
+
+
       </tr>
       <?php endif; ?>
-     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
-   
-  
+     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
     </tbody>
-  
+
   </table>
-  
+
     <span class="pagination justify-content-center" >
     <?php echo e($rooms->links()); ?>
 
     </span>
 
 
- 
+
   <form action="<?php echo e(route ('streamers.store')); ?>" method="POST" enctype="multipart/form-data">
     <?php echo csrf_field(); ?>
   <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -186,7 +183,7 @@ label[for="file-uploadupdate"]:hover {
         <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name</label>
             <input type="text" id="RoomName" name="room_name" class="form-control validate">
-          
+
         </div>
         <div class="row">
           <div class="col">
@@ -212,17 +209,17 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
           
-          
-             
+
+
               <label data-error="wrong" data-success="right" for="orangeForm-email">Upload your Presentation</label>
               <div class="form-group">
                 <span id="filename">Select your file</span>
                   <label for="file-upload">Browse
                     <input type="file" id="file-upload" name="file_upload"></label>
-                 
+
              </div>
              </div>
-        <div class="md-form mb-4"> 
+        <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description</label>
             <textarea id="RoomDesc" name="room_desc" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
@@ -277,7 +274,7 @@ unset($__errorArgs, $__bag); ?>
           </div>
 
           <div class="md-form mb-4 form_div">
-           
+
               <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation</label>
               <div class="form-group">
                 <span id="filenameUpdate">Select your file</span>
@@ -294,7 +291,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
              </div>
-        <div class="md-form mb-4"> 
+        <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description</label>
             <textarea id="room_descUpdate" name="room_descUpdate" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
@@ -322,12 +319,12 @@ unset($__errorArgs, $__bag); ?>
     var valLength = val.length;
     $('#countL').attr("style","color:red");
     var maxCount = $this.attr('maxlength');
-  
+
    $('#countL').text(valLength+"/"+maxCount);
     if(valLength>maxCount){
-        $this.val($this.val().substring(0,maxCount)); 
+        $this.val($this.val().substring(0,maxCount));
     }
-}); 
+});
 </script>
 <script>
   $('.editRoom').on('click', function (e) {
@@ -338,13 +335,13 @@ unset($__errorArgs, $__bag); ?>
       url: '/room/'+id+'/edit/',
       method:"GET",
       success:function (result){
-         // console.log(result.event.event_theme);//.val(result.event.event_theme);
+        console.log(url);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value  = result.room.room_name;
         MaxViewerUpdate.value = result.room.max_viewers;
         viewer_pwUpdate.value = result.room.viewer_pw;
-        room_descUpdate.value = result.room.room_desc; 
-        
+        room_descUpdate.value = result.room.room_desc;
+
         }
       })
   });
@@ -396,4 +393,5 @@ $.ajax({
 </div>
 </form>
   <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('streamers.streamer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\plateforme-seminaire\resources\views/streamers/rooms.blade.php ENDPATH**/ ?>

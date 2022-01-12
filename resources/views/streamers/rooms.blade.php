@@ -95,15 +95,15 @@ label[for="file-uploadupdate"]:hover {
       </div>
       @endif
     @if($c == 0)
-    <div class="btn mb-4 mr-4" style="float: right">   
+    <div class="btn mb-4 mr-4" style="float: right">
           <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Room</button>
     </div>
     @else
     <div class="alert alert-danger mt-3" role="alert">
       You Have Reached Your Limit (1/1 Room)
     </div>
-    @endif  
-    <table class="table table-hover"> 
+    @endif
+    <table class="table table-hover">
  {{-- Search Box --}}
  <form action="{{ route('search_room_streamer') }}" method="GET">
  <div class="row">
@@ -128,46 +128,46 @@ label[for="file-uploadupdate"]:hover {
     <tbody>
         @foreach ($rooms as $room )
         @if (Auth::user()->id == $room->user->id  )
-            
-        <tr> 
+
+        <tr>
         <td>{{ $room->room_name }}</td>
         <td class="room_desc">{{ $room->room_desc }}</td>
         <td >{{ $room->max_viewers }}</td>
         <td>{{$room->viewer_pw}}</td>
         <td>{{$room->verified}}</td>
-      
-         
+
+
         <td colspan="3">
           @if($room->verified!='Pending' && $room->verified!='Denied')
 
-           
-       @endif 
+
+       @endif
 
        @if($room->verified!='Pending')
        {{-- <a  href="{{ route('delete.room' , $room->id)}}"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a> --}}
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" style="background-color: Green" data-id="{{ $room->id }}" ><i class="fas fa-edit" ></i></button></a>
-       @endif 
+       @endif
 
         </td>
-        
+
         <!-- Trigger -->
-        
-      
+
+
       </tr>
       @endif
-     @endforeach   
-   
-  
+     @endforeach
+
+
     </tbody>
-  
+
   </table>
-  
+
     <span class="pagination justify-content-center" >
     {{$rooms->links()}}
     </span>
 
 
- 
+
   <form action="{{ route ('streamers.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
   <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -183,7 +183,7 @@ label[for="file-uploadupdate"]:hover {
         <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name</label>
             <input type="text" id="RoomName" name="room_name" class="form-control validate">
-          
+
         </div>
         <div class="row">
           <div class="col">
@@ -206,17 +206,17 @@ label[for="file-uploadupdate"]:hover {
             </span>
             @enderror
           {{-- <form action="{{route('streamer.presentation.upload')}}" method="POST" enctype="multipart/form-data"> --}}
-          
-             
+
+
               <label data-error="wrong" data-success="right" for="orangeForm-email">Upload your Presentation</label>
               <div class="form-group">
                 <span id="filename">Select your file</span>
                   <label for="file-upload">Browse
                     <input type="file" id="file-upload" name="file_upload"></label>
-                 
+
              </div>
              </div>
-        <div class="md-form mb-4"> 
+        <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description</label>
             <textarea id="RoomDesc" name="room_desc" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
@@ -271,7 +271,7 @@ label[for="file-uploadupdate"]:hover {
           </div>
 
           <div class="md-form mb-4 form_div">
-           
+
               <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation</label>
               <div class="form-group">
                 <span id="filenameUpdate">Select your file</span>
@@ -285,7 +285,7 @@ label[for="file-uploadupdate"]:hover {
              </span>
              @enderror
              </div>
-        <div class="md-form mb-4"> 
+        <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description</label>
             <textarea id="room_descUpdate" name="room_descUpdate" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
@@ -313,12 +313,12 @@ label[for="file-uploadupdate"]:hover {
     var valLength = val.length;
     $('#countL').attr("style","color:red");
     var maxCount = $this.attr('maxlength');
-  
+
    $('#countL').text(valLength+"/"+maxCount);
     if(valLength>maxCount){
-        $this.val($this.val().substring(0,maxCount)); 
+        $this.val($this.val().substring(0,maxCount));
     }
-}); 
+});
 </script>
 <script>
   $('.editRoom').on('click', function (e) {
@@ -329,13 +329,13 @@ label[for="file-uploadupdate"]:hover {
       url: '/room/'+id+'/edit/',
       method:"GET",
       success:function (result){
-         // console.log(result.event.event_theme);//.val(result.event.event_theme);
+        //console.log(result.event.event_theme);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value  = result.room.room_name;
         MaxViewerUpdate.value = result.room.max_viewers;
         viewer_pwUpdate.value = result.room.viewer_pw;
-        room_descUpdate.value = result.room.room_desc; 
-        
+        room_descUpdate.value = result.room.room_desc;
+
         }
       })
   });
