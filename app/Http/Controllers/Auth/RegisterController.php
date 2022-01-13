@@ -144,7 +144,7 @@ class RegisterController extends Controller
 
         if (Auth::user()->role ==2 && Auth::user()->status == 'Pending') {
 
-           return view('streamers.rooms');
+           return url('streamer/rooms');
         }
         if(url('/').'/user//register' != url()->previous())
         // Redirect::setIntendedUrl(url()->previous());
