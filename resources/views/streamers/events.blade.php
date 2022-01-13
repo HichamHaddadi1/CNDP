@@ -207,6 +207,7 @@ footer p {
                     <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="{{ route('join' , $event->id_room)}}">
                         Copy Link
                     </button>
+
                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"> Share link&nbsp;<i class="fas fa-share-alt"></i> </button>
                 @endif
                 @if($event->isVerified !='Pending' )
@@ -415,10 +416,16 @@ footer p {
 </form>
 </div>
  <!--Model pour partage-->
-    {{-- <?php
+
+     <?php
         $url = new \ImLiam\ShareableLink(route('join' , $event->id_room), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
-    ?> --}}
-{{--
+        // dd($event);
+
+
+
+    ?>
+
+
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content col-12">
@@ -482,7 +489,7 @@ footer p {
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!--fin Model pour partage-->
 
 
