@@ -158,7 +158,7 @@ class EventsController extends Controller
 
         $data = DB::table('events')->get();
         //  $name = DB::table('users')->select('user_name')->where('id_user','=',$data->id_user);
-        $events = DB::table('events')->orderByRaw('created_at DESC')->paginate(10);
+        $events = DB::table('events')->where('id_user','=',Auth::user()->id)->orderByRaw('created_at DESC')->paginate(10);
         $rooms = Room::all();
         $rooms_count = $rooms->count();
         //dd($events);

@@ -284,6 +284,7 @@ class RoomsController extends Controller
 
         $room = Room::findOrFail($id);
         // $path = asset('presentations/main.pdf');
+        $presentation=asset('uploads/images/'.$room->presentations);
         if(\Bigbluebutton::isMeetingRunning($room->id) == false){
         /***My Piece Of code that work on Workplace and not on Salle Complexe */
         $createMeeting = \Bigbluebutton::initCreateMeeting([
@@ -295,7 +296,7 @@ class RoomsController extends Controller
             'logoutUrl' => route('dashboard'),
             'record'=>true,
             'presentation' => [
-                ['link' => '/uploads/images/'.$room->presentations, 'fileName' => $room->presentations]
+                ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
             'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id]))."' target='_blank'>".(route('join',['id'=>$room->id]))."</a></li> "
 
@@ -331,7 +332,7 @@ class RoomsController extends Controller
     {
 
         $room = Room::findOrFail($id);
-        $path = asset('presentations/main.pdf');
+        /*$path = asset('presentations/main.pdf');*/
         $event = Event::findOrFail($_id);
         $presentation=asset('uploads/images/'.$room->presentations);
         // dd($presentation);
@@ -346,7 +347,7 @@ class RoomsController extends Controller
             'logoutUrl' => route('dashboard'),
             'record'=>true,
             'presentation' => [
-                ['link' => $presentation, 'fileName' => $presentation.'.pdf']
+                ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
             'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id]))."' target='_blank'>".(route('join',['id'=>$room->id]))."</a></li> "
 
@@ -361,7 +362,6 @@ class RoomsController extends Controller
             'attendeePW' => $room->id.'cmp', //attendee password here
             'userName' => Auth::user()->name,//for join meeting
             'maxParticipants'=>$room->max_viewers,
-
         ]);
         // dd($url);
         $event->event_statue = 1;

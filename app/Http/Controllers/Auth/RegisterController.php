@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'role' =>2,
-            'status' => 'Pending',
+            'status' => 'verified',
             'password' => Hash::make($data['password']),
             'language' =>$data['language'],
             'country' =>$data['country'],
@@ -144,7 +144,7 @@ class RegisterController extends Controller
 
         if (Auth::user()->role ==2 && Auth::user()->status == 'Pending') {
 
-           return '/streamer_confirmation';
+           return view('streamers.rooms');
         }
         if(url('/').'/user//register' != url()->previous())
         // Redirect::setIntendedUrl(url()->previous());
