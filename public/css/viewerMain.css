@@ -79,7 +79,7 @@ body{
     background-color:rgba(221, 221, 221, 0.562);
 }
 #logo_png {
-  width: 150px;
+  width: auto;
   height: auto;
   top: 0;
   position: absolute;

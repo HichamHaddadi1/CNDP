@@ -142,7 +142,7 @@ class RegisterController extends Controller
     {
 
 
-        if (Auth::user()->role ==2 && Auth::user()->status == 'Pending') {
+        if (Auth::user()->role ==2 && Auth::user()->status == 'verified') {
 
            return url('streamer/rooms');
         }
