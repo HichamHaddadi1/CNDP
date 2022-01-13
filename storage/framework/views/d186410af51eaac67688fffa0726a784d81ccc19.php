@@ -206,6 +206,7 @@ footer p {
                     <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="<?php echo e(route('join' , $event->id_room)); ?>">
                         Copy Link
                     </button>
+
                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"> Share link&nbsp;<i class="fas fa-share-alt"></i> </button>
                 <?php endif; ?>
                 <?php if($event->isVerified !='Pending' ): ?>
@@ -472,8 +473,80 @@ unset($__errorArgs, $__bag); ?>
 </form>
 </div>
  <!--Model pour partage-->
-    
 
+     <?php
+        $url = new \ImLiam\ShareableLink(route('join' , $event->id_room), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
+        // dd($event);
+
+
+
+    ?>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content col-12">
+                <div class="modal-header">
+                    <h5 class="modal-title">Partager</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <div class="icon-container1 d-flex">
+                        <!-- Twitter -->
+                        <div class="smd">
+                            <a href='<?php echo e($url->twitter); ?>' target='_blank'>
+                                <i class=" img-thumbnail fab fa-twitter fa-2x" style="color:#4c6ef5;background-color: aliceblue"></i>
+                                <p>Twitter</p>
+                            </a>
+                        </div>
+                        <!-- Facebook -->
+                        <div class="smd">
+                            <a href='<?php echo e($url->facebook); ?>' target='_blank'>
+                               <i class="img-thumbnail fab fa-facebook fa-2x" style="color: #3b5998;background-color: #eceff5;"></i>
+                               <p>Facebook</p>
+                            </a>
+                        </div>
+                        <!-- linkedin -->
+                        <div class="smd">
+                            <a href='<?php echo e($url->linkedin); ?>' target='_blank'>
+                               <i class="img-thumbnail fab fa-linkedin-in fa-2x" style="color: #2379aa;background-color: #eceff5;"></i>
+                               <p>linkedin</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="icon-container2 d-flex">
+                        <!-- whatsapp -->
+                        <div class="smd">
+                            <a href='<?php echo e($url->whatsapp); ?>' target='_blank'>
+                                <i class="img-thumbnail fab fa-whatsapp fa-2x" style="color: #25D366;background-color: #cef5dc;"></i>
+                                <p>Whatsapp</p>
+                            </a>
+                        </div>
+                        <!-- Telegram -->
+                        <div class="smd">
+                            <a href='<?php echo e($url->telegram); ?>' target='_blank'>
+                              <i class="img-thumbnail fab fa-telegram fa-2x" style="color: #4c6ef5;background-color: aliceblue"></i>
+                              <p>Telegram</p>
+                            </a>
+                        </div>
+                        <!-- E-mail -->
+                        <div class="smd">
+                            <a href="mailto:?subject=Lien de partage du salle :&amp;body=Check out this site" title="Lien de partage du salle :" target='_blank'>
+                                <i class="img-thumbnail fas fa-envelope fa-2x" style="color: #6c6e71;background-color: #eceff5;"></i>
+                                <p>E-mail</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"> <label style="font-weight: 600">Lien de page <span class="message"></span></label><br />
+
+                    <div class="copy-text">
+                        <input type="text" class="text" value="<?php echo e(route('join' , $event->id_room)); ?>" />
+                        <button data-clipboard-text="<?php echo e(route('join' , $event->id_room)); ?>"><i class="far fa-clone"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--fin Model pour partage-->
 
 

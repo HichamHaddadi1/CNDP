@@ -490,6 +490,10 @@ footer p {
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+    <!--fin Model pour partage-->
+>>>>>>> 4bee07c68e4e04c0bd131dc1d763607d1c832028
 
 
 <script>

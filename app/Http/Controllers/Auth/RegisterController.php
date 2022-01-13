@@ -44,8 +44,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-       
-        
+
+
     }
 
     /**
@@ -60,17 +60,17 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required' , 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required' , 'string', 'min:8' , 'confirmed'],
-            'language' , 
+            'language' ,
             'country' ,
-            'avatar' , 
+            'avatar' ,
             'address' =>'required' ,
             'gender' =>'required' ,
             'fname' =>'required' ,
             'lname' =>'required' ,
         ]);
 
-        
-        
+
+
     }
 
     /**
@@ -81,9 +81,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data  )
     {
-        
+
        if (isset($data['language'])) {
-          
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -104,13 +104,13 @@ class RegisterController extends Controller
             $file->move('upload/', $filename);
             $image = $filename;
             $user->update(['avatar' => $image]);
-        } 
-        
+        }
+
     }
-  
+
     else
     {
-          
+
         $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -120,8 +120,8 @@ class RegisterController extends Controller
             'gender' =>$data['gender'],
             'fname' => $data['fname'],
             'lname'=>$data['lname'],
-            
-        ]); 
+
+        ]);
         if (request()->hasFile('image')) {
             $file = request()->file('image');
             $extension = $file->getClientOriginalExtension();
@@ -129,18 +129,18 @@ class RegisterController extends Controller
             $file->move('upload/', $filename);
             $image = $filename;
             $user->update(['avatar' => $image]);
-        } 
+        }
 
-        
+
     }
 
-   
+
     return $user;
-            
+
     }
     protected function redirectTo()
     {
- 
+
 
         if (Auth::user()->role ==2 && Auth::user()->status == 'Pending') {
 
@@ -154,10 +154,10 @@ class RegisterController extends Controller
         // return '/';
             // dd
             return redirect()->intended('/')->getTargetUrl();
-        
+
          }
          return "/";
     }
-    
+
 
 }
