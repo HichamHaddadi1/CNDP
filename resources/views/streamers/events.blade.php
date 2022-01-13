@@ -216,7 +216,7 @@ footer p {
                     <a class="btn btn-danger btn-sm" href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i> Delete</a>
                 @endif
                 @else
-                   <small style="color:red;"> Event Expired</small>
+                   <small style="color:green;"> Event Expired</small>
                 @endif
             </td>
         </tr>

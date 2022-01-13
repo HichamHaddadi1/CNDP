@@ -217,7 +217,7 @@ footer p {
                     <a class="btn btn-danger btn-sm" href="<?php echo e(route('delete.event' , $event->id)); ?>"><i class="fas fa-trash"></i> Delete</a>
                 <?php endif; ?>
                 <?php else: ?>
-                   <small style="color:red;"> Event Expired</small>
+                   <small style="color:green;"> Event Expired</small>
                 <?php endif; ?>
             </td>
         </tr>
