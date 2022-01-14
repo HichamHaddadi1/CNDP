@@ -116,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="{{ url('user/events') }}" class="nav-link active">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
-                Events Calendar 
+                SEMINARS Calendar 
               </p>
             </a>
            

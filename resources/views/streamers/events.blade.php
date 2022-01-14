@@ -169,7 +169,7 @@ footer p {
       </div>
       @endif
   <div class="btn mb-4 mr-4" style="float: right">
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Event</button>
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
   <form action="{{ route('search_event_streamer') }}" method="GET">
     <div class="row">
@@ -185,7 +185,7 @@ footer p {
 
     <thead>
       <tr>
-        <th scope="col">Event Theme</th>
+        <th scope="col">Seminar Theme</th>
         <th scope="col">Starts at</th>
         <th scope="col">End at</th>
         <th scope="col">State</th>
@@ -206,7 +206,7 @@ footer p {
               @if(\Carbon\Carbon::now()->lte($event->starting_at))
                 @if($event->isVerified!='Pending' && $event->isVerified!='Denied')
                     <a class="btn btn-primary btn-sm" href="{{ route('streamers.event_start' , [$event->id_room , $event->id ])}}"><i class="fa fa-play fa-sm"></i> Start Room</a>
-                    <button  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}"><i class="fas fa-pen"></i>Edit Event</button>
+                    <button  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}"><i class="fas fa-pen"></i>Edit Seminar</button>
                     <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="{{ route('join' , $event->id_room)}}">
                         Copy Link
                     </button>
@@ -216,7 +216,7 @@ footer p {
                     <a class="btn btn-danger btn-sm" href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i> Delete</a>
                 @endif
                 @else
-                   <small style="color:green;"> Event Expired</small>
+                   <small style="color:green;"> Seminar Expired</small>
                 @endif
             </td>
         </tr>
@@ -236,7 +236,7 @@ footer p {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Create Event</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Create Seminar</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -273,7 +273,7 @@ footer p {
             </div>
             <div class="modal-body mx-3">
           <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">Event Theme</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Seminar Theme</label>
             <input type="text" id="RoomName" name="event_theme" class="form-control @error('event_theme') is-invalid @enderror" >
            @error('event_theme')
                         <span class="invalid-feedback" role="alert">
@@ -313,7 +313,7 @@ footer p {
 
         </div>
         <div class="md-form ">
-            <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass"> Seminar Description</label>
             <textarea name="event_desc" id="event_desc" class="form-control @error('event_desc') is-invalid @enderror" cols="30" rows="6"  maxlength="300" ></textarea>
 
             @error('event_desc')
@@ -326,7 +326,7 @@ footer p {
                     </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button id="submit" class="btn btn-info">Create Event</button>
+          <button id="submit" class="btn btn-info">Create SEMINAR</button>
         </div>
 
 
@@ -347,7 +347,7 @@ footer p {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Edit Event</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Edit SEMINAR</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -382,7 +382,7 @@ footer p {
 {{-- First Row END --}}
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">Event Theme</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">SEMINAR Theme</label>
             <input type="text" id="RoomNameUpdate" name="event_themeUpdate" class="form-control validate"   >
         </div>
 

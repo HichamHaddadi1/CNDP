@@ -36,7 +36,7 @@
 <div class="container border rounded border-primary mt-5 w-40 p-3 col-md-6">
   <div class="text-center">
   <h3 class="text-primary  text-uppercase mt-3 ">Welcome </h3>
-  <h5 class="text-muted">Enter the required informations to join the event</h5>
+  <h5 class="text-muted">Enter the required informations to join the Seminar</h5>
   </div>
 
     {{-- @if(auth()->user()) --}}

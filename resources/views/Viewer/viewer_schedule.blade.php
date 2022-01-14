@@ -49,7 +49,7 @@ margin-bottom: 10%;
 <div class="event_info "style="">
   <h3 class="display-4">Event Schedule</h3>
   <div class="alert alert-info p-3 ">
-  <p class="text-muted h3">All the events are listed here , and you can have access to all of them and be part of <strong>CNDP</strong>  community</p>
+  <p class="text-muted h3">All the SEMINARS are listed here , and you can have access to all of them and be part of <strong>CNDP</strong>  community</p>
   </div>
  
 

@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="{{ url('validator/events/pending') }}" class="nav-link active">
               <i class="nav-icon fa fa-clock"></i>
               <p>
-                Pending Events <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
+                Pending SEMINARS <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
               </p>
             </a>
             <a href="{{ url('validator/rooms/pending') }}" class="nav-link active">
@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="{{ url('validator/events') }}" class="nav-link active">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
-                  All Events
+                  All SEMINARS
                 </p>
               </a>
             <a href="{{ url('validator/rooms') }}" class="nav-link active">

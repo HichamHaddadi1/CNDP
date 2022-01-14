@@ -9,7 +9,7 @@
     <thead>
       <tr>
   
-        <th scope="col">Event Theme</th>
+        <th scope="col">Seminar Theme</th>
         <th scope="col">Starts At</th>
         <th scope="col">Ending At</th>
         <th scope="col">Owner</th>
@@ -27,8 +27,8 @@
       <td>{{ str_replace(str_split('"[]'),'', App\Models\User::where('id' , '=' , $event->id_user)->pluck('name') ) }}</td>
       <td colspan="2">
         {{-- <a class="btn btn-success btn-sm" href=""><i class="fas fa-pen fa-sm"></i> Edit</a> --}}
-      <a  class="btn btn-success btn-sm" href="{{ route('verify_event' , [$event->id,'v'])}}"><i class="fas fa-check"></i> Validate Events</a>
-        <a class="btn btn-danger btn-sm" href="{{ route('verify_event' , [$event->id,'d'])}}"><i class="fas fa-times"></i> Deny Events</a>
+      <a  class="btn btn-success btn-sm" href="{{ route('verify_event' , [$event->id,'v'])}}"><i class="fas fa-check"></i> Validate SEMINARS</a>
+        <a class="btn btn-danger btn-sm" href="{{ route('verify_event' , [$event->id,'d'])}}"><i class="fas fa-times"></i> Deny SEMINARS</a>
       </td>
     </tr>
     @endif

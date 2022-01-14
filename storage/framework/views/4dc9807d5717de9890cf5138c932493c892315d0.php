@@ -169,7 +169,7 @@
                       <a href="<?php echo e(route('index')); ?>" class="nav-logo "><img class="navbar-brand h-100"  src="\img\cndp-logo.png" id="logo_png"/> </a>
                     </li>
                     <li class="nav-item" id="nav_home"><a href="<?php echo e(route('index')); ?>" class="nav-link">Home</a></li>
-                    <li class="nav-item" id="nav_events"><a href="<?php echo e(route('viewer_events')); ?>" class="nav-link">EVENTS</a></li>
+                    <li class="nav-item" id="nav_events"><a href="<?php echo e(route('viewer_events')); ?>" class="nav-link">seminars</a></li>
                     <li class="nav-item" id="nav_schedule"><a href="<?php echo e(route('viewer_schedule')); ?>" class="nav-link">SCHEDULE</a></li>
                     <li class="nav-item" id="nav_contactus"><a href="<?php echo e(route('viewer_contact_us')); ?>" class="nav-link">
                       Contact us</a>
@@ -254,7 +254,7 @@
                 <h2 class="footer-heading">Categories</h2>
                 <ul class="list-unstyled">
                   <li><a href="<?php echo e(route('index')); ?>" class="py-1 d-block">Home</a></li>
-                  <li><a href="<?php echo e(route('viewer_events')); ?>" class="py-1 d-block">Events</a></li>
+                  <li><a href="<?php echo e(route('viewer_events')); ?>" class="py-1 d-block">SEMINARS</a></li>
                   <li><a href="<?php echo e(route('viewer_contact_us')); ?>" class="py-1 d-block">Contact us</a></li>
                   <li><a href="<?php echo e(route('register')); ?>" class="py-1 d-block">Become a Seminar</a></li>
                 </ul>

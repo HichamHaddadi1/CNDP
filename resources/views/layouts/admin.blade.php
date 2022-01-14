@@ -116,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('admin/events_req')}}" class="nav-link active">
                 <i class="nav-icon fa fa-clock"></i>
                 <p>
-                  Pending Events <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
+                  Pending SEMINARS <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
                 </p>
               </a>
               <a href="{{ url('admin/streamers') }}" class="nav-link active">
@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{{ url('admin/planning') }}" class="nav-link active">
                   <i class="nav-icon fas fa-calendar"></i>
                   <p>
-                        Events Calendar
+                        SEMINARS Calendar
                   </p>
                 </a>
               

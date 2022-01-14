@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tamkine</title>
+    <title>CNDP</title>
     <link rel="icon" href="<?php echo e(asset('/img/favicons/orientation-tamkine-32x32.png')); ?>" type="favicon/png" sizes="32x32">
     <link rel="icon" href="<?php echo e(asset('/img/favicons/orientation-tamkine-192x192.png')); ?>" sizes="192x192">
     <link rel="apple-touch-icon-precomposed" href="<?php echo e(asset('/img/favicons/orientation-tamkine-180x180.png')); ?>" sizes="180x180">

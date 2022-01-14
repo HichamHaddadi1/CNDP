@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="apple-touch-icon-precomposed" href="<?php echo e(asset('/img/favicons/orientation-tamkine-180x180.png')); ?>" sizes="180x180">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
-  <title>Tamkine</title>
+  <title>CNDP</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

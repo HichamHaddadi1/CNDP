@@ -2,7 +2,7 @@
 
 @section('admin_content')
 <div class="container">
-  <h3 class="m-3">Events</h3>
+  <h3 class="m-3">SEMINARS</h3>
 @if (Session::get('success'))
       <div class="alert alert-success mt-3" role="alert">
         {{ Session::get('success') }}
@@ -12,7 +12,7 @@
 
     <thead>
       <tr>
-        <th scope="col">Event Theme</th>
+        <th scope="col">Seminar Theme</th>
         <th scope="col">Starts At</th>
         <th scope="col">Ending At</th>
         <th scope="col">Status</th>
@@ -70,7 +70,7 @@
 {{-- First Row END --}}
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">Event Theme</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Seminar Theme</label>
             <input type="text" id="RoomNameUpdate" name="event_themeUpdate" class="form-control validate"   >
         </div>
         <div class="time-picker">   
@@ -88,7 +88,7 @@
         </div>
         
         <div class="md-form "> 
-            <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Seminar Description</label>
             {{-- <input type="text" id="RoomDesc" class="form-control validate"> --}}
             <textarea name="event_desc_Update" id="DescUpdate" class="form-control validate" cols="30" rows="6"  ></textarea>
         </div>
