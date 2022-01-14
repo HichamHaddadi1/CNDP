@@ -423,7 +423,7 @@ footer p {
  <!--Model pour partage-->
     <!--Model pour partage-->
     <?php
-      
+      if(isset($event))
     $url = new \ImLiam\ShareableLink(route('join' , $event->id_room), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
   
    
@@ -434,25 +434,26 @@ footer p {
                 <div class="modal-header">
                     <h5 class="modal-title">Partager</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                 </div>
+                @if(isset($url))
                 <div class="modal-body">
                     <div class="icon-container1 d-flex">
                         <!-- Twitter -->
                         <div class="smd">
-                            <a href='{{$url->twitter}}' target='_blank'>
+                            <a href='{{  $url->twitter}}' target='_blank'>
                                 <i class=" img-thumbnail fab fa-twitter fa-2x" style="color:#4c6ef5;background-color: aliceblue"></i>
                                 <p>Twitter</p>
                             </a>
                         </div>
                         <!-- Facebook -->
                         <div class="smd">
-                            <a href='{{$url->facebook}}' target='_blank'>
+                            <a href='{{  $url->facebook}}' target='_blank'>
                                <i class="img-thumbnail fab fa-facebook fa-2x" style="color: #3b5998;background-color: #eceff5;"></i>
                                <p>Facebook</p>
                             </a>
                         </div>
                         <!-- linkedin -->
                         <div class="smd">
-                            <a href='{{$url->linkedin}}' target='_blank'>
+                            <a href='{{ $url->linkedin}}' target='_blank'>
                                <i class="img-thumbnail fab fa-linkedin-in fa-2x" style="color: #2379aa;background-color: #eceff5;"></i>
                                <p>linkedin</p>
                             </a>
@@ -461,14 +462,14 @@ footer p {
                     <div class="icon-container2 d-flex">
                         <!-- whatsapp -->
                         <div class="smd">
-                            <a href='{{$url->whatsapp}}' target='_blank'>
+                            <a href='{{  $url->whatsapp}}' target='_blank'>
                                 <i class="img-thumbnail fab fa-whatsapp fa-2x" style="color: #25D366;background-color: #cef5dc;"></i>
                                 <p>Whatsapp</p>
                             </a>
                         </div>
                         <!-- Telegram -->
                         <div class="smd">
-                            <a href='{{$url->telegram}}' target='_blank'>
+                            <a href='{{ $url->telegram}}' target='_blank'>
                               <i class="img-thumbnail fab fa-telegram fa-2x" style="color: #4c6ef5;background-color: aliceblue"></i>
                               <p>Telegram</p>
                             </a>
@@ -482,6 +483,7 @@ footer p {
                         </div>
                     </div>
                 </div>
+                @endif
                 {{-- <div class="modal-footer"> <label style="font-weight: 600">Copy Link <span class="message"></span></label><br />
                   
                     <div class="copy-text">

@@ -482,7 +482,7 @@ unset($__errorArgs, $__bag); ?>
  <!--Model pour partage-->
     <!--Model pour partage-->
     <?php
-      
+      if(isset($event))
     $url = new \ImLiam\ShareableLink(route('join' , $event->id_room), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
   
    
@@ -493,6 +493,7 @@ unset($__errorArgs, $__bag); ?>
                 <div class="modal-header">
                     <h5 class="modal-title">Partager</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                 </div>
+                <?php if(isset($url)): ?>
                 <div class="modal-body">
                     <div class="icon-container1 d-flex">
                         <!-- Twitter -->
@@ -541,6 +542,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                 </div>
+                <?php endif; ?>
                 
 
                     </div>

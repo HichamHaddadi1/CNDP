@@ -21,9 +21,15 @@ class EVController extends Controller
 {
     public function validator_profile()
     {
-        $p_events = Event::where('isVerified', '<=', 'Pending')->get();
+        $p_events = Event::where('isVerified', '=', 'Pending')->get();
         $pending_events = $p_events->count();
-        return view('EventValidator.validator_profile' , compact('pending_events') );
+        // dd($pending_events);
+        $rooms = Room::all();
+        $p_rooms = Room::where('verified', '=', 'pending')->get();
+        $pending_rooms = $p_rooms->count();
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        return view('EventValidator.validator_profile' ,  compact('pending_events','streamers_requests','pending_rooms') );
     }
     public function events_validation()
     {
