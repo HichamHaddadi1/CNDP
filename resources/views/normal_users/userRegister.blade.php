@@ -17,7 +17,7 @@
   <div class="container">
       <form method="POST" action="{{route('register')}}" enctype="multipart/form-data">
           @csrf
-          <h2 class="text-center h2_stream">Join a SEMINARS</h2>
+          <h2 class="text-center h2_stream">Join a Seminar</h2>
       <div class="row jumbotron shadow-lg">
           <div class="col-sm-6 form-group">
               <label for="name-f">First Name</label>

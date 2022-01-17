@@ -14,7 +14,7 @@ color:rgb(90, 30, 255) !important;
 
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-    <strong>Note : </strong> here you can find your paste and upcoming SEMINARS, if it's empty go create one at  ><b><span ><a style="color: rgb(37, 37, 37)" class="link_guide" href="{{ url('streamer/rooms') }}"> <i class="nav-icon fas fa-door-open"></i> Rooms</a></span></b> > then create your first Seminar <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="{{ url('streamer/events') }}"><i class="nav-icon fas fa-bolt"></i> SEMINARS</a></span></b>
+    <strong>Note : </strong> here you can find your paste and upcoming Seminar, if it's empty go create one at  ><b><span ><a style="color: rgb(37, 37, 37)" class="link_guide" href="{{ url('streamer/rooms') }}"> <i class="nav-icon fas fa-door-open"></i> Rooms</a></span></b> > then create your first Seminar <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="{{ url('streamer/events') }}"><i class="nav-icon fas fa-bolt"></i> Seminar</a></span></b>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

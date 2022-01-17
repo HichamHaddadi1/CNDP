@@ -80,7 +80,7 @@ label[for="file-uploadupdate"]:hover {
 <link rel="stylesheet" href="\js\sweetalert2.css">
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-    <strong>Note :</strong> After creating Your first room, you should create an event for that Room at the sidebar > <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/events')); ?>"><i class="nav-icon fas fa-bolt"></i> Events</a></span></b>
+    <strong>Note :</strong> After creating Your first room, you should create an Seminar for that Room at the sidebar > <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/events')); ?>"><i class="nav-icon fas fa-bolt"></i> Seminars</a></span></b>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

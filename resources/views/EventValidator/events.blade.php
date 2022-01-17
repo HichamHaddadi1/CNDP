@@ -27,9 +27,9 @@
       <td colspan="2">
         {{-- <a class="btn btn-success btn-sm" href=""><i class="fas fa-pen fa-sm"></i> Edit</a> --}}
         @if($event->isVerified == 'Denied')
-      <a  class="btn btn-success btn-sm" href="{{ route('verify_event' , [$event->id,'v'])}}"><i class="fas fa-check"></i> Validate SEMINARS</a>
+      <a  class="btn btn-success btn-sm" href="{{ route('verify_event' , [$event->id,'v'])}}"><i class="fas fa-check"></i> Validate Seminar</a>
       @elseif($event->isVerified == 'Verified')
-        <a class="btn btn-danger btn-sm" href="{{ route('verify_event' , [$event->id,'d'])}}"><i class="fas fa-times"></i> Deny SEMINARS</a>
+        <a class="btn btn-danger btn-sm" href="{{ route('verify_event' , [$event->id,'d'])}}"><i class="fas fa-times"></i> Deny Seminar</a>
         @endif
       </td>
     </tr>

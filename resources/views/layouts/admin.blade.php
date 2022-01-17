@@ -116,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="{{url('admin/events_req')}}" class="nav-link active">
                 <i class="nav-icon fa fa-clock"></i>
                 <p>
-                  Pending SEMINARS <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
+                  Pending Seminars <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
                 </p>
               </a>
               <a href="{{ url('admin/streamers') }}" class="nav-link active">
@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{{ url('admin/planning') }}" class="nav-link active">
                   <i class="nav-icon fas fa-calendar"></i>
                   <p>
-                        SEMINARS Calendar
+                    Seminars Calendar
                   </p>
                 </a>
               
@@ -193,7 +193,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 <a href="https://tamkine.org/en/" target="_blank">Tamkine</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; {{Carbon\Carbon::now()->format('Y')}} <a href="https://tamkine.org/en/" target="_blank">Tamkine Technologies</a>.</strong> All rights reserved.
   </footer>
 </div>
 <script>

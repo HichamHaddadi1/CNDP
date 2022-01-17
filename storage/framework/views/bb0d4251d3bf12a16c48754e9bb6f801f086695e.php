@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="<?php echo e(url('streamer/events')); ?>" class="nav-link active">
               <i class="nav-icon fas fa-bolt"></i>
               <p>
-                    Events
+              Seminars
               </p>
             </a>
             <a href="<?php echo e(url('streamer/planning')); ?>" class="nav-link active">

@@ -2,7 +2,7 @@
 
 @section('admin_content')
 <div class="container">
-  <h3 class="m-3">SEMINARS</h3>
+  <h3 class="m-3">Seminars</h3>
 @if (Session::get('success'))
       <div class="alert alert-success mt-3" role="alert">
         {{ Session::get('success') }}

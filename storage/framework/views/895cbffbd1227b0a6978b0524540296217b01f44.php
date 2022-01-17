@@ -7,11 +7,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
   <title>CNDP</title>
-  <link rel="icon" href="{{ asset('/img/favicons/orientation-tamkine-32x32.png') }}" type="favicon/png" sizes="32x32">
-  <link rel="icon" href="{{ asset('/img/favicons/orientation-tamkine-192x192.png') }}" sizes="192x192">
-  <link rel="apple-touch-icon-precomposed" href="{{ asset('/img/favicons/orientation-tamkine-180x180.png') }}" sizes="180x180">
+  <link rel="icon" href="<?php echo e(asset('/img/favicons/orientation-tamkine-32x32.png')); ?>" type="favicon/png" sizes="32x32">
+  <link rel="icon" href="<?php echo e(asset('/img/favicons/orientation-tamkine-192x192.png')); ?>" sizes="192x192">
+  <link rel="apple-touch-icon-precomposed" href="<?php echo e(asset('/img/favicons/orientation-tamkine-180x180.png')); ?>" sizes="180x180">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -56,20 +56,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      {{-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-       --}}
+      
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <!-- Messages Dropdown Menu -->
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{{ route( 'logout')}}" class="nav-link">Logout  <i class="fas fa-sign-out-alt"></i></a>
+        <a href="<?php echo e(route( 'logout')); ?>" class="nav-link">Logout  <i class="fas fa-sign-out-alt"></i></a>
       </li>
       <!-- Notifications Dropdown Menu -->
     </ul>
@@ -78,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('index')}}" class="brand-link" target="_blank">
+    <a href="<?php echo e(route('index')); ?>" class="brand-link" target="_blank">
       <img src="/img/cndp-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">CNDP</span>
     </a>
@@ -87,17 +81,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 ml-n2 d-flex">
         <div class="image">
-        @if(!empty(auth()->user()->avatar))
-                                <div class="m-b-25"> <img src="/upload/{{Auth::user()->avatar}}" alt="avatar" class="img-radius" style="border-radius: 50% ; width:50px ; height:50px ;object-fit: cover;
+        <?php if(!empty(auth()->user()->avatar)): ?>
+                                <div class="m-b-25"> <img src="/upload/<?php echo e(Auth::user()->avatar); ?>" alt="avatar" class="img-radius" style="border-radius: 50% ; width:50px ; height:50px ;object-fit: cover;
           object-position: center;"> </div>
-                              @else
+                              <?php else: ?>
                               <div class="m-b-25"> <img src="/img/default-icon.png" alt="avatar" class="img-radius" style="border-radius: 50% ; width:50px ; height:50px ;object-fit: cover;
           object-position: center;" > </div>
-                              @endif
+                              <?php endif; ?>
         </div>
         <div class="info">
 
-          <a href="{{url('validator/profile')}}" class="d-block" style="text-decoration: none">{{Auth::user()->name}}</a>
+          <a href="<?php echo e(url('validator/profile')); ?>" class="d-block" style="text-decoration: none"><?php echo e(Auth::user()->name); ?></a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -106,37 +100,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="{{ url('validator/events/pending') }}" class="nav-link active">
+            <a href="<?php echo e(url('validator/events/pending')); ?>" class="nav-link active">
               <i class="nav-icon fa fa-clock"></i>
               <p>
-                Pending Seminars <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
+                Pending Seminars <span class="badge badge-dark" style="color:red;"><?php echo e($pending_events); ?></span>
               </p>
             </a>
-            <a href="{{ url('validator/rooms/pending') }}" class="nav-link active">
+            <a href="<?php echo e(url('validator/rooms/pending')); ?>" class="nav-link active">
               <i class="nav-icon fas fa-clock"></i>
               <p>
-                Pending Rooms <span class="badge badge-dark" style="color:red;">{{$pending_rooms}}</span>
+                Pending Rooms <span class="badge badge-dark" style="color:red;"><?php echo e($pending_rooms); ?></span>
               </p>
             </a>
-            <a href="{{ url('validator/streamers/pending') }}" class="nav-link active">
+            <a href="<?php echo e(url('validator/streamers/pending')); ?>" class="nav-link active">
                 <i class="nav-icon fas fa-clock"></i>
                 <p>
-                  Pending Seminarists <span class="badge badge-dark" style="color:red;">{{ $streamers_requests }}</span>
+                  Pending Seminarists <span class="badge badge-dark" style="color:red;"><?php echo e($streamers_requests); ?></span>
                 </p>
               </a>
-            <a href="{{ url('validator/events') }}" class="nav-link active">
+            <a href="<?php echo e(url('validator/events')); ?>" class="nav-link active">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                   All Seminars
                 </p>
               </a>
-            <a href="{{ url('validator/rooms') }}" class="nav-link active">
+            <a href="<?php echo e(url('validator/rooms')); ?>" class="nav-link active">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                   All Rooms
                 </p>
               </a>
-              <a href="{{ url('validator/seminarists') }}" class="nav-link active">
+              <a href="<?php echo e(url('validator/seminarists')); ?>" class="nav-link active">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
                   All Seminarists
@@ -167,7 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- Main content -->
     <main>
-   @yield('validator_content')
+   <?php echo $__env->yieldContent('validator_content'); ?>
     </main><!-- /.content -->
   </div>
   <aside class="control-sidebar control-sidebar-dark">
@@ -184,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; {{Carbon\Carbon::now()->format('Y')}} <a href="https://tamkine.org/en/" target="_blank">Tamkine Technologies</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php echo e(Carbon\Carbon::now()->format('Y')); ?> <a href="https://tamkine.org/en/" target="_blank">Tamkine Technologies</a>.</strong> All rights reserved.
   </footer>
 </div>
 <script>
@@ -203,12 +197,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
-<script src={{asset('js\jquery\jquery.min.js')}}></script>
+<script src=<?php echo e(asset('js\jquery\jquery.min.js')); ?>></script>
 <!-- Bootstrap 4 -->
-<script src={{ asset('css\bootstrap\js\bootstrap.bundle.min.js') }}></script>
+<script src=<?php echo e(asset('css\bootstrap\js\bootstrap.bundle.min.js')); ?>></script>
 <!-- AdminLTE App -->
-<script src={{ asset('dist\js\adminlte.min.js') }}></script>
+<script src=<?php echo e(asset('dist\js\adminlte.min.js')); ?>></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.js"></script>
 </body>
 </html>
+<?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/EventValidator/EV_layout.blade.php ENDPATH**/ ?>
