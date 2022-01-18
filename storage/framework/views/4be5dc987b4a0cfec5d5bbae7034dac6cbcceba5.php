@@ -1,7 +1,7 @@
-@extends('normal_users.user_layout')
 
 
-@section('user_content')
+
+<?php $__env->startSection('user_content'); ?>
 <div class="container">
       <div class="main-body">
           <!-------------------------------------------------------------------------------------------------->
@@ -13,12 +13,12 @@
                             <div class="row m-l-0 m-r-0">
                                 <div class="col-sm-4 bg-c-lite-green user-profile">
                                   <div class="card-block text-center text-white">
-                                  @if(!empty(auth()->user()->avatar))
-                                <div class="m-b-25"> <img src="/upload/{{Auth::user()->avatar}}" alt="avatar" class="img-radius" style="border-radius: 50% ; width:150px ; height:150px" > </div>
-                              @else
+                                  <?php if(!empty(auth()->user()->avatar)): ?>
+                                <div class="m-b-25"> <img src="/upload/<?php echo e(Auth::user()->avatar); ?>" alt="avatar" class="img-radius" style="border-radius: 50% ; width:150px ; height:150px" > </div>
+                              <?php else: ?>
                               <div class="m-b-25"> <img src="/img/default-icon.png" alt="avatar" class="img-radius" style="border-radius: 50% ; width:150px ; height:150px" > </div>
-                              @endif
-                                    <h6 class="f-w-600">{{Auth::user()->name}}</h6>
+                              <?php endif; ?>
+                                    <h6 class="f-w-600"><?php echo e(Auth::user()->name); ?></h6>
                                     <p class="mb-2 f-w-600" style="color:rgb(255, 255, 255);">Change Avatar </p>
                           
                                     <form enctype="multipart/form-data" action="/profile" method="post">
@@ -33,7 +33,7 @@
                                             <input type="file" id="file" name="image"  accept="image" />
                                           </div>
                                           <!--<label class="custom-file-label" for="inputGroupFile04">Choose file</label>-->
-                                          <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                          <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                         </div>
                                         
                                         <div class="input-group-append">
@@ -45,53 +45,41 @@
                                 </div>
                               </div>
                               <div class="col-sm-8">
-                                <form action="{{route('user_profile_update' , Auth::user()->id)}}" method="GET">
+                                <form action="<?php echo e(route('user_profile_update' , Auth::user()->id)); ?>" method="GET">
                                   <div class="card-block">
                                       <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informations</h6>
                                       <div class="row">
                                           <div class="col-sm-6">
                                               <p class="m-b-10 f-w-600">First Name</p>
-                                              <h6 class="text-muted f-w-400"> <input type="text" name ="fname" value="{{Auth::user()->fname}}" class="form-control" id="EmailInput"  ></h6>
+                                              <h6 class="text-muted f-w-400"> <input type="text" name ="fname" value="<?php echo e(Auth::user()->fname); ?>" class="form-control" id="EmailInput"  ></h6>
                                           </div>
                                           <div class="col-sm-6">
                                               <p class="m-b-10 f-w-600">Last Name</p>
                                               <h6 class="text-muted f-w-400"> 
-                                                <input type="text" name ="lname" value="{{Auth::user()->lname}}" class="form-control" id="NameInput" ></h6>
+                                                <input type="text" name ="lname" value="<?php echo e(Auth::user()->lname); ?>" class="form-control" id="NameInput" ></h6>
                                           </div>
                                       </div>
                                       <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Email</p>
-                                            <h6 class="text-muted f-w-400"> <input type="text" name ="email" value="{{Auth::user()->email}}" class="form-control" id="EmailInput"  ></h6>
+                                            <h6 class="text-muted f-w-400"> <input type="text" name ="email" value="<?php echo e(Auth::user()->email); ?>" class="form-control" id="EmailInput"  ></h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">User Name</p>
                                             <h6 class="text-muted f-w-400"> 
-                                              <input type="text" name ="username" value="{{Auth::user()->name}}" class="form-control" id="NameInput" ></h6>
+                                              <input type="text" name ="username" value="<?php echo e(Auth::user()->name); ?>" class="form-control" id="NameInput" ></h6>
                                         </div>
                                     </div>
                                     <div class="row">
                                       <div class="col-sm-6">
                                           <p class="m-b-10 f-w-600">Adress</p>
-                                          <h6 class="text-muted f-w-400"> <input type="text" name ="adress" value="{{Auth::user()->address}}" class="form-control" id="EmailInput"  ></h6>
+                                          <h6 class="text-muted f-w-400"> <input type="text" name ="adress" value="<?php echo e(Auth::user()->address); ?>" class="form-control" id="EmailInput"  ></h6>
                                       </div>
-                                      {{-- <div class="col-sm-6">
-                                          <p class="m-b-10 f-w-600">Country</p>
-                                          <h6 class="text-muted f-w-400"> 
-                                            <input type="text" name ="country" value="{{Auth::user()->country}}" class="form-control" id="NameInput" readonly="readonly"></h6>
-                                      </div> --}}
+                                      
                                     </div>
                                     <div class="row">
-                                      {{-- <div class="col-sm-6">
-                                          <p class="m-b-10 f-w-600">Language</p>
-                                          <h6 class="text-muted f-w-400"> 
-                                            <input type="text" name ="language" value="{{Auth::user()->language}}" class="form-control" id="EmailInput" readonly="readonly" ></h6>
-                                      </div> --}}
-                                      {{-- <div class="col-sm-6">
-                                          <p class="m-b-10 f-w-600">Gender</p>
-                                          <h6 class="text-muted f-w-400"> 
-                                            <input type="text" name ="country" value="{{Auth::user()->gender}}" class="form-control" id="NameInput" readonly="readonly"></h6>
-                                      </div> --}}
+                                      
+                                      
                                   </div>
                                       <div class="row">
                                           <div class="col-sm-6">
@@ -237,4 +225,5 @@
     
     $('input[type=file]').customFile();
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('normal_users.user_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/normal_users/user_profile.blade.php ENDPATH**/ ?>

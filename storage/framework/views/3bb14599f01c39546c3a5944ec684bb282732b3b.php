@@ -1,6 +1,6 @@
-@extends('layouts.viewer_layout')
 
-@section('viewer_content')
+
+<?php $__env->startSection('viewer_content'); ?>
 <style>
 
 #nav_schedule{
@@ -19,7 +19,7 @@ margin-left: 5%;
   margin-left: 5%;
   margin-top: 2%;
 }
-@media screen and (max-width: 600px) {
+@media  screen and (max-width: 600px) {
   .fc-header-title h2{
   font-size: 10px;
   padding: 5px;
@@ -56,12 +56,7 @@ margin-bottom: 10%;
 </div>
 <div class=" clander-container" style="" >
 
-  {{-- <select name="name" id="dropdown">
-    @foreach ($user as $u)
-          <option value="{{$u->id}}" onclick="{{route('test')}}" >{{$u->name}}</option>
-    @endforeach
-  </select>
-  <input type="text" name="userid" id="userid"> --}}
+  
 
   <div class="modal fade" id="schedule-edit" tabindex='-1'>
     <div class="modal-dialog modal-dialog-centered">
@@ -99,9 +94,9 @@ margin-bottom: 10%;
         
           <div class="form-group ">
             <a href="" class="btn btn-outline-primary btn-md form-control" id="invite-link"><i class="fas fa-door-open"></i>&nbsp Join Meeting</a>
-            @if(!Auth::check())
-            <a href="{{route('userRegister')}}" class="btn btn-outline-primary btn-md form-control"><i class="fas fa-user-plus"></i>&nbsp Register</a>
-            @endif
+            <?php if(!Auth::check()): ?>
+            <a href="<?php echo e(route('userRegister')); ?>" class="btn btn-outline-primary btn-md form-control"><i class="fas fa-user-plus"></i>&nbsp Register</a>
+            <?php endif; ?>
           <div class="text-center alert alert-info justify-content-center" id="msg_warning"></div>
           </div>
           </div>
@@ -119,18 +114,7 @@ margin-bottom: 10%;
 </div>
     
    
-{{--     
-   <script>
-     $(document).ready(function() {
-  $('#dropdown[name="name"]').on('change', showSelectedValue);
-  
-  function showSelectedValue(event) {
-    var target = $(event.target);
-    console.log(target.val());
-    $('#userid').val(target.val());
-  }
-});
-   </script> --}}
+
     
     
     <script>
@@ -171,7 +155,7 @@ margin-bottom: 10%;
     
              
     
-            var SITEURL = "{{url('/')}}";
+            var SITEURL = "<?php echo e(url('/')); ?>";
     
             $.ajaxSetup({
     
@@ -218,7 +202,7 @@ margin-bottom: 10%;
                 var room_id = event.id_room;
                 //console.log(room_id);
                 
-                var url = `{{route('join')}}/${room_id}`;
+                var url = `<?php echo e(route('join')); ?>/${room_id}`;
                 $('#invite-link').attr('href' , url);
                 $('#event-title').val(event.title);
               
@@ -277,4 +261,5 @@ margin-bottom: 10%;
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.viewer_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/Viewer/viewer_schedule.blade.php ENDPATH**/ ?>
