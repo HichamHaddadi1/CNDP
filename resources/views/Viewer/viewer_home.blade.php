@@ -273,22 +273,53 @@ font-weight: bold;
 	font-size: 60px;
 	font-weight: 600;
 }
+.live_list{
+  top: 20vh;
+  left: 30vw;
+}
+
 </style>
 
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
+  <div class="container my-auto col-4 mt-10 live_list">
+    <div class="list-group">
+     
+      @forelse($seminars as $ev)
+               
+      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="list-group-item list-group-item-action text-center">
+      {{$ev->event_theme}}  
+      <a href="{{route('join',['id'=>$ev->id_room ,'_id'=>Crypt::encrypt('$event->id')])}}" class="btn_1 btn btn-primary float-right text-center"> 
+      <i class="fas fa-play text-end"></i> 
+      </a>
+      </span>
+      @if ($loop->index  == 5)
+          @break
+      @endif
 
- <div class="container row div_live" >
+ @empty
+<span class="list-group-item list-group-item-action active ">
+  No Data  <i class="fas fa-play text-end"></i> 
+</span>
+@endforelse
+    
+<a href="{{url('/schedule')}}" class="text-center list-group-item list-group-item-action active">
+  View More 
+</a>
+    </div>
+    
+  </div>
+{{-- <div class="container row div_live" >
    @if(!Auth::check())
    <a id="tutorial" class=""><i class="fas fa-chalkboard-teacher"></i>Start a Tutorial</a>
    @endif
-    {{-- <div data-title='Facebook Page' class="fb-page" data-href="https://www.facebook.com/fondation.tamkine" data-tabs="timeline" data-width="300" data-height="550" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="https://www.facebook.com/fondation.tamkine" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/fondation.tamkine">Fondation Tamkine</a></blockquote></div> --}}
+   
 
   @php
     $i=0;
     $j=0;
   @endphp
-    <div class="col-lg data_events">
+  <div class="col-lg data_events">
         @foreach ($events as $event)
         @php
           $date_soon=\Carbon\Carbon::create($event->starting_at);
@@ -302,7 +333,7 @@ font-weight: bold;
          $event->event_statue = 1;
          $event->update();
        @endif -->
-       {{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}{{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}
+      
       <div class="col container text-align-center">
       <div class="blog-card" style="-webkit-animation-delay: 0.1s; -moz-animation-delay: 0.1s; animation-delay: 0.1s;">
         <div class="meta">
@@ -335,7 +366,7 @@ font-weight: bold;
         </div>
       </div>
     </div>
-     {{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}{{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}
+    
       @elseif ($i==0 && $event->event_statue==false && \Carbon\Carbon::now()->lte($event->starting_at) && $event->isVerified=="Verified" && \Carbon\Carbon::now()->diffInHours($event->starting_at)<=10)
       @php
       $i++;
@@ -365,13 +396,13 @@ font-weight: bold;
             <a class="btnstyle first_button" href="{{route('viewer_events')}}" style="color:#fff;">View More</a>
           </p>
         </div>
-      </div>
+  </div>
      @endif
      @php
        $j=$i;
      @endphp
       @endforeach
-      {{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}{{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}
+   
       @if($j==0)
       @php
        $i++;
@@ -387,14 +418,16 @@ font-weight: bold;
        </div>
       </div>
      @endif
-     {{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}{{-- DIV DIV DIV DIV DIV DIV DIV DIV --}}
-
-    </div>
+   
+</div> --}}
     <div class="row btn_join_us">
       <ul class="btn-group-vertical">
 
-        <li><a href="{{route('register')}}" class="btn-group btnstyle2" style="color: #fff">Register as a Seminarist</a></li>
-        {{-- <li><a href="{{route('userRegister')}}" class="btn-group btnstyle2 btn_style" style="color: #fff">Register as a User</a></li> --}}
+        {{-- <li><a href="{{route('register')}}" class="btn-group btnstyle2" style="color: #fff">Register as a Seminarist</a></li> --}}
+
+
+
+  
       </ul>
     </div>
   </div>

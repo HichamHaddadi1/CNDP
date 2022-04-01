@@ -274,9 +274,8 @@ label[for="file-uploadupdate"]:hover {
 
               <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation</label>
               <div class="form-group">
-                <span id="filenameUpdate">Select your file</span>
-                  <label for="file-uploadupdate">Browse
-                  <input type="file" id="file-uploadupdate" name="file_uploadUpdate"></label>
+                
+                <input type="file" id="" name="file_uploadUpdate">
                   <small class="text-error file_uploadUpdate_error" style="color:red;"></small>
              </div>
              @if($errors->has('txtName'))
@@ -328,6 +327,7 @@ label[for="file-uploadupdate"]:hover {
     $.ajax({
       url: '/room/'+id+'/edit/',
       method:"GET",
+      
       success:function (result){
         //console.log(result.event.event_theme);//.val(result.event.event_theme);
         room_id.value=id;
@@ -377,12 +377,12 @@ $.ajax({
       var filename = m[1];
       $('#filename').text(filename);
   });
-  $('#file-uploadupdate').change(function() {
-      var filepath = this.value;
-      var m = filepath.match(/([^\/\\]+)$/);
-      var filename = m[1];
-      $('#filenameUpdate').text(filename);
-  });
+  // $('#file-uploadupdate').change(function() {
+  //     var filepath = this.value;
+  //     var m = filepath.match(/([^\/\\]+)$/);
+  //     var filename = m[1];
+  //     $('#filenameUpdate').text(filename);
+  // });
   </script>
 </div>
 </form>

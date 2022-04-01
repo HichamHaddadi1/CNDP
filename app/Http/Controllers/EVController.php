@@ -84,7 +84,7 @@ class EVController extends Controller
         ->paginate(10);
         $s_requests = User::where('status' , '=' , 'pending')->get();
         $streamers_requests = $s_requests->count();
-        // dd($pending_users);
+        //dd($events);
         $all_users= DB::table('users')->where('role' , '=' , 2)->paginate(10);
         return view('EventValidator.events' , compact('pending_events','pending_rooms','streamers_requests','streamers','all_users', 'events'));
 

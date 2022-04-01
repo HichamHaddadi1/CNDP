@@ -121,7 +121,7 @@ class EventsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function     store(Request $request)
+    public function store(Request $request)
     {
 
         // //dd($request);
@@ -158,11 +158,18 @@ class EventsController extends Controller
 
         $data = DB::table('events')->get();
         //  $name = DB::table('users')->select('user_name')->where('id_user','=',$data->id_user);
-        $events = DB::table('events')->where('id_user','=',Auth::user()->id)->orderByRaw('created_at DESC')->paginate(10);
+        $events =DB::table('events')
+        ->where('ending_at','>=',Carbon::now()->format('Y-m-d G:i'))
+        ->where('id_user','=',Auth::user()->id)
+        ->paginate(10);
+        $oldevents = DB::table('events')
+        ->where('ending_at','<=',Carbon::now()->format('Y-m-d G:i'))
+        ->where('id_user','=',Auth::user()->id)
+        ->paginate(10);
         $rooms = Room::all();
         $rooms_count = $rooms->count();
         //dd($events);
-         return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count'));
+         return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count','oldevents'));
 
     }
 
@@ -201,16 +208,20 @@ class EventsController extends Controller
     }
     public function updateRoom(Request $request)
     {
-        $validator = FacadesValidator::make(request()->all(), [
-            'room_nameupdate' => 'required',
-            'max_viewersupdate' => 'required',
-            'viewer_pwupdate' => 'required',
-            'room_descUpdate' => 'required||max:300' ,
-            'room_id' => 'required',
-            //'file_uploadUpdate'  =>  'required',
+        $rules = collect([
+            'room_nameupdate'    =>  'required',
+            'max_viewersupdate'  =>  'required',
+            'room_descUpdate'    =>  'required||max:300' ,
+            'room_id'            =>  'required',
+            //'file_uploadUpdate'  =>  'required|mimes:pdf',
         ]);
+        if($request->input('viewer_password') == 'with_password') {
+            $rules->put('viewer_pwupdate', 'required');
+        }
+        $validator = FacadesValidator::make(request()->all(), $rules->toArray());
         $filenameglobe="";
         if($request->hasFile('file_uploadUpdate') ) {
+            // dd($request->File('file_uploadUpdate'));
             $file = $request->file('file_uploadUpdate');
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
@@ -218,21 +229,36 @@ class EventsController extends Controller
             $filenameglobe=$filename;
            }
         if ($validator->passes()) {
-            DB::table('rooms')
-            ->where('id', $request->get('room_id'))
-            ->update([
-                      'room_name'     =>  $request->get('room_nameupdate'),
-                      'max_viewers'   =>  $request->get('max_viewersupdate'),
-                      'viewer_pw'     =>  $request->get('viewer_pwupdate'),
-                      'room_desc'     =>  $request->get('room_descUpdate'),
-                      'presentations' =>  $filenameglobe,
-        ]);
+//            DB::table('rooms')
+//            ->where('id', $request->get('room_id'))
+//            ->update([
+//                      'room_name'     =>  $request->get('room_nameupdate'),
+//                      'max_viewers'   =>  $request->get('max_viewersupdate'),
+//                      'viewer_pw'     =>  $request->get('viewer_pwupdate'),
+//                      'room_desc'     =>  $request->get('room_descUpdate'),
+//                      'presentations' =>  $filenameglobe,
+//        ]);
+            $room = Room::find($request->get('room_id'));
+            $room->room_name = $request->get('room_nameupdate');
+            $room->room_desc = $request->get('room_descUpdate');
+            $room->max_viewers = $request->get('max_viewersupdate');
+
+            $room->presentations = $filenameglobe;
+
+            if($request->input('viewer_password') == 'with_password'){
+//                    dd($request->input('viewer_pw'),1);
+                $room->viewer_pw = $request->get('viewer_pwupdate');
+            }elseif($request->input('viewer_password') == 'without_password'){
+                $room->viewer_pw = null;
+            }
+            $room->save();
 
         return response()->json(['status' => 1, 'message' => "AZERTYUIOP"]);
 
         } else {
             return response()->json(['status' => 0, 'errors' => $validator->errors()->toArray()]);
         }
+
 
 
     }

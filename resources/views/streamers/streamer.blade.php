@@ -35,8 +35,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.3/fullcalendar.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <!-- tempusdominus- -->
 <!-- end scripts -->
@@ -67,7 +69,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Brand Logo -->
     <a href="{{route('index')}}" class="brand-link" target="_blank">
       <img src="\img\cndp-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-4" style="opacity: .8">
-      <span class="brand-text font-weight-light">CNDP</span>
+      <span class="brand-text font-weight-light"> &nbsp;
+      </span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -165,6 +168,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src={{ asset('dist\js\adminlte.min.js') }}></script>
 <script>
   new ClipboardJS('.btn');
@@ -182,8 +187,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         console.log(result.event.event_theme);
 
         $('#EditEvent').modal('show');
-
-
         // console.log(result.event.event_theme);//.val(result.event.event_theme);
         RoomNameUpdate.value=result.event.event_theme;
         startingUpdate.value=result.event.starting_at;

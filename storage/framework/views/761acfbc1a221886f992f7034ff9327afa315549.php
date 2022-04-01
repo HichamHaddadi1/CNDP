@@ -80,7 +80,7 @@ label[for="file-uploadupdate"]:hover {
 <link rel="stylesheet" href="\js\sweetalert2.css">
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-    <strong>Note :</strong> After creating Your first room, you should create an Seminar for that Room at the sidebar > <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/events')); ?>"><i class="nav-icon fas fa-bolt"></i> Seminars</a></span></b>
+    <strong>Note :</strong> After creating Your first room, you should create an Seminar for that Room at the sidebar > <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/events')); ?>"><i class="nav-icon fas fa-bolt"></i> Seminar</a></span></b>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -280,9 +280,8 @@ unset($__errorArgs, $__bag); ?>
 
               <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation</label>
               <div class="form-group">
-                <span id="filenameUpdate">Select your file</span>
-                  <label for="file-uploadupdate">Browse
-                  <input type="file" id="file-uploadupdate" name="file_uploadUpdate"></label>
+                
+                <input type="file" id="" name="file_uploadUpdate">
                   <small class="text-error file_uploadUpdate_error" style="color:red;"></small>
              </div>
              <?php if($errors->has('txtName')): ?>
@@ -337,6 +336,7 @@ unset($__errorArgs, $__bag); ?>
     $.ajax({
       url: '/room/'+id+'/edit/',
       method:"GET",
+      
       success:function (result){
         //console.log(result.event.event_theme);//.val(result.event.event_theme);
         room_id.value=id;
@@ -386,12 +386,12 @@ $.ajax({
       var filename = m[1];
       $('#filename').text(filename);
   });
-  $('#file-uploadupdate').change(function() {
-      var filepath = this.value;
-      var m = filepath.match(/([^\/\\]+)$/);
-      var filename = m[1];
-      $('#filenameUpdate').text(filename);
-  });
+  // $('#file-uploadupdate').change(function() {
+  //     var filepath = this.value;
+  //     var m = filepath.match(/([^\/\\]+)$/);
+  //     var filename = m[1];
+  //     $('#filenameUpdate').text(filename);
+  // });
   </script>
 </div>
 </form>

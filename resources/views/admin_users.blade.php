@@ -31,6 +31,7 @@
         <th scope="col">Gender</th>
         <th scope="col">Language</th>
         <th scope="col">Role</th>
+        <th scope="col">Created At</th>
         <th scope="col">Options</th>
       </tr>
     </thead>
@@ -52,10 +53,11 @@
             @if ($one_user->role == 3)
             <td class="bg-info bg-opacity-25" >Normal User </td>
             @endif
+            <td>{{ $one_user->created_at }}</td>
             <td colspan="2">
                 <a class="btn btn-danger btn-sm" href="{{ route('delete.user' , $one_user->id)}}"><i class="fas fa-times"></i> Delete</a>
               </td>
-              @endif
+            @endif
         @endforeach
     </tbody>
 

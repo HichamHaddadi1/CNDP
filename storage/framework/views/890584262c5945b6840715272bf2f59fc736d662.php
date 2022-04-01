@@ -17,6 +17,7 @@
         <th scope="col">Starts At</th>
         <th scope="col">Ending At</th>
         <th scope="col">Status</th>
+        <th scope="col">Created at</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -29,7 +30,7 @@
       <td><?php echo e($event->starting_at); ?></td>
       <td><?php echo e($event->ending_at); ?></td>
       <td><?php echo e($event->isVerified); ?></td>
-      
+      <td><?php echo e($event->created_at); ?></td>
       <td colspan="2">
         <?php if($event->isVerified == 'Verified'): ?>
         <a class="btn btn-danger btn-sm" href="<?php echo e(route('delete.event' , $event->id)); ?>"><i class="fas fa-trash"></i> Delete</a>

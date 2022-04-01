@@ -39,6 +39,7 @@
         <th scope="col">User</th>
         <th scope="col">Access Code</th>
         <th scope="col">Room Statue</th>
+        <th scope="col">Created at</th>
         <th scope="col">Options</th>
       </tr>
     </thead>
@@ -60,7 +61,7 @@
         @else
         <td><img src="https://img.icons8.com/emoji/48/000000/green-circle-emoji.png" style="width: 10px; height:10px;" /> Online</td>
         @endif
-         
+         <td>{{ $room->created_at }}</td>
         <td colspan="3">
           <a class="btn btn-primary btn-sm" href="{{ route('admin.rooms_start' , $room->id)}}"><i class="fa fa-play fa-sm"></i> Start Room</a>
           <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="{{ route('join' , $room->id)}}">

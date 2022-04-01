@@ -45,7 +45,7 @@ class RoomsController extends Controller
      */
     function streamer_recordings()
     {
-        $room = Room::where('id_user' , '<=' , Auth::user()->id)->first();
+        $room = Room::where('id_user' , '=' , Auth::user()->id)->first();
         // dd($room->id);
 
             if ($room) {
@@ -203,7 +203,7 @@ class RoomsController extends Controller
             'userName' => request()->get('txtName'),
             'password' => $room->id.'cmp'//which user role want to join set password here
         ]);
-        // dd($room->viewer_pw);
+        //dd($room->max_viewers);
         if($room->viewer_pw != request()->get('code'))
             {
                 return back()->with('errorsUnique' , 'Access code is wrong , try again !');
@@ -213,9 +213,20 @@ class RoomsController extends Controller
              return back()->with('errorsUnique' , 'Meeting not started yet , wait until a moderator launch the event');
             }
 
-
-
-        return redirect()->to($url);
+            $meetingInfo=\Bigbluebutton::getMeetingInfo([
+                'meetingID' => $room->id.'cmp',
+                 //moderator password set here
+            ]);
+            $collection = collect($meetingInfo['attendees']['attendee']);
+            $max_counter=$collection->count()-1 ;
+          //dd($meetingInfo['attendees']['attendee']);
+            if($collection->count()-1 >= $room->max_viewers)
+            {
+                return back()->with('errorsUnique' , 'the Seminars has reached the max viewers Count '.$max_counter);
+            }
+            else{
+                return redirect()->to($url);
+             }
 
 
     }

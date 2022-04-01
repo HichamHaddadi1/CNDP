@@ -45,8 +45,15 @@ class MainController extends Controller
        ->join('events','rooms.id','=','events.id_room')
        ->select('users.*','rooms.*','events.*')
        ->get();
-    //    dd($events);
-        return view('Viewer.viewer_home' , compact('events'));
+      $seminars= DB::table('users')
+       ->Join('rooms', 'users.id', '=', 'rooms.id_user')
+       ->join('events','rooms.id','=','events.id_room')
+       ->select('users.*','rooms.*','events.*')
+       ->where('events.isVerified','=','Verified')
+       ->where('events.ending_at','>=',\Carbon\Carbon::now())
+       ->get();
+    //dd($seminars);
+        return view('Viewer.viewer_home' , compact(['events','seminars']));
     }
 
 /**this one for auth forms for a normal user  */
@@ -309,10 +316,11 @@ class MainController extends Controller
         DB::table('users')
         ->where('id', $id)
         ->update([
-            'name' => request()->get('username'),
-            'email' => request()->get('email'),
-            'fname' =>  request()->get('fname'),
-            'lname' =>  request()->get('lname')
+            'name'      =>  request()->get('username'),
+            'email'     =>  request()->get('email'),
+            'fname'     =>  request()->get('fname'),
+            'lname'     =>  request()->get('lname'),
+            'password'  =>  Hash::make(request()->get('password'))
         ]);
 
     return back();

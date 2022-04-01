@@ -22,7 +22,9 @@
         <th scope="col">Email</th>
         <th scope="col">Gender</th>
         <th scope="col">Language</th>
+        <th scope="col">Created at</th>
         <th scope="col">Role</th>
+        
       </tr>
     </thead>
 
@@ -37,6 +39,7 @@
             <td>{{ $one_user->email }}</td>
             <td>{{ $one_user->gender }}</td>
             <td>{{ $one_user->language }}</td>
+            <td>{{ $one_user->created_at }}</td>
             @if ($one_user->role == 2)
             <td class="bg-secondary bg-gradient">Streamer </td>
             @endif
@@ -46,7 +49,8 @@
             {{-- <td colspan="2">
                 <a class="btn btn-danger btn-sm" href="{{ route('delete.user' , $one_user->id)}}"><i class="fas fa-times"></i> Delete</a>
               </td> --}}
-              @endif
+        @endif
+
         @endforeach
     </tbody>
 

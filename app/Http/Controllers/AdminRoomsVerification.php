@@ -53,14 +53,13 @@ class AdminRoomsVerification extends Controller
      */
     public function show()
     {
-        $pending_rooms = Room::where('verified', '=', 'pending')->get();
-        $pending = $pending_rooms->count();
-        $s_requests = User::where('status' , '=' , 'pending')->get();
-        $streamers_requests = $s_requests->count();
-        $rooms = Room::paginate(20);
-        $events = Event::where('isVerified', '=', 'Pending')->get();
-
-        $pending_events=$events->count();
+        $pending_rooms      =   Room::where('verified', '=', 'pending')->get();
+        $pending            =   $pending_rooms->count();
+        $s_requests         =   User::where('status' , '=' , 'pending')->get();
+        $streamers_requests =   $s_requests->count();
+        $rooms              =   Room::paginate(20);
+        $events             =   Event::where('isVerified', '=', 'Pending')->get();
+        $pending_events     =   $events->count();
         return view('admin_pending' , compact(['rooms','pending' , 'streamers_requests' , 'pending_events']));
     }
 

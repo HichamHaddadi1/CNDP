@@ -1,7 +1,8 @@
 
 
 
-<?php $__env->startSection('admin_content'); ?>
+
+<?php $__env->startSection('validator_content'); ?>
 <div class="container">
 <h3 class="m-3">Users</h3>
 <?php if(Session::get('success')): ?>
@@ -13,16 +14,7 @@
 
       <table class="table table-hover">
   <div class="search mb-3">
-<form action="<?php echo e(route('search_users')); ?>" method="GET">
- <div class="row">
-  <div class="col-lg-4 col-lg-offset-4">
-    <div class="input-group">
-      <input type="search" id="search" name="search" class="form-control" placeholder="Search ">
-      <button type="submit" class="btn btn-outline-primary">search</button>
-    </div>
-  </div>
-</div>
-</form>
+
 </div>
     <thead>
       <tr>
@@ -31,9 +23,9 @@
         <th scope="col">Email</th>
         <th scope="col">Gender</th>
         <th scope="col">Language</th>
+        <th scope="col">Created at</th>
         <th scope="col">Role</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Options</th>
+        
       </tr>
     </thead>
 
@@ -48,17 +40,16 @@
             <td><?php echo e($one_user->email); ?></td>
             <td><?php echo e($one_user->gender); ?></td>
             <td><?php echo e($one_user->language); ?></td>
+            <td><?php echo e($one_user->created_at); ?></td>
             <?php if($one_user->role == 2): ?>
             <td class="bg-secondary bg-gradient">Streamer </td>
             <?php endif; ?>
             <?php if($one_user->role == 3): ?>
             <td class="bg-info bg-opacity-25" >Normal User </td>
             <?php endif; ?>
-            <td><?php echo e($one_user->created_at); ?></td>
-            <td colspan="2">
-                <a class="btn btn-danger btn-sm" href="<?php echo e(route('delete.user' , $one_user->id)); ?>"><i class="fas fa-times"></i> Delete</a>
-              </td>
-            <?php endif; ?>
+            
+        <?php endif; ?>
+
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
 
@@ -73,4 +64,4 @@
 
   <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/admin_users.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('EventValidator.EV_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/EventValidator/all_streamers.blade.php ENDPATH**/ ?>

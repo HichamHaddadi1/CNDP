@@ -12,6 +12,7 @@
             <th scope="col">Starts At</th>
             <th scope="col">Ending At</th>
             <th scope="col">Owner</th>
+            <th scope="col">Created at</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -24,10 +25,11 @@
           <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
           <td>{{ str_replace('00:', '',$event->ending_at) }}</td>
           <td>{{ str_replace(str_split('"[]'),'', App\Models\User::where('id' , '=' , $event->id_user)->pluck('name') ) }}</td>
+          <td>{{ $event->created_at }}</td>
           <td colspan="2">
             {{-- <a class="btn btn-success btn-sm" href=""><i class="fas fa-pen fa-sm"></i> Edit</a> --}}
-          <a  class="btn btn-success btn-sm" href="{{ route('admin_verify_event' , [$event->id,'v'])}}"><i class="fas fa-check"></i> Validate Seminar</a>
-            <a class="btn btn-danger btn-sm" href="{{ route('admin_verify_event' , [$event->id,'d'])}}"><i class="fas fa-times"></i> Deny Seminar</a>
+          <a class="btn btn-success btn-sm" href="{{ route('admin_verify_event' , [$event->id,'v'])}}"><i class="fas fa-check"></i> Validate Seminar</a>
+          <a class="btn btn-danger btn-sm" href="{{ route('admin_verify_event' , [$event->id,'d'])}}"><i class="fas fa-times"></i> Deny Seminar</a>
           </td>
         </tr>
         @endif

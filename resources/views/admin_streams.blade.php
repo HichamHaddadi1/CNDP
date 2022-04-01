@@ -16,6 +16,7 @@
         <th scope="col">Starts At</th>
         <th scope="col">Ending At</th>
         <th scope="col">Status</th>
+        <th scope="col">Created at</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -28,7 +29,7 @@
       <td>{{ $event->starting_at }}</td>
       <td>{{ $event->ending_at }}</td>
       <td>{{ $event->isVerified }}</td>
-      
+      <td>{{ $event->created_at }}</td>
       <td colspan="2">
         @if($event->isVerified == 'Verified')
         <a class="btn btn-danger btn-sm" href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i> Delete</a>

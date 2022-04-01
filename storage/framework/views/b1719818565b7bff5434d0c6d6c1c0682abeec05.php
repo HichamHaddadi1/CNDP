@@ -1,8 +1,8 @@
-@extends('EventValidator.EV_layout')
 
 
 
-@section('validator_content')
+
+<?php $__env->startSection('validator_content'); ?>
 <style>
   .room_desc{
   width: 250px;
@@ -20,34 +20,22 @@ color:rgb(90, 30, 255) !important;
 </style>
 <link rel="stylesheet" href="\js\sweetalert2.css">
 <div class="container">
-  {{-- <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-    <strong>Note :</strong> After creating Your first room, you should create an event for that Room at the sidebar > <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="{{ url('streamer/events') }}"><i class="nav-icon fas fa-bolt"></i> Events</a></span></b>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div> --}}
-@if (Session::get('success'))
+  
+<?php if(Session::get('success')): ?>
       <div class="alert alert-success mt-3" role="alert">
-        {{ Session::get('success') }}
+        <?php echo e(Session::get('success')); ?>
+
       </div>
-@elseif(Session::get('error'))
+<?php elseif(Session::get('error')): ?>
       <div class="alert alert-danger mt-3" role="alert">
-        {{ Session::get('error') }}
+        <?php echo e(Session::get('error')); ?>
+
       </div>
-      @endif
+      <?php endif; ?>
 
     <table class="table table-hover">
- {{-- Search Box --}}
- {{-- <form action="{{ route('search_room_streamer') }}" method="GET">
- <div class="row">
-  <div class="col-lg-4 col-lg-offset-4">
-    <div class="input-group">
-      <input type="search" id="search" name="search" class="form-control" placeholder="Search ">
-      <button type="submit" class="btn btn-outline-primary">search</button>
-    </div>
-  </div>
-</div>
-</form> --}}
+ 
+ 
     <thead>
       <tr>
         <th>Room Name</th>
@@ -60,25 +48,25 @@ color:rgb(90, 30, 255) !important;
       </tr>
     </thead>
     <tbody>
-        @foreach ($rooms as $room )
+        <?php $__currentLoopData = $rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $room): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
         <tr>
-        <td>{{ $room->room_name }}</td>
-        <td class="room_desc">{{ $room->room_desc }}</td>
-        <td >{{ $room->max_viewers }}</td>
-        <td>{{$room->viewer_pw}}</td>
-        <td>{{$room->verified}}</td>
-        <td>{{$room->created_at}}</td>
+        <td><?php echo e($room->room_name); ?></td>
+        <td class="room_desc"><?php echo e($room->room_desc); ?></td>
+        <td ><?php echo e($room->max_viewers); ?></td>
+        <td><?php echo e($room->viewer_pw); ?></td>
+        <td><?php echo e($room->verified); ?></td>
+        <td><?php echo e($room->created_at); ?></td>
 
         <td colspan="3">
-          @if($room->verified!='Pending' && $room->verified!='Denied')
+          <?php if($room->verified!='Pending' && $room->verified!='Denied'): ?>
 
 
-       @endif
+       <?php endif; ?>
 
-       @if($room->verified!='Pending')
-       <a  href="{{ route('delete.room' , $room->id)}}"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a>
-       <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: Green" data-id="{{ $room->id }}" ><i class="fas fa-edit" ></i></button></a>
+       <?php if($room->verified!='Pending'): ?>
+       <a  href="<?php echo e(route('delete.room' , $room->id)); ?>"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a>
+       <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: Green" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
 
 
         </td>
@@ -87,8 +75,8 @@ color:rgb(90, 30, 255) !important;
 
 
       </tr>
-      @endif
-     @endforeach
+      <?php endif; ?>
+     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
     </tbody>
@@ -96,7 +84,7 @@ color:rgb(90, 30, 255) !important;
   </table>
 
     <span class="pagination justify-content-center" >
-    {{-- {{$rooms->links()}} --}}
+    
     </span>
 
 
@@ -108,7 +96,7 @@ color:rgb(90, 30, 255) !important;
 
 <!-- Modal -->
 <form method="POST" id="updateRoomForm" action="">
-  @csrf
+  <?php echo csrf_field(); ?>
 <div class="modal fade" id="updateRoomModal" tabindex="-1" role="dialog" aria-labelledby="updateRoomModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -201,7 +189,7 @@ $('#updateRoomForm').submit(function (e) {
   var form =this;
 e.preventDefault();
 $.ajax({
-      url: "{{ route('streamers.room_update') }}",
+      url: "<?php echo e(route('streamers.room_update')); ?>",
       method:"POST",
       processData: false,
       contentType: false,
@@ -233,4 +221,6 @@ $.ajax({
 
 </div>
 </form>
-  @endsection
+  <?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('EventValidator.EV_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/EventValidator/rooms.blade.php ENDPATH**/ ?>

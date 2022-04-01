@@ -37,6 +37,7 @@
         <th scope="col">Email</th>
         <th scope="col">Gender</th>
         <th scope="col">Language</th>
+        <th scope="col">Created at</th>
         <th scope="col">Options</th>
       </tr>
     </thead>
@@ -54,7 +55,7 @@
             <td>{{ $streamer->email }}</td>
             <td>{{ $streamer->gender }}</td>
             <td>{{ $streamer->language }}</td>
-           
+            <td>{{ $streamer->created_at }}</td>
             <td colspan="2">
             @if($streamer->status == 'Pending')
             <a class="btn btn-success btn-sm" href="{{ route('admin_verify_streamer' , [$streamer->id,'v'])}}"><i class="fas fa-check fa-sm"></i> Verify</a>

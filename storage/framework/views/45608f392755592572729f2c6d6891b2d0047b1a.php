@@ -39,6 +39,7 @@
         <th scope="col">Email</th>
         <th scope="col">Gender</th>
         <th scope="col">Language</th>
+        <th scope="col">Created at</th>
         <th scope="col">Options</th>
       </tr>
     </thead>
@@ -56,7 +57,7 @@
             <td><?php echo e($streamer->email); ?></td>
             <td><?php echo e($streamer->gender); ?></td>
             <td><?php echo e($streamer->language); ?></td>
-           
+            <td><?php echo e($streamer->created_at); ?></td>
             <td colspan="2">
             <?php if($streamer->status == 'Pending'): ?>
             <a class="btn btn-success btn-sm" href="<?php echo e(route('admin_verify_streamer' , [$streamer->id,'v'])); ?>"><i class="fas fa-check fa-sm"></i> Verify</a>

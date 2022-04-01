@@ -163,11 +163,17 @@ footer p {
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  @if($errors->any())
+  <div class="alert alert-danger" role="alert">
+    <b>Error!</b> Please go re-add seminar => <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
+  </div>
+  @endif
+
 @if (Session::get('success'))
       <div class="alert alert-success mt-3" role="alert">
         {{ Session::get('success') }}
       </div>
-      @endif
+@endif
   <div class="btn mb-4 mr-4" style="float: right">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
@@ -181,55 +187,133 @@ footer p {
      </div>
    </div>
    </form>
-   <table class="table table-hover">
 
-    <thead>
-      <tr>
-        <th scope="col">Seminar Theme</th>
-        <th scope="col">Starts at</th>
-        <th scope="col">End at</th>
-        <th scope="col">State</th>
-        <th scope="col" style="text-align: center;">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-      @foreach ($events as $event )
-    
-      @if ($event->id_user == Auth::user()->id)
-        <tr>
-            <td>{{ $event->event_theme }}</td>
-            <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
-            <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
-            <td>{{ $event->isVerified}}</td>
-            <td colspan="2" class="text-center">
-              @if(\Carbon\Carbon::now()->lte($event->starting_at))
-                @if($event->isVerified!='Pending' && $event->isVerified!='Denied')
-                    <a class="btn btn-primary btn-sm" href="{{ route('streamers.event_start' , [$event->id_room , $event->id ])}}"><i class="fa fa-play fa-sm"></i> Start Room</a>
-                    <button  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}"><i class="fas fa-pen"></i>Edit Seminar</button>
-                    <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text="{{ route('join' , $event->id_room)}}">
-                        Copy Link
-                    </button>
-                    <button type="button" class="btn btn-warning btn-sm link_id" data-toggle="modal" id="{{$loop->index}}" data-target="#exampleModal"> Share link&nbsp;<i class="fas fa-share-alt"></i> </button>
-                @endif
-                @if($event->isVerified !='Pending' )
-                    <a class="btn btn-danger btn-sm" href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i> Delete</a>
-                @endif
-                @else
-                   <small style="color:green;"> Seminar Expired</small>
-                @endif
-            </td>
-        </tr>
-      @endif
-    
+   <br><br><br>
+   <div class="p-5 bg-white rounded shadow mb-5">
+    <!-- Rounded tabs -->
+    <ul id="myTab" role="tablist" class="nav nav-tabs nav-pills flex-column flex-sm-row text-center bg-light border-0 rounded-nav">
+      <li class="nav-item flex-sm-fill">
+        <a id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" class="nav-link border-0 text-uppercase font-weight-bold active">Seminars</a>
+      </li>
+      <li class="nav-item flex-sm-fill">
+        <a id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" class="nav-link border-0 text-uppercase font-weight-bold">Expired Seminars</a>
+      </li>
+      
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div id="home" role="tabpanel" aria-labelledby="home-tab" class="tab-pane fade px-4 py-5 show active">
+        <table class="table table-hover">
 
-      @endforeach
-  </tbody>
+          <thead>
+            <tr>
+              <th scope="col">Seminar Theme</th>
+              <th scope="col">Starts at</th>
+              <th scope="col">End at</th>
+              <th scope="col">State</th>
+              <th scope="col" style="text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @php 
+      
+            use Illuminate\Support\Facades\URL;
+            use Illuminate\Support\Facades\Crypt;
+            @endphp
+            
+            @forelse ($events as $event )
+            
+              <tr>
+                  <td>{{ $event->event_theme }}</td>
+                  <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
+                  <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
+                  <td>{{ $event->isVerified}}</td>
+                  <td colspan="2">
+                    @if(\Carbon\Carbon::now()->lt($event->ending_at))
+                      @if($event->isVerified!='Pending' && $event->isVerified!='Denied')
+                     
+                          <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Start Room" href="{{ route('streamers.event_start' , [$event->id_room , $event->id ])}}"><i class="fa fa-play fa-sm"></i> </a>
+              
+                          <button data-toggle="tooltip" title="Edit Seminar"  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}" ><i class="fas fa-pen"></i></button>
+                           <button data-toggle="tooltip" title="Copy Link" class="btn btn-primary btn-sm" id="share_link" style="color: white" data-clipboard-text="{{ route('join' , [$event->id_room,Crypt::encrypt($event->id)])}}">
+                            <i class="fas fa-copy"></i>
+                          </button>
+                         <span data-toggle="tooltip" title="Share link">
+                          <button  type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-share-alt"></i> </button>
+                         </span>
+                      
+                      @endif
+                      @if($event->isVerified !='Pending' )
+                          <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete"  href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i></a>
+                      @endif
+      
+                      @else
+                        Seminers Expired
+                      @endif
+                     
+                          
+                     
+                          
+                      
+                  </td>
+              </tr>
+           @empty
+                <td colspan="5" class="text-center">No Seminars Created Yet</td>
+      
+            @endforelse
+        </tbody>
+      </table>
+         <span class="pagination justify-content-center" >
+          {{$events->links()}}
+          </span>
+      </div>
+      <div id="profile" role="tabpanel" aria-labelledby="profile-tab" class="tab-pane fade px-4 py-5">
+    
+        <table class="table table-hover">
 
-  </table>
-   <span class="pagination justify-content-center" >
-    {{$events->links()}}
-    </span>
+          <thead>
+            <tr>
+              <th scope="col">Seminar Theme</th>
+              <th scope="col">Starts at</th>
+              <th scope="col">End at</th>
+              <th scope="col">State</th>
+              <th scope="col" style="text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse ($oldevents as $event )
+            @if ($event->id_user == Auth::user()->id)
+              <tr>
+                  <td>{{ $event->event_theme }}</td>
+                  <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
+                  <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
+                  <td>{{ $event->isVerified}}</td>
+                  <td >
+                    Expired
+                  </td>
+              </tr>
+            @endif
+            @empty
+            <td colspan="5" class="text-center">No Seminars Expired Yet</td>
+        
+            @endforelse
+        </tbody>
+        
+        </table>
+         <span class="pagination justify-content-center" >
+          {{$oldevents->links()}}
+          </span>
+
+
+
+      </div>
+     
+    </div>
+    <!-- End rounded tabs -->
+  </div>
+
+
+
+
  
   <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">

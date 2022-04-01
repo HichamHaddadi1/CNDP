@@ -265,3 +265,7 @@ Route::get('/validator/seminarists' , [EVController::class , 'validator_all_user
 Route::get('mail', function () {
     return view('streamers.mail');
 });
+
+Route::get('/test01',function(){
+    return view('test01');
+});
