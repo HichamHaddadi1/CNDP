@@ -176,15 +176,30 @@ class EventsController extends Controller
     public function search_event_streamer()
     {
         $search = request()->input('search');
-
+            $oldevents = DB::table('events')
+            ->where('ending_at','<=',Carbon::now()->format('Y-m-d G:i'))
+            ->where('id_user','=',Auth::user()->id)
+            ->paginate(10);
         // Search in the title and body columns from the posts table
+        if( $search == null)
+        {
+            $events =DB::table('events')
+            ->where('ending_at','>=',Carbon::now()->format('Y-m-d G:i'))
+            ->where('id_user','=',Auth::user()->id)
+            ->paginate(10);
+        }
+        else{
             $events = Event::query()
             ->where('event_theme', 'LIKE', "%{$search}%")
             ->orWhere('event_desc' , 'LIKE' ,"%{$search}%")
+            ->where('id_user','=',Auth::user()->id)
             ->paginate(10);
             $rooms = Room::all();
+        }
+        $rooms = Room::all();
+        $rooms_count = $rooms->count();
         // Return the search view with the resluts compacted
-            return view('streamers.events', compact('events' , 'rooms'));
+            return view('streamers.events', compact('events' , 'rooms','oldevents','rooms_count'));
     }
 
 

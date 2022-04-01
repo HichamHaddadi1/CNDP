@@ -155,6 +155,9 @@ footer p {
   margin: revert;
   padding: revert;
 }
+.red_req{
+  color: red;
+}
   </style>
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
@@ -210,6 +213,7 @@ footer p {
               <th scope="col">Seminar Theme</th>
               <th scope="col">Starts at</th>
               <th scope="col">End at</th>
+              <th scope="col">Password</th>
               <th scope="col">State</th>
               <th scope="col" style="text-align: center;">Actions</th>
             </tr>
@@ -220,13 +224,14 @@ footer p {
             use Illuminate\Support\Facades\URL;
             use Illuminate\Support\Facades\Crypt;
             ?>
-            
+           
             <?php $__empty_1 = true; $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-            
+           
               <tr>
                   <td><?php echo e($event->event_theme); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->starting_at)); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->ending_at)); ?></td>
+                  <td><?php echo e(\App\Models\Room::where('id',$event->id_room)->first()->viewer_pw); ?></td>
                   <td><?php echo e($event->isVerified); ?></td>
                   <td colspan="2">
                     <?php if(\Carbon\Carbon::now()->lt($event->ending_at)): ?>
@@ -277,6 +282,7 @@ footer p {
               <th scope="col">Seminar Theme</th>
               <th scope="col">Starts at</th>
               <th scope="col">End at</th>
+              
               <th scope="col">State</th>
               <th scope="col" style="text-align: center;">Actions</th>
             </tr>
@@ -361,7 +367,7 @@ footer p {
             </div>
             <div class="modal-body mx-3">
           <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">Seminar Theme</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Seminar Theme <small class="red_req">*</small></label>
             <input type="text" id="RoomName" name="event_theme" class="form-control <?php $__errorArgs = ['event_theme'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -390,7 +396,7 @@ unset($__errorArgs, $__bag); ?>
             <div class="row">
               <div class="col">
                 <div class="md-orm ">
-                  <label class="col-form-label text-right">Start at</label>
+                  <label class="col-form-label text-right">Start at <small class="red_req">*</small></label>
                   <input type="text" id="starting_at" name="starting_at" autocomplete="off" class="form-control <?php $__errorArgs = ['starting_at'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -415,7 +421,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
                 <div class="col">
             <div class="md-orm ">
-                  <label class="col-form-label text-right">End at</label>
+                  <label class="col-form-label text-right">End at <small class="red_req">*</small></label>
                   <input type="text"  id="ending_at" name="ending_at" autocomplete="off" class="form-control <?php $__errorArgs = ['ending_at'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -443,7 +449,7 @@ unset($__errorArgs, $__bag); ?>
 
         </div>
         <div class="md-form ">
-            <label data-error="wrong" data-success="right" for="orangeForm-pass"> Seminar Description</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass"> Seminar Description <small class="red_req">*</small></label>
             <textarea name="event_desc" id="event_desc" class="form-control <?php $__errorArgs = ['event_desc'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -468,6 +474,9 @@ unset($__errorArgs, $__bag); ?>
                     <div class="countArea">
 
                     </div>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button id="submit" class="btn btn-info">Create SEMINAR</button>
@@ -526,7 +535,7 @@ unset($__errorArgs, $__bag); ?>
 
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">SEMINAR Theme</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">SEMINAR Theme <small class="red_req">*</small></label>
             <input type="text" id="RoomNameUpdate" name="event_themeUpdate" class="form-control validate"   >
         </div>
 
@@ -534,21 +543,21 @@ unset($__errorArgs, $__bag); ?>
             <div class="row">
               <div class="col">
                 <div class="md-orm ">
-                  <label class="col-form-label text-right">Start at</label>
+                  <label class="col-form-label text-right">Start at <small class="red_req">*</small></label>
                   <input type="text" id="startingUpdate" name="starting_at_Update" autocomplete="off" value="" class="form-control form-control-solid datetimepicker-input" id="kt_datetimepicker_5" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_6" onfocusout="checkDates()" />
                   <span for="end" id="start_error_update" class="text-danger error-text start_error_update"></span>
                 </div>
                 </div>
                 <div class="col">
             <div class="md-orm ">
-                  <label class="col-form-label text-right">End at</label>
+                  <label class="col-form-label text-right">End at <small class="red_req">*</small></label>
                   <input type="text" id="EndingUpdate" name="ending_at_Update" autocomplete="off" value="" class="form-control form-control-solid datetimepicker-input" id="kt_datetimepicker_4" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_6"   />
             </div>
             </div>
              </div>
         </div>
         <div class="md-form ">
-            <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description <small class="red_req">*</small></label>
             
             <textarea name="event_desc_Update" id="DescUpdate" class="form-control validate " cols="30" rows="6" maxlength="300" ></textarea>
           <div id="countL1"></div>

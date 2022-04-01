@@ -76,6 +76,9 @@ label[for="file-uploadupdate"]:hover {
   background: #007bff;
   color: white;
 }
+.red_req{
+  color: red;
+}
 </style>
 <link rel="stylesheet" href="\js\sweetalert2.css">
 <div class="container">
@@ -181,20 +184,19 @@ label[for="file-uploadupdate"]:hover {
       </div>
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name <small class="red_req">*</small></label>
             <input type="text" id="RoomName" name="room_name" class="form-control validate">
-
         </div>
         <div class="row">
           <div class="col">
             <div class="md-form mb-3">
-                <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees</label>
+                <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
                 <input type="text" id="MaxViewer" name="max_viewers" class="form-control validate">
             </div>
             </div>
             <div class="col">
             <div class="md-form mb-3">
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password</label>
+              <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
               <input type="text" id="MaxViewer" name="viewer_pw" class="form-control validate">
             </div>
           </div>
@@ -208,7 +210,7 @@ label[for="file-uploadupdate"]:hover {
           {{-- <form action="{{route('streamer.presentation.upload')}}" method="POST" enctype="multipart/form-data"> --}}
 
 
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Upload your Presentation</label>
+              <label data-error="wrong" data-success="right" for="orangeForm-email">Upload your Presentation <small class="red_req">*</small></label>
               <div class="form-group">
                 <span id="filename">Select your file</span>
                   <label for="file-upload">Browse
@@ -217,11 +219,13 @@ label[for="file-uploadupdate"]:hover {
              </div>
              </div>
         <div class="md-form mb-4">
-            <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description <small class="red_req">*</small></label>
             <textarea id="RoomDesc" name="room_desc" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
         </div>
-
+        <div class="form-check">
+          <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
+        </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit" class="btn btn-info">Create Room</button>
@@ -241,14 +245,14 @@ label[for="file-uploadupdate"]:hover {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Update Room</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Update Room </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
-            <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name <small class="red_req">*</small></label>
             <input type="text" id="RoomNameUpdate" name="room_nameupdate" class="form-control validate">
             <small class="text-error room_nameupdate_error" style="color:red;"></small>
         </div>
@@ -256,14 +260,14 @@ label[for="file-uploadupdate"]:hover {
         <div class="row">
           <div class="col">
             <div class="md-form mb-3">
-                <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees</label>
+                <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
                 <input type="text" id="MaxViewerUpdate" name="max_viewersupdate" class="form-control validate">
                 <small class="text-error max_viewersupdate_error"  style="color:red;"></small>
             </div>
             </div>
             <div class="col">
             <div class="md-form mb-3">
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password</label>
+              <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
               <input type="text" id="viewer_pwUpdate" name="viewer_pwupdate" class="form-control validate">
               <small class="text-error viewer_pwupdate_error"  style="color:red;"></small>
             </div>
@@ -272,7 +276,7 @@ label[for="file-uploadupdate"]:hover {
 
           <div class="md-form mb-4 form_div">
 
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation</label>
+              <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation <small class="red_req">*</small></label>
               <div class="form-group">
                 
                 <input type="file" id="" name="file_uploadUpdate">
@@ -285,7 +289,7 @@ label[for="file-uploadupdate"]:hover {
              @enderror
              </div>
         <div class="md-form mb-4">
-            <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description</label>
+            <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description <small class="red_req">*</small></label>
             <textarea id="room_descUpdate" name="room_descUpdate" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
             <small class="text-error room_descUpdate_error" style="color:red;"></small>

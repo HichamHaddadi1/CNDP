@@ -39,11 +39,7 @@ label[for="file-upload"]:hover {
   background: #007bff;
   color: white;
 }
-
- 
 </style>
-
-
 <div class="container alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
   <strong>here you can upload your presentation to be at your stream screen but make sure it is a *.PDF format </strong> 
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
