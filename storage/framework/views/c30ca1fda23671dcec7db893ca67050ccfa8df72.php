@@ -273,126 +273,57 @@ font-weight: bold;
 	font-size: 60px;
 	font-weight: 600;
 }
+.live_list{
+  top: 25vh;
+  
+}
+
 </style>
 
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
+  <div class="container my-auto col-5  live_list">
+    <div class="list-group">
+     
+      <?php $__empty_1 = true; $__currentLoopData = $seminars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ev): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+               
+      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="m-1 list-group-item list-group-item-action text-center">
+      <?php echo e($ev->event_theme); ?>  
+      <a href="<?php echo e(route('join',['id'=>$ev->id_room ,'_id'=>Crypt::encrypt('$event->id')])); ?>" class="btn_1 btn btn-primary float-right text-center"> 
+      <i class="fas fa-play text-end"></i> 
+      </a>
+      </span>
+      <?php if($loop->index  == 5): ?>
+          <?php break; ?>
+      <?php endif; ?>
 
- <div class="container row div_live" >
+ <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+<span class=" m-1 list-group-item list-group-item-action active  text-center">
+  No Data 
+</span>
+<?php endif; ?>
+    
+<a href="<?php echo e(url('/schedule')); ?>" class="m-1 text-center list-group-item list-group-item-action active">
+  View More 
+</a>
+    </div>
+    
+  </div>
+<div class="container row div_live" >
    <?php if(!Auth::check()): ?>
    <a id="tutorial" class=""><i class="fas fa-chalkboard-teacher"></i>Start a Tutorial</a>
    <?php endif; ?>
-    
+   
 
-  <?php
-    $i=0;
-    $j=0;
-  ?>
-    <div class="col-lg data_events">
-        <?php $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <?php
-          $date_soon=\Carbon\Carbon::create($event->starting_at);
-        ?>
-        <?php if($i==0 && $event->event_statue==true /*&& \Carbon\Carbon::now()->diffInHours($event->ending_at)<=4 */&& $event->isVerified=="Verified" && \Carbon\Carbon::now()->lte($event->ending_at)): ?>
-        <?php
-          $i++;
-          $j++;
-        ?>
-       <!-- <?php if(Bigbluebutton::isMeetingRunning($event->id_room) == false): ?>
-         $event->event_statue = 1;
-         $event->update();
-       <?php endif; ?> -->
-       
-      <div class="col container text-align-center">
-      <div class="blog-card" style="-webkit-animation-delay: 0.1s; -moz-animation-delay: 0.1s; animation-delay: 0.1s;">
-        <div class="meta">
-          <div class="photo" style="background-image: url(/upload/<?php echo e($event->avatar); ?>)"></div>
-          <ul class="details">
-            <?php if($event->event_statue == 1): ?>
-            <li class="author"><?php echo e($event->name); ?></li>
-            <li class="date"><?php echo e($date_soon->toFormattedDateString()); ?></li>
-            <li class="tags">
-            </li>
-            <?php endif; ?>
-          </ul>
-        </div>
-        <div class="description">
-          <h1 style="color:white;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;max-width: 40%"><span class="fas fa-broadcast-tower" style="color:#2f589e;"></span> <?php echo e($event->event_theme); ?></h1>
-          <h2> ON AIR</h2>
-          <p> <?php echo e($event->event_desc); ?></p>
-          <p>
-            <p class="card-text text-center">
-              <div class='timer' id='<?php echo e($event->id); ?>' data-date='<?php echo e(\Carbon\Carbon::parse($event->ending_at)->isoFormat('MMMM D YYYY, h:mm:ss a')/*->diff(\Carbon\Carbon::now())*/); ?>'>
-                <?php echo e(\Carbon\Carbon::parse($event->starting_at)->isoFormat('h:mm:ss a')/*->diff(\Carbon\Carbon::now())->format('%H:%I:%S')*/); ?>
-
-              </div>
-          </p>
-          <p class="read-more">
-            <a class="btnstyle" href="<?php echo e(route('join' , $event->id_room)); ?>" style="color:#fff;">Join Now</a>
-          </p>
-
-        </div>
-      </div>
-    </div>
-     
-      <?php elseif($i==0 && $event->event_statue==false && \Carbon\Carbon::now()->lte($event->starting_at) && $event->isVerified=="Verified" && \Carbon\Carbon::now()->diffInHours($event->starting_at)<=10): ?>
-      <?php
-      $i++;
-      $j++;
-    ?>
-
-      <div class="blog-card">
-        <div class="meta">
-          <div class="photo" style="background-image: url(/upload/<?php echo e($event->avatar); ?>);height:100%;width:100%;"></div>
-          <ul class="details">
-            <li class="author"><a href="#"><?php echo e($event->name); ?></a></li>
-            <li class="date"><?php echo e($date_soon->toFormattedDateString()); ?></li>
-          </ul>
-        </div>
-        <div class="description">
-          <h1 style="max-width: 40%;color:white;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;" class="f-w-600"><?php echo e($event->event_theme); ?></h1>
-          <h2><i class="fas fa-stopwatch"></i>Starting Soon</h2>
-          <p style="word-wrap: break-word;width: 300px;"> <?php echo e($event->event_desc); ?></p>
-          <p class="card-text text-center">
-            <div class='timer' id='<?php echo e($event->id); ?>' data-date='<?php echo e(\Carbon\Carbon::parse($event->starting_at)->isoFormat('MMMM D YYYY, h:mm:ss a')/*->diff(\Carbon\Carbon::now())*/); ?>'>
-              <?php echo e(\Carbon\Carbon::parse($event->starting_at)->isoFormat('h:mm:ss a')/*->diff(\Carbon\Carbon::now())->format('%H:%I:%S')*/); ?>
-
-            </div>
-          </p>
-          <p class="read-more">
-            <a class="btnstyle first_button" href="<?php echo e(route('viewer_events')); ?>" style="color:#fff;">View More</a>
-          </p>
-        </div>
-      </div>
-     <?php endif; ?>
-     <?php
-       $j=$i;
-     ?>
-      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-      
-      <?php if($j==0): ?>
-      <?php
-       $i++;
-       $j++;
-      ?>
-      <div class="col-lg blog-card combacklater">
-       <div class="description">
-         <h1 style="color:white;" class="f-w-600">No Live Streams at this Moment</h1>
-         <h2><i class="fas fa-stopwatch"></i>Comeback Later</h2>
-         <p class="read-more">
-           <a class="btnstyle first_button" href="<?php echo e(route('viewer_events')); ?>" style="color:#fff;">View More</a>
-         </p>
-       </div>
-      </div>
-     <?php endif; ?>
-     
-
-    </div>
+</div> 
     <div class="row btn_join_us">
       <ul class="btn-group-vertical">
 
-        <li><a href="<?php echo e(route('register')); ?>" class="btn-group btnstyle2" style="color: #fff">Register as a Seminarist</a></li>
         
+
+
+
+  
       </ul>
     </div>
   </div>
@@ -439,7 +370,7 @@ font-weight: bold;
 
             <img src="\img\icon\Breakout Rooms.png" class="service-icon">
             <p class="service-title"><a href="#">Breakout Rooms</a></p>
-            <p class="service-para">You can group and place viewers into breakout rooms (full Tamkine Platform sessions) for give number of minutes for increased collaboration.</p>
+            <p class="service-para">You can group and place viewers into breakout rooms (full CNDP Platform sessions) for give number of minutes for increased collaboration.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-6 col-12 mt-4 mt-md-0">
@@ -482,7 +413,7 @@ font-weight: bold;
           <div class="icon-box">
             <img src="\img\icon\Screen-reader.png" class="service-icon">
             <p class="service-title"><a href="#">Screen Reader</a></p>
-            <p class="service-para">viewers with visual disabilities can use JAWS screen reader to interact with Tamkine Platform.</p>
+            <p class="service-para">viewers with visual disabilities can use JAWS screen reader to interact with CNDP Platform.</p>
           </div>
         </div>
 
@@ -649,7 +580,8 @@ $('button.b[type]').click(function () {
 $('#tutorial').click(function(){
 
 introJs().setOptions({
-  steps: [{
+  steps: 
+  [{
     title: 'Welcome 👋',
     intro: 'Would you like to Explore our Platform?',
     position:'auto'
@@ -657,41 +589,29 @@ introJs().setOptions({
   {
     element:document.querySelector('.join_us_l'),
     title:'Join Us',
-    intro:'You can be Part of our Community as a User or a Seminarist',
+    intro:'You can be Part of our Community as a Seminarist',
     position:'auto'
   },
-
-  {
-    title:'Our Latest Live Event',
-    element: document.querySelector('.data_events'),
-    intro: 'Here you can Find or Join our Trend Events',
-    position:'auto'
-
-  }
-  ,
-
-  {
-    title:'Our Latest Live Event',
-    element: document.querySelector('.btn_join_us'),
-    intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
-    position:'auto'
-
-  },
-  {
-    title:'Information',
-    element: document.querySelector('#click_for_home'),
-    intro: 'hover the Icons for more information about the platform',
-    position:'auto'
-  }
-
-,{
-  element:document.querySelector('.partners'),
-  title:'Partners',
-  intro:'Partners of our Foundation',
-  position:'auto'
-}
-
-  ]
+  // {
+  //   title:'Our Latest Live Event',
+  //   element: document.querySelector('.live_list'),
+  //   intro: 'Here you can Find or Join our Trend Seminars',
+  //   position:'auto'
+  // }
+  // ,
+  // {
+  //   title:'Our Latest Live Event',
+  //   element: document.querySelector('.btn_join_us'),
+  //   intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
+  //   position:'auto'
+  // },
+  // {
+  //   title:'Information',
+  //   element: document.querySelector('#click_for_home'),
+  //   intro: 'hover the Icons for more information about the platform',
+  //   position:'auto'
+  // }
+]
 }).start();
 });
 </script>

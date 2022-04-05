@@ -35,8 +35,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.3/fullcalendar.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <!-- tempusdominus- -->
 <!-- end scripts -->
@@ -65,9 +67,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?php echo e(route('index')); ?>" class="brand-link" target="_blank">
-      <img src="\img\cndp-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-4" style="opacity: .8">
-      <span class="brand-text font-weight-light">CNDP</span>
+    <a href="<?php echo e(route('index')); ?>" class="brand-link justify-content-center" target="_blank">
+      <img src="\img\cndp-logo.png" alt="AdminLTE Logo" class="brand-image elevation-5" style="opacity: .8">
+      <span class="brand-text font-weight-light"> &nbsp;
+      </span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -96,13 +99,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="<?php echo e(url('streamer/rooms')); ?>" class="nav-link active">
               <i class="nav-icon fas fa-door-open"></i>
               <p>
-                Rooms
+                Room
               </p>
             </a>
             <a href="<?php echo e(url('streamer/events')); ?>" class="nav-link active">
               <i class="nav-icon fas fa-bolt"></i>
               <p>
-                    Events
+                Seminars
               </p>
             </a>
             <a href="<?php echo e(url('streamer/planning')); ?>" class="nav-link active">
@@ -153,13 +156,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- To the right -->
 
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 <a href="https://tamkine.org/en/" target="_blank">Tamkine</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php echo e(Carbon\Carbon::now()->format('Y')); ?> <a href="https://tamkine.org/en/" target="_blank">Tamkine Technologies</a>.</strong> All rights reserved.
   </footer>
 </div>
 
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src=<?php echo e(asset('dist\js\adminlte.min.js')); ?>></script>
 <script>
   new ClipboardJS('.btn');
@@ -177,8 +182,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         console.log(result.event.event_theme);
 
         $('#EditEvent').modal('show');
-
-
         // console.log(result.event.event_theme);//.val(result.event.event_theme);
         RoomNameUpdate.value=result.event.event_theme;
         startingUpdate.value=result.event.starting_at;

@@ -73,8 +73,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?php echo e(route('index')); ?>" class="brand-link" target="_blank">
-      <img src="/img/cndp-logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">CNDP</span>
+      <img src="/img/cndp-logo.png" alt="AdminLTE Logo" class="brand-image elevation-4" style="opacity: .8">
+      <span class="brand-text font-weight-light"> &nbsp;</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="<?php echo e(url('validator/events/pending')); ?>" class="nav-link active">
               <i class="nav-icon fa fa-clock"></i>
               <p>
-                Pending Events <span class="badge badge-dark" style="color:red;"><?php echo e($pending_events); ?></span>
+                Pending Seminars <span class="badge badge-dark" style="color:red;"><?php echo e($pending_events); ?></span>
               </p>
             </a>
             <a href="<?php echo e(url('validator/rooms/pending')); ?>" class="nav-link active">
@@ -121,7 +121,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="<?php echo e(url('validator/events')); ?>" class="nav-link active">
                 <i class="nav-icon fas fa-list"></i>
                 <p>
-                  All Events
+                  All Seminars
                 </p>
               </a>
             <a href="<?php echo e(url('validator/rooms')); ?>" class="nav-link active">
@@ -178,7 +178,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2021 <a href="https://tamkine.org/en/" target="_blank">Tamkine</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php echo e(Carbon\Carbon::now()->format('Y')); ?> <a href="https://tamkine.org/en/" target="_blank">Tamkine Technologies</a>.</strong> All rights reserved.
   </footer>
 </div>
 <script>
