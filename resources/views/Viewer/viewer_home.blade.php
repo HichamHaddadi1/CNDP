@@ -474,7 +474,7 @@ font-weight: bold;
 
             <img src="\img\icon\Breakout Rooms.png" class="service-icon">
             <p class="service-title"><a href="#">Breakout Rooms</a></p>
-            <p class="service-para">You can group and place viewers into breakout rooms (full Tamkine Platform sessions) for give number of minutes for increased collaboration.</p>
+            <p class="service-para">You can group and place viewers into breakout rooms (full CNDP Platform sessions) for give number of minutes for increased collaboration.</p>
           </div>
         </div>
         <div class="col-md-6 col-lg-6 col-12 mt-4 mt-md-0">
@@ -517,7 +517,7 @@ font-weight: bold;
           <div class="icon-box">
             <img src="\img\icon\Screen-reader.png" class="service-icon">
             <p class="service-title"><a href="#">Screen Reader</a></p>
-            <p class="service-para">viewers with visual disabilities can use JAWS screen reader to interact with Tamkine Platform.</p>
+            <p class="service-para">viewers with visual disabilities can use JAWS screen reader to interact with CNDP Platform.</p>
           </div>
         </div>
 
@@ -918,7 +918,8 @@ $('button.b[type]').click(function () {
 $('#tutorial').click(function(){
 
 introJs().setOptions({
-  steps: [{
+  steps: 
+  [{
     title: 'Welcome 👋',
     intro: 'Would you like to Explore our Platform?',
     position:'auto'
@@ -929,22 +930,18 @@ introJs().setOptions({
     intro:'You can be Part of our Community as a Seminarist',
     position:'auto'
   },
-
   // {
   //   title:'Our Latest Live Event',
   //   element: document.querySelector('.live_list'),
   //   intro: 'Here you can Find or Join our Trend Seminars',
   //   position:'auto'
-
   // }
   // ,
-
   // {
   //   title:'Our Latest Live Event',
   //   element: document.querySelector('.btn_join_us'),
   //   intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
   //   position:'auto'
-
   // },
   // {
   //   title:'Information',
@@ -952,10 +949,7 @@ introJs().setOptions({
   //   intro: 'hover the Icons for more information about the platform',
   //   position:'auto'
   // }
-
-
-
-  ]
+]
 }).start();
 });
 </script>

@@ -88,6 +88,12 @@ label[for="file-uploadupdate"]:hover {
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <?php if($errors->any()): ?>
+  <div class="alert alert-danger mt-3" role="alert">
+    Error:   <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Room</button>
+   </div>
+  <?php endif; ?>
+
 <?php if(Session::get('success')): ?>
       <div class="alert alert-success mt-3" role="alert">
         <?php echo e(Session::get('success')); ?>
@@ -189,30 +195,47 @@ label[for="file-uploadupdate"]:hover {
         <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name <small class="red_req">*</small></label>
             <input type="text" id="RoomName" name="room_name" class="form-control validate">
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="md-form mb-3">
-                <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
-                <input type="text" id="MaxViewer" name="max_viewers" class="form-control validate">
-            </div>
-            </div>
-            <div class="col">
-            <div class="md-form mb-3">
-              <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
-              <input type="text" id="MaxViewer" name="viewer_pw" class="form-control validate">
-            </div>
-          </div>
-          </div>
-          <div class="md-form mb-4 form_div">
-            <?php if($errors->has('file_upload')): ?>
+            <?php if($errors->has('room_name')): ?>
             <span class="text-danger" role="alert">
-                <strong><?php echo e($errors->first('file_upload')); ?></strong>
+            <small><strong><?php echo e($errors->first('room_name')); ?></strong></small>
             </span>
             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="md-form mb-3">
+                <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
+                <input type="number" id="MaxViewer" name="max_viewers" class="form-control validate">
+                <?php if($errors->has('max_viewers')): ?>
+                <span class="text-danger" role="alert">
+                <small> <strong><?php echo e($errors->first('max_viewers')); ?></strong></small>
+                </span>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
+            </div>
+            <div class="col">
+            <div class="md-form mb-3">
+              <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
+              <input type="number" id="MaxViewer" name="viewer_pw" class="form-control validate">
+              <?php if($errors->has('viewer_pw')): ?>
+              <span class="text-danger" role="alert">
+              <small> <strong><?php echo e($errors->first('viewer_pw')); ?></strong></small>
+              </span>
+              <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
+          </div>
+          </div>
+          <div class="md-form mb-4 form_div">
+         
           
 
 
@@ -224,11 +247,27 @@ unset($__errorArgs, $__bag); ?>
 
              </div>
              </div>
+             <?php if($errors->has('file_upload')): ?>
+             <span class="text-danger" role="alert">
+            <small> <strong><?php echo e($errors->first('file_upload')); ?></strong></small>
+             </span>
+             <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description <small class="red_req">*</small></label>
             <textarea id="RoomDesc" name="room_desc" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
         </div>
+        <?php if($errors->has('room_desc')): ?>
+        <span class="text-danger" role="alert">
+           <small> <strong><?php echo e($errors->first('room_desc')); ?></strong></small>
+        </span>
+        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
         <div class="form-check">
           <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
         </div>

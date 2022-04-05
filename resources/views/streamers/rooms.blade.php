@@ -88,6 +88,12 @@ label[for="file-uploadupdate"]:hover {
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  @if($errors->any())
+  <div class="alert alert-danger mt-3" role="alert">
+    Error:   <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Room</button>
+   </div>
+  @endif
+
 @if (Session::get('success'))
       <div class="alert alert-success mt-3" role="alert">
         {{ Session::get('success') }}
@@ -186,27 +192,38 @@ label[for="file-uploadupdate"]:hover {
         <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">Room Name <small class="red_req">*</small></label>
             <input type="text" id="RoomName" name="room_name" class="form-control validate">
+            @if($errors->has('room_name'))
+            <span class="text-danger" role="alert">
+            <small><strong>{{ $errors->first('room_name') }}</strong></small>
+            </span>
+            @enderror
         </div>
         <div class="row">
           <div class="col">
             <div class="md-form mb-3">
                 <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
-                <input type="text" id="MaxViewer" name="max_viewers" class="form-control validate">
+                <input type="number" id="MaxViewer" name="max_viewers" class="form-control validate">
+                @if($errors->has('max_viewers'))
+                <span class="text-danger" role="alert">
+                <small> <strong>{{ $errors->first('max_viewers') }}</strong></small>
+                </span>
+                @enderror
             </div>
             </div>
             <div class="col">
             <div class="md-form mb-3">
               <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
-              <input type="text" id="MaxViewer" name="viewer_pw" class="form-control validate">
+              <input type="number" id="MaxViewer" name="viewer_pw" class="form-control validate">
+              @if($errors->has('viewer_pw'))
+              <span class="text-danger" role="alert">
+              <small> <strong>{{ $errors->first('viewer_pw') }}</strong></small>
+              </span>
+              @enderror
             </div>
           </div>
           </div>
           <div class="md-form mb-4 form_div">
-            @if($errors->has('file_upload'))
-            <span class="text-danger" role="alert">
-                <strong>{{ $errors->first('file_upload') }}</strong>
-            </span>
-            @enderror
+         
           {{-- <form action="{{route('streamer.presentation.upload')}}" method="POST" enctype="multipart/form-data"> --}}
 
 
@@ -218,11 +235,21 @@ label[for="file-uploadupdate"]:hover {
 
              </div>
              </div>
+             @if($errors->has('file_upload'))
+             <span class="text-danger" role="alert">
+            <small> <strong>{{ $errors->first('file_upload') }}</strong></small>
+             </span>
+             @enderror
         <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Room Description <small class="red_req">*</small></label>
             <textarea id="RoomDesc" name="room_desc" class="form-control validate" cols="30" rows="8" maxlength="300"></textarea>
             <div id="countL" style="color:green;"></div>
         </div>
+        @if($errors->has('room_desc'))
+        <span class="text-danger" role="alert">
+           <small> <strong>{{ $errors->first('room_desc') }}</strong></small>
+        </span>
+        @enderror
         <div class="form-check">
           <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
         </div>

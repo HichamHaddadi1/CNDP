@@ -14,7 +14,7 @@
         padding: 20px;
       }
       .img_logo
-      {
+      { 
         
         width: 100px;
       }

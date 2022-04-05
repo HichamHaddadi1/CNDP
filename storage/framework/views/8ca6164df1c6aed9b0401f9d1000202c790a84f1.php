@@ -66,7 +66,7 @@
           <?php
             $l=0;
           ?>
-           <a class="card1" href="<?php echo e(route('join' , $v->id_room)); ?>" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
+           <a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
              <div>
                <div class="live-dot"></div>
                <h1><?php echo e($v->name); ?></h1>
