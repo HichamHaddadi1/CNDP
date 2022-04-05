@@ -930,14 +930,14 @@ introJs().setOptions({
     position:'auto'
   },
 
-  {
-    title:'Our Latest Live Event',
-    element: document.querySelector('.live_list'),
-    intro: 'Here you can Find or Join our Trend Seminars',
-    position:'auto'
+  // {
+  //   title:'Our Latest Live Event',
+  //   element: document.querySelector('.live_list'),
+  //   intro: 'Here you can Find or Join our Trend Seminars',
+  //   position:'auto'
 
-  }
-  ,
+  // }
+  // ,
 
   // {
   //   title:'Our Latest Live Event',
