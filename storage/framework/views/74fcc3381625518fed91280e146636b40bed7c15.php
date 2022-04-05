@@ -274,20 +274,20 @@ font-weight: bold;
 	font-weight: 600;
 }
 .live_list{
-  top: 20vh;
-  left: 30vw;
+  top: 25vh;
+  
 }
 
 </style>
 
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
-  <div class="container my-auto col-4 mt-10 live_list">
+  <div class="container my-auto col-5  live_list">
     <div class="list-group">
      
       <?php $__empty_1 = true; $__currentLoopData = $seminars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ev): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                
-      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="list-group-item list-group-item-action text-center">
+      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="m-1 list-group-item list-group-item-action text-center">
       <?php echo e($ev->event_theme); ?>  
       <a href="<?php echo e(route('join',['id'=>$ev->id_room ,'_id'=>Crypt::encrypt('$event->id')])); ?>" class="btn_1 btn btn-primary float-right text-center"> 
       <i class="fas fa-play text-end"></i> 
@@ -298,18 +298,24 @@ font-weight: bold;
       <?php endif; ?>
 
  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-<span class="list-group-item list-group-item-action active ">
-  No Data  <i class="fas fa-play text-end"></i> 
+<span class=" m-1 list-group-item list-group-item-action active  text-center">
+  No Data 
 </span>
 <?php endif; ?>
     
-<a href="<?php echo e(url('/schedule')); ?>" class="text-center list-group-item list-group-item-action active">
+<a href="<?php echo e(url('/schedule')); ?>" class="m-1 text-center list-group-item list-group-item-action active">
   View More 
 </a>
     </div>
     
   </div>
+<div class="container row div_live" >
+   <?php if(!Auth::check()): ?>
+   <a id="tutorial" class=""><i class="fas fa-chalkboard-teacher"></i>Start a Tutorial</a>
+   <?php endif; ?>
+   
 
+</div> 
     <div class="row btn_join_us">
       <ul class="btn-group-vertical">
 
@@ -582,39 +588,34 @@ introJs().setOptions({
   {
     element:document.querySelector('.join_us_l'),
     title:'Join Us',
-    intro:'You can be Part of our Community as a User or a Seminarist',
+    intro:'You can be Part of our Community as a Seminarist',
     position:'auto'
   },
 
   {
     title:'Our Latest Live Event',
-    element: document.querySelector('.data_events'),
-    intro: 'Here you can Find or Join our Trend Events',
+    element: document.querySelector('.live_list'),
+    intro: 'Here you can Find or Join our Trend Seminars',
     position:'auto'
 
   }
   ,
 
-  {
-    title:'Our Latest Live Event',
-    element: document.querySelector('.btn_join_us'),
-    intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
-    position:'auto'
+  // {
+  //   title:'Our Latest Live Event',
+  //   element: document.querySelector('.btn_join_us'),
+  //   intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
+  //   position:'auto'
 
-  },
-  {
-    title:'Information',
-    element: document.querySelector('#click_for_home'),
-    intro: 'hover the Icons for more information about the platform',
-    position:'auto'
-  }
+  // },
+  // {
+  //   title:'Information',
+  //   element: document.querySelector('#click_for_home'),
+  //   intro: 'hover the Icons for more information about the platform',
+  //   position:'auto'
+  // }
 
-,{
-  element:document.querySelector('.partners'),
-  title:'Partners',
-  intro:'Partners of our Foundation',
-  position:'auto'
-}
+
 
   ]
 }).start();

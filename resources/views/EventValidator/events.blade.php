@@ -40,7 +40,7 @@
 
   </table>
    <span class="pagination justify-content-center" >
-    {{-- {{$events->links()}} --}}
+    {{$events->links()}} 
     </span>
 
 

@@ -40,7 +40,7 @@ Route::get('/logout', [LoginController::class , 'logout'])->name('logout');
 /**This One if for login */
 
 //this route is for the user to join the meeting
-Route::get('/meeting-room/join/{id?}',[MainController::class , 'join_meeting'] )->name('join');
+Route::get('/meeting-room/join/{id?}/{_id?}',[MainController::class , 'join_meeting'] )->name('join');
 // Route::post('/check',[MainController::class,'check'])->name('auth.check');
 Route::get('streamer/rooms/search', [RoomsController::class , 'search_room'])->name('search_room_streamer');
 Route::get('admin/users/search', [UserController::class , 'search_users'])->name('search_users');
@@ -166,7 +166,7 @@ Route::post('/rooms/update_', [EVController::class ,'updateRoomValidator'])->nam
 Route::get('/rooms/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
 Route::get('/validator/streamers/pending/{id}/{mode}', [EVController ::class ,'verify_streamer'])->name('validator_verify_streamer');
 Route::get('/validator/seminarists' , [EVController::class , 'validator_all_users'])->name('validator.users');
-
+Route::get('/validator/statistics',[EVController::class , 'showStatistics']);
 
 
 

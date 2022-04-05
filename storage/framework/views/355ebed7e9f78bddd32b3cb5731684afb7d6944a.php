@@ -40,7 +40,7 @@
 
   </table>
    <span class="pagination justify-content-center" >
-    
+    <?php echo e($events->links()); ?> 
     </span>
 
 

@@ -66,7 +66,7 @@
           @php
             $l=0;
           @endphp
-           <a class="card1" href="{{ route('join' , $v->id_room)}}" style="background-image: url(/upload/{{$v->avatar}});">
+           <a class="card1" href="{{ route('join' , [$v->id_room,Crypt::encrypt($v->id)])}}" style="background-image: url(/upload/{{$v->avatar}});">
              <div>
                <div class="live-dot"></div>
                <h1>{{$v->name}}</h1>

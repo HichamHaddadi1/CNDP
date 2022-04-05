@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
+use Illuminate\Support\Facades\Crypt;
 class MainController extends Controller
 {
 
@@ -229,7 +230,7 @@ class MainController extends Controller
     /**this is for user joing meeting */
 
 
-    function join_meeting($id ='')
+    function join_meeting($id ='',$_id='')
     {
         // if (Auth::check())
         // {
@@ -244,7 +245,7 @@ class MainController extends Controller
         //     return redirect()->route('login')->with('errorsUnique' , 'you must login to have access to the meeting');
 
         // }
-        return view('user_join', compact('id'));
+        return view('user_join', compact('id','_id'));
     }
     /**End Join */
     function streamer_confirmation()
@@ -354,7 +355,7 @@ class MainController extends Controller
                 'greeting' =>'Hello there' ,
                 'subject' => 'Event Invitation',
                 'message' => 'We are happy to let you know that there is an event "'.$event->event_theme .'" which will be on '.str_replace('00:', '',$event->starting_at) .' if you would like to join use the link down below and use this access code "'.$room->viewer_pw.'"',
-                'actionUrl' => route('join',['id'=>$event->id_room])
+                'actionUrl' => route('join',['id'=>$event->id_room,'_id'=>Crypt::encrypt($event->id)])
 
             ];
             $msg = [

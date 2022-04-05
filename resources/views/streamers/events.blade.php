@@ -517,7 +517,7 @@ footer p {
     <!--Model pour partage-->
     <?php
       if(isset($event))
-    $url = new \ImLiam\ShareableLink(route('join' , $event->id_room), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
+    $url = new \ImLiam\ShareableLink(route('join' , [$event->id_room,Crypt::encrypt($event->id)]), "Lien d'événement (".$event->event_theme.") commencer le ".str_replace('00:', '',$event->starting_at)." et terminer le ".str_replace('00:', '',$event->ending_at)." est: ");
   
    
    ?> 

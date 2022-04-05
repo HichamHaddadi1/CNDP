@@ -125,7 +125,9 @@
     display: none;
     margin-left: -24px;
 }
-
+#logo_mobile {
+  width: 45%;
+}
 .showhim:hover .showme {
     display: block;
     font-size: 11px;
@@ -141,8 +143,26 @@
     position: absolute;
     z-index: 9999;
 }
-
-        </style>
+#li_mobile_logo
+{
+  display: none;
+}
+/* 810 */
+@media screen and (max-width: 600px) {
+  #li_mobile_logo
+  {
+      text-align: center;
+      display: block;
+  }
+}
+@media screen and (max-width: 811px) {
+  #li_mobile_logo
+  {
+      text-align: center;
+      display: block;
+  }
+}
+</style>
     </head>
     <body class="section">
 
@@ -167,6 +187,9 @@
                 <ul class="navbar-nav mr-auto" id="navbar_left">
                     <li class="nav-item" id="img_logo_bg">
                       <a href="{{ route('index') }}" class="nav-logo "><img class="navbar-brand h-100"  src="\img\cndp-logo.png" id="logo_png"/> </a>
+                    </li>
+                    <li class="nav-item" id="li_mobile_logo">
+                      <a href="{{ route('index') }}" class="nav-logo "><img class="navbar-brand h-100"  src="\img\cndp-logo.png" id="logo_mobile"/> </a>
                     </li>
                     <li class="nav-item" id="nav_home"><a href="{{route('index')}}" class="nav-link">Home</a></li>
                     <li class="nav-item" id="nav_events"><a href="{{route('viewer_events')}}" class="nav-link">seminars</a></li>

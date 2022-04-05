@@ -65,9 +65,9 @@
       @enderror
       <input type="text" class="form-control mb-3" name="code" id="code" placeholder="Access Code" >
         <div class="row">
-            <button type="submit" class="form-control btn-primary text-uppercase text-primary {{ !Auth::check() ? "btn_ col-md-5" : "btn_f" }} showhim"> Join <div class="showme">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></button>
+            <button type="submit" class="form-control btn-primary text-uppercase text-primary {{ !Auth::check() ? "btn_ col-md-5" : "btn_f" }} showhim"> Join <div class="showme">You can directly join the ongoing seminar by clicking on join after having entered your name and the access code to the seminar's virtual room that you would have received with the invitation or via email. </div></button>
             @if(!Auth::check())
-               <a href="{{route('userRegister')}}" class="form-control btn-primary text-uppercase text-primary text-center col-md-5 showhim btn_">Register <div class="showme">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div></a>
+               <a href="{{route('userRegister')}}" class="form-control btn-primary text-uppercase text-primary text-center col-md-5 showhim btn_">Register <div class="showme">You can join the ongoing seminar by creating your own account, which will allow us to identify you everytime you join a seminar on our platform, and to notify you about the latest seminars and conferences.</div></a>
             @endif
         </div><!-- fin row -->
      </div>

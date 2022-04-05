@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use JoisarJignesh\Bigbluebutton\Bigbluebutton as BigbluebuttonBigbluebutton;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
-
+use Illuminate\Support\Facades\Crypt;
 class RoomsController extends Controller
 {
     /**
@@ -309,7 +309,7 @@ class RoomsController extends Controller
             'presentation' => [
                 ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
-            'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id]))."' target='_blank'>".(route('join',['id'=>$room->id]))."</a></li> "
+            'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
 
         ]);
 
@@ -360,7 +360,7 @@ class RoomsController extends Controller
             'presentation' => [
                 ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
-            'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id]))."' target='_blank'>".(route('join',['id'=>$room->id]))."</a></li> "
+            'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
 
         ]);
 

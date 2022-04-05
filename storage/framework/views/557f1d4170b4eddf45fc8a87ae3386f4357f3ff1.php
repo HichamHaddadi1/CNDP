@@ -57,7 +57,7 @@
   <span class="pagination justify-content-center" >
     <?php echo e($all_users->links()); ?>
 
-    </span>
+  </span>
 </div>
 
 

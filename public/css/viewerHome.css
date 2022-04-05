@@ -122,12 +122,12 @@ html , body{
 #body{
  
   /* background-color: #2f589e; */
- background-image: url('/img/AIWoman.jpeg');
+ background-image: url('/img/AIWoman.jpg');
  background-repeat: no-repeat;
  background-size: cover;
  background-position: center center;
   
- height: 108vh;
+ height: 85vh;
 }
 .live_section{
   padding: 10px;
@@ -213,7 +213,7 @@ html , body{
     margin-bottom: 50px;
     font-size: 1em;
     overflow: hidden;
-    padding-top: 200px;
+    padding-top: 100px;
 }
 .fb-page{
   position: absolute;
@@ -237,6 +237,35 @@ html , body{
       padding-top: 40px;
       } 
 } /* End Media*/
+/* 414×896 */
+@media screen and (max-width: 600px) {
+  .fb-page{
+ display: none;
+ }
+
+.div_live {
+color: white;
+margin-left:15px ;
+margin-bottom: 50px;
+font-size: 1em;
+overflow: hidden;
+padding-top: 40px;
+} 
+
+#body{
+ background-image: url('/img/AIWoman.jpg');
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-position: center center;
+  
+ height: 70vh;
+}
+
+.live_list {
+  top: 10vh;
+}
+} 
+
 
  .live_h2{
    text-align: center;

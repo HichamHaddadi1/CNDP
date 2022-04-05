@@ -285,7 +285,7 @@ unset($__errorArgs, $__bag); ?>
               <label data-error="wrong" data-success="right" for="orangeForm-email">Update your Presentation <small class="red_req">*</small></label>
               <div class="form-group">
                 
-                <input type="file" id="" name="file_uploadUpdate">
+                <input type="file" id="file_uploadUpdate" name="file_uploadUpdate">
                   <small class="text-error file_uploadUpdate_error" style="color:red;"></small>
              </div>
              <?php if($errors->has('txtName')): ?>
@@ -352,9 +352,20 @@ unset($__errorArgs, $__bag); ?>
         }
       })
   });
+  $('#updateRoomForm').submit(function (e) {
+
+
+});
 $('#updateRoomForm').submit(function (e) {
   var form =this;
 e.preventDefault();
+if($('#file_uploadUpdate').get(0).files.length === 0 )
+  {
+    e.preventDefault();
+    $('.file_uploadUpdate_error').text('file is required (pdf*)');
+  }
+  else{
+    $('.file_uploadUpdate_error').text(' ');
 $.ajax({
       url: "<?php echo e(route('streamers.room_update')); ?>",
       method:"POST",
@@ -371,7 +382,7 @@ $.ajax({
         $.each(result.errors, function (prefix, val) {
             $(form).find('small.text-error.' + prefix + '_error').text(val[0]);
           });
-          } else if (result.status == 1) {
+          } else if (result.status == 1 && $('#file_uploadUpdate').get(0).files.length === 1) {
             $('#updateRoomModal').modal('hide');
             Swal.fire(
                    'Room Added',
@@ -381,7 +392,9 @@ $.ajax({
           }
       }
 });
+}
 });
+
 </script>
 <script>
   $('#file-upload').change(function() {
@@ -396,6 +409,8 @@ $.ajax({
   //     var filename = m[1];
   //     $('#filenameUpdate').text(filename);
   // });
+
+
   </script>
 </div>
 </form>

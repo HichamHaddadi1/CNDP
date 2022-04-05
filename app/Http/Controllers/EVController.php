@@ -15,10 +15,33 @@ use App\Mail\ValidatedEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
-
+use Illuminate\Support\Facades\Crypt;
 
 class EVController extends Controller
 {
+
+    public function showStatistics()
+    {
+        $p_events = Event::where('isVerified', '=', 'Pending')->get();
+        $pending_events = $p_events->count();
+     
+        $all_events = Event::all();
+        $total_events = $all_events->count();
+
+        $rooms               =  Room::all();
+        $total_rooms_created =  $rooms->count();
+
+        $users               =  User::all(); 
+        $total_users         =  $users->count();
+
+        $p_rooms             =  Room::where('verified', '=', 'pending')->get();
+        $pending_rooms       =  $p_rooms->count();
+
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+
+        return view('EventValidator.statistics',compact('pending_events','streamers_requests','pending_rooms','total_rooms_created','total_users','total_events'));
+    }
     public function validator_profile()
     {
         $p_events = Event::where('isVerified', '=', 'Pending')->get();
@@ -74,7 +97,7 @@ class EVController extends Controller
     }
     public function validator_all_events()
     {
-         $events = Event::all();
+        $events = Event::paginate(10);
         $p_events = Event::where('isVerified', '=', 'Pending')->get();
         $pending_events = $p_events->count();
         $rooms = Room::all();
@@ -169,7 +192,7 @@ class EVController extends Controller
                 'greeting' =>'Hello there' ,
                 'subject' => 'Event Invitation',
                 'message' => 'We are happy to let you know that there is an event "'.$event->event_theme .'" which will be on '.str_replace('00:', '',$event->starting_at) .' if you would like to join use the link down below and use this access code "'.$room->viewer_pw.'"',
-                'actionUrl' => route('join',['id'=>$event->id_room])
+                'actionUrl' => route('join',['id'=>$event->id_room,'_id'=>Crypt::encrypt($event->id)])
 
             ];
             $msg = [

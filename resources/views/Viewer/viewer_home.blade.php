@@ -274,20 +274,20 @@ font-weight: bold;
 	font-weight: 600;
 }
 .live_list{
-  top: 20vh;
-  left: 30vw;
+  top: 25vh;
+  
 }
 
 </style>
 
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
-  <div class="container my-auto col-4 mt-10 live_list">
+  <div class="container my-auto col-5  live_list">
     <div class="list-group">
      
       @forelse($seminars as $ev)
                
-      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="list-group-item list-group-item-action text-center">
+      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="m-1 list-group-item list-group-item-action text-center">
       {{$ev->event_theme}}  
       <a href="{{route('join',['id'=>$ev->id_room ,'_id'=>Crypt::encrypt('$event->id')])}}" class="btn_1 btn btn-primary float-right text-center"> 
       <i class="fas fa-play text-end"></i> 
@@ -298,23 +298,23 @@ font-weight: bold;
       @endif
 
  @empty
-<span class="list-group-item list-group-item-action active ">
-  No Data  <i class="fas fa-play text-end"></i> 
+<span class=" m-1 list-group-item list-group-item-action active  text-center">
+  No Data 
 </span>
 @endforelse
     
-<a href="{{url('/schedule')}}" class="text-center list-group-item list-group-item-action active">
+<a href="{{url('/schedule')}}" class="m-1 text-center list-group-item list-group-item-action active">
   View More 
 </a>
     </div>
     
   </div>
-{{-- <div class="container row div_live" >
+<div class="container row div_live" >
    @if(!Auth::check())
    <a id="tutorial" class=""><i class="fas fa-chalkboard-teacher"></i>Start a Tutorial</a>
    @endif
    
-
+{{-- 
   @php
     $i=0;
     $j=0;
@@ -418,8 +418,8 @@ font-weight: bold;
        </div>
       </div>
      @endif
-   
-</div> --}}
+   --}}
+</div> 
     <div class="row btn_join_us">
       <ul class="btn-group-vertical">
 
@@ -926,39 +926,34 @@ introJs().setOptions({
   {
     element:document.querySelector('.join_us_l'),
     title:'Join Us',
-    intro:'You can be Part of our Community as a User or a Seminarist',
+    intro:'You can be Part of our Community as a Seminarist',
     position:'auto'
   },
 
   {
     title:'Our Latest Live Event',
-    element: document.querySelector('.data_events'),
-    intro: 'Here you can Find or Join our Trend Events',
+    element: document.querySelector('.live_list'),
+    intro: 'Here you can Find or Join our Trend Seminars',
     position:'auto'
 
   }
   ,
 
-  {
-    title:'Our Latest Live Event',
-    element: document.querySelector('.btn_join_us'),
-    intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
-    position:'auto'
+  // {
+  //   title:'Our Latest Live Event',
+  //   element: document.querySelector('.btn_join_us'),
+  //   intro: 'Here is a quick step to be part of our community by signing up as a user or a seminarist',
+  //   position:'auto'
 
-  },
-  {
-    title:'Information',
-    element: document.querySelector('#click_for_home'),
-    intro: 'hover the Icons for more information about the platform',
-    position:'auto'
-  }
+  // },
+  // {
+  //   title:'Information',
+  //   element: document.querySelector('#click_for_home'),
+  //   intro: 'hover the Icons for more information about the platform',
+  //   position:'auto'
+  // }
 
-,{
-  element:document.querySelector('.partners'),
-  title:'Partners',
-  intro:'Partners of our Foundation',
-  position:'auto'
-}
+
 
   ]
 }).start();

@@ -57,7 +57,7 @@
   </table>
   <span class="pagination justify-content-center" >
     {{$all_users->links()}}
-    </span>
+  </span>
 </div>
 
 
