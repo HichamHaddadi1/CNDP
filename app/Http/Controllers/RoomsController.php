@@ -139,17 +139,27 @@ class RoomsController extends Controller
                 'room_name' => 'required',
                 'room_desc' => 'required',
                 'max_viewers' => 'required',
-                // 'viewer_pw' => 'required'
+                'viewer_pw' => 'required',
+                'file_upload' => 'required'
             ]);
+            if($request->hasFile('file_upload') ) {
+                // dd($request->File('file_uploadUpdate'));
+                $file = $request->file('file_upload');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . '.' . $extension;
+                $file->move('uploads/images/', $filename);
+                $filenameglobe=$filename;
+               }
             if($c==0)
             {
             $room = new Room([
-                'room_name' => $request->get('room_name'),
-                'room_desc' => $request->get('room_desc'),
-                'max_viewers' => $request->get('max_viewers'),
-                'moderator_pw'=>Auth::user()->email,
-                'viewer_pw'=>$request->get('viewer_pw'),
-                'id_user' =>Auth::user()->id
+                'room_name'     =>  $request->get('room_name'),
+                'room_desc'     =>  $request->get('room_desc'),
+                'max_viewers'   =>  $request->get('max_viewers'),
+                'moderator_pw'  =>  Auth::user()->email,
+                'viewer_pw'     =>  $request->get('viewer_pw'),
+                'id_user'       =>  Auth::user()->id,
+                'presentations' => $filenameglobe
             ]);
                 $room->save();
                 return redirect()->route('streamers.rooms', compact('c'))->with('success', __('Successfully Created '));

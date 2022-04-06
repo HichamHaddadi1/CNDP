@@ -8,7 +8,7 @@
 
     <thead>
       <tr>
-        <th scope="col">Event Theme</th>
+        <th scope="col">Seminar Theme</th>
         <th scope="col">Starts At</th>
         <th scope="col">Ending At</th>
         <th scope="col">Owner</th>
@@ -27,9 +27,9 @@
       <td colspan="2">
         
         <?php if($event->isVerified == 'Denied'): ?>
-      <a  class="btn btn-success btn-sm" href="<?php echo e(route('verify_event' , [$event->id,'v'])); ?>"><i class="fas fa-check"></i> Validate Events</a>
+      <a  class="btn btn-success btn-sm" href="<?php echo e(route('verify_event' , [$event->id,'v'])); ?>"><i class="fas fa-check"></i> Validate SEMINARS</a>
       <?php elseif($event->isVerified == 'Verified'): ?>
-        <a class="btn btn-danger btn-sm" href="<?php echo e(route('verify_event' , [$event->id,'d'])); ?>"><i class="fas fa-times"></i> Deny Events</a>
+        <a class="btn btn-danger btn-sm" href="<?php echo e(route('verify_event' , [$event->id,'d'])); ?>"><i class="fas fa-times"></i> Deny SEMINARS</a>
         <?php endif; ?>
       </td>
     </tr>

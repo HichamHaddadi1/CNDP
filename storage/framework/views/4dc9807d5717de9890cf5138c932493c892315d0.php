@@ -125,7 +125,9 @@
     display: none;
     margin-left: -24px;
 }
-
+#logo_mobile {
+  width: 45%;
+}
 .showhim:hover .showme {
     display: block;
     font-size: 11px;
@@ -141,8 +143,26 @@
     position: absolute;
     z-index: 9999;
 }
-
-        </style>
+#li_mobile_logo
+{
+  display: none;
+}
+/* 810 */
+@media  screen and (max-width: 600px) {
+  #li_mobile_logo
+  {
+      text-align: center;
+      display: block;
+  }
+}
+@media  screen and (max-width: 811px) {
+  #li_mobile_logo
+  {
+      text-align: center;
+      display: block;
+  }
+}
+</style>
     </head>
     <body class="section">
 
@@ -167,6 +187,9 @@
                 <ul class="navbar-nav mr-auto" id="navbar_left">
                     <li class="nav-item" id="img_logo_bg">
                       <a href="<?php echo e(route('index')); ?>" class="nav-logo "><img class="navbar-brand h-100"  src="\img\cndp-logo.png" id="logo_png"/> </a>
+                    </li>
+                    <li class="nav-item" id="li_mobile_logo">
+                      <a href="<?php echo e(route('index')); ?>" class="nav-logo "><img class="navbar-brand h-100"  src="\img\cndp-logo.png" id="logo_mobile"/> </a>
                     </li>
                     <li class="nav-item" id="nav_home"><a href="<?php echo e(route('index')); ?>" class="nav-link">Home</a></li>
                     <li class="nav-item" id="nav_events"><a href="<?php echo e(route('viewer_events')); ?>" class="nav-link">seminars</a></li>
@@ -254,7 +277,7 @@
                 <h2 class="footer-heading">Categories</h2>
                 <ul class="list-unstyled">
                   <li><a href="<?php echo e(route('index')); ?>" class="py-1 d-block">Home</a></li>
-                  <li><a href="<?php echo e(route('viewer_events')); ?>" class="py-1 d-block">Seminar</a></li>
+                  <li><a href="<?php echo e(route('viewer_events')); ?>" class="py-1 d-block">Seminars</a></li>
                   <li><a href="<?php echo e(route('viewer_contact_us')); ?>" class="py-1 d-block">Contact us</a></li>
                   <li><a href="<?php echo e(route('register')); ?>" class="py-1 d-block">Become a Seminar</a></li>
                 </ul>
@@ -280,7 +303,7 @@
             </div>
           </div>
           <div class="w-100 mt-5 border-top py-5 text-center">
-            ©2021  All Right Reserved <a href="#">Tamkine Technologies</a>
+            ©<?php echo e(Carbon\Carbon::now()->format('Y')); ?>  All Right Reserved <a href="#">Tamkine Technologies</a>
           </div>
         </footer>
         <!--/Footer-->
