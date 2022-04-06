@@ -105,6 +105,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               <li class="nav-item menu-open">
+               <a href="{{ url('/validator/statistics') }}" class="nav-link active">
+                <i class="nav-icon fa-solid fa-chart-line"></i>
+                <p>
+                  Statistics 
+                </p>
+              </a>
+               </li>
           <li class="nav-item menu-open">
             <a href="{{ url('validator/events/pending') }}" class="nav-link active">
               <i class="nav-icon fa fa-clock"></i>
@@ -112,6 +120,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 Pending Seminars <span class="badge badge-dark" style="color:red;">{{$pending_events}}</span>
               </p>
             </a>
+
             <a href="{{ url('validator/rooms/pending') }}" class="nav-link active">
               <i class="nav-icon fas fa-clock"></i>
               <p>

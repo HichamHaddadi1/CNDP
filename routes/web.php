@@ -166,7 +166,7 @@ Route::post('/rooms/update_', [EVController::class ,'updateRoomValidator'])->nam
 Route::get('/rooms/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
 Route::get('/validator/streamers/pending/{id}/{mode}', [EVController ::class ,'verify_streamer'])->name('validator_verify_streamer');
 Route::get('/validator/seminarists' , [EVController::class , 'validator_all_users'])->name('validator.users');
-Route::get('/validator/statistics',[EVController::class , 'showStatistics']);
+Route::get('/validator/statistics',[EVController::class , 'showStatistics'])->name('validator.statistics');
 
 
 

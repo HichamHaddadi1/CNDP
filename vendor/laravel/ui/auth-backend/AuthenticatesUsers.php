@@ -190,7 +190,7 @@ trait AuthenticatesUsers
             // dd(collect($uri_segments)->implode('/'));
             return redirect(collect($uri_segments)->implode('/'));
         }
-            return redirect()->route('validator.PendingEvents');
+            return redirect()->route('validator.statistics');
         }
         // return '/home';
     }
