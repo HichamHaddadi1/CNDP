@@ -33,7 +33,7 @@ class Response
     public const HTTP_RESET_CONTENT = 205;
     public const HTTP_PARTIAL_CONTENT = 206;
     public const HTTP_MULTI_STATUS = 207;          // RFC4918
-    public const HTTP_ALREADY_REPORTED = 208;      // RFC5752
+    public const HTTP_ALREADY_REPORTED = 208;      // RFC5842
     public const HTTP_IM_USED = 226;               // RFC3229
     public const HTTP_MULTIPLE_CHOICES = 300;
     public const HTTP_MOVED_PERMANENTLY = 301;
@@ -81,7 +81,7 @@ class Response
     public const HTTP_VERSION_NOT_SUPPORTED = 505;
     public const HTTP_VARIANT_ALSO_NEGOTIATES_EXPERIMENTAL = 506;                        // RFC2295
     public const HTTP_INSUFFICIENT_STORAGE = 507;                                        // RFC4918
-    public const HTTP_LOOP_DETECTED = 508;                                               // RFC5752
+    public const HTTP_LOOP_DETECTED = 508;                                               // RFC5842
     public const HTTP_NOT_EXTENDED = 510;                                                // RFC2774
     public const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;                             // RFC6585
 
@@ -138,7 +138,7 @@ class Response
      *
      * The list of codes is complete according to the
      * {@link https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml Hypertext Transfer Protocol (HTTP) Status Code Registry}
-     * (last updated 2016-03-01).
+     * (last updated 2021-10-01).
      *
      * Unless otherwise noted, the status code is defined in RFC2616.
      *
@@ -157,7 +157,7 @@ class Response
         205 => 'Reset Content',
         206 => 'Partial Content',
         207 => 'Multi-Status',          // RFC4918
-        208 => 'Already Reported',      // RFC5752
+        208 => 'Already Reported',      // RFC5842
         226 => 'IM Used',               // RFC3229
         300 => 'Multiple Choices',
         301 => 'Moved Permanently',
@@ -180,14 +180,14 @@ class Response
         410 => 'Gone',
         411 => 'Length Required',
         412 => 'Precondition Failed',
-        413 => 'Payload Too Large',
+        413 => 'Content Too Large',                                           // RFC-ietf-httpbis-semantics
         414 => 'URI Too Long',
         415 => 'Unsupported Media Type',
         416 => 'Range Not Satisfiable',
         417 => 'Expectation Failed',
         418 => 'I\'m a teapot',                                               // RFC2324
         421 => 'Misdirected Request',                                         // RFC7540
-        422 => 'Unprocessable Entity',                                        // RFC4918
+        422 => 'Unprocessable Content',                                       // RFC-ietf-httpbis-semantics
         423 => 'Locked',                                                      // RFC4918
         424 => 'Failed Dependency',                                           // RFC4918
         425 => 'Too Early',                                                   // RFC-ietf-httpbis-replay-04
@@ -204,7 +204,7 @@ class Response
         505 => 'HTTP Version Not Supported',
         506 => 'Variant Also Negotiates',                                     // RFC2295
         507 => 'Insufficient Storage',                                        // RFC4918
-        508 => 'Loop Detected',                                               // RFC5752
+        508 => 'Loop Detected',                                               // RFC5842
         510 => 'Not Extended',                                                // RFC2774
         511 => 'Network Authentication Required',                             // RFC6585
     ];
@@ -246,7 +246,7 @@ class Response
      * one that will be sent to the client only if the prepare() method
      * has been called before.
      *
-     * @return string The Response as an HTTP string
+     * @return string
      *
      * @see prepare()
      */
@@ -395,6 +395,8 @@ class Response
 
         if (\function_exists('fastcgi_finish_request')) {
             fastcgi_finish_request();
+        } elseif (\function_exists('litespeed_finish_request')) {
+            litespeed_finish_request();
         } elseif (!\in_array(\PHP_SAPI, ['cli', 'phpdbg'], true)) {
             static::closeOutputBuffers(0, true);
         }
@@ -406,8 +408,6 @@ class Response
      * Sets the response content.
      *
      * @return $this
-     *
-     * @throws \UnexpectedValueException
      */
     public function setContent(?string $content)
     {
@@ -1046,10 +1046,10 @@ class Response
 
         $ret = [];
         foreach ($vary as $item) {
-            $ret = array_merge($ret, preg_split('/[\s,]+/', $item));
+            $ret[] = preg_split('/[\s,]+/', $item);
         }
 
-        return $ret;
+        return array_merge([], ...$ret);
     }
 
     /**
@@ -1076,8 +1076,6 @@ class Response
      * If the Response is not modified, it sets the status code to 304 and
      * removes the actual content by calling the setNotModified() method.
      *
-     * @return bool true if the Response validators match the Request, false otherwise
-     *
      * @final
      */
     public function isNotModified(Request $request): bool
@@ -1090,8 +1088,7 @@ class Response
         $lastModified = $this->headers->get('Last-Modified');
         $modifiedSince = $request->headers->get('If-Modified-Since');
 
-        if ($ifNoneMatchEtags = $request->getETags()) {
-            $etag = $this->getEtag();
+        if (($ifNoneMatchEtags = $request->getETags()) && (null !== $etag = $this->getEtag())) {
             if (0 == strncmp($etag, 'W/', 2)) {
                 $etag = substr($etag, 2);
             }

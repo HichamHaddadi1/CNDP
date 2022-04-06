@@ -128,7 +128,7 @@ label[for="file-uploadupdate"]:hover {
       <tr>
         <th>Room Name</th>
         <th  class="room_desc">Room Description</th>
-        <th >Max Attendees</th>
+        {{-- <th >Max Attendees</th> --}}
         <th >Access Code</th>
         <th >State</th>
         <th >Options</th>
@@ -141,7 +141,7 @@ label[for="file-uploadupdate"]:hover {
         <tr>
         <td>{{ $room->room_name }}</td>
         <td class="room_desc">{{ $room->room_desc }}</td>
-        <td >{{ $room->max_viewers }}</td>
+        {{-- <td >{{ $room->max_viewers }}</td> --}}
         <td>{{$room->viewer_pw}}</td>
         <td>{{$room->verified}}</td>
 
@@ -198,9 +198,9 @@ label[for="file-uploadupdate"]:hover {
             </span>
             @enderror
         </div>
-        <div class="row">
-          <div class="col">
-            <div class="md-form mb-3">
+        
+          {{--<div class="col">
+             <div class="md-form mb-3">
                 <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
                 <input type="number" id="MaxViewer" name="max_viewers" class="form-control validate">
                 @if($errors->has('max_viewers'))
@@ -209,8 +209,8 @@ label[for="file-uploadupdate"]:hover {
                 </span>
                 @enderror
             </div>
-            </div>
-            <div class="col">
+            </div> --}}
+            
             <div class="md-form mb-3">
               <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
               <input type="number" id="MaxViewer" name="viewer_pw" class="form-control validate">
@@ -220,8 +220,8 @@ label[for="file-uploadupdate"]:hover {
               </span>
               @enderror
             </div>
-          </div>
-          </div>
+          
+          
           <div class="md-form mb-4 form_div">
          
           {{-- <form action="{{route('streamer.presentation.upload')}}" method="POST" enctype="multipart/form-data"> --}}
@@ -250,9 +250,7 @@ label[for="file-uploadupdate"]:hover {
            <small> <strong>{{ $errors->first('room_desc') }}</strong></small>
         </span>
         @enderror
-        <div class="form-check">
-          <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
-        </div>
+        
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit" class="btn btn-info">Create Room</button>
@@ -284,22 +282,22 @@ label[for="file-uploadupdate"]:hover {
             <small class="text-error room_nameupdate_error" style="color:red;"></small>
         </div>
         <input type="hidden" name="room_id" id="room_id">
-        <div class="row">
-          <div class="col">
+        
+          {{-- <div class="col">
             <div class="md-form mb-3">
                 <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees <small class="red_req">*</small></label>
                 <input type="text" id="MaxViewerUpdate" name="max_viewersupdate" class="form-control validate">
                 <small class="text-error max_viewersupdate_error"  style="color:red;"></small>
             </div>
-            </div>
-            <div class="col">
+            </div> --}}
+         
             <div class="md-form mb-3">
               <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
               <input type="text" id="viewer_pwUpdate" name="viewer_pwupdate" class="form-control validate">
               <small class="text-error viewer_pwupdate_error"  style="color:red;"></small>
             </div>
-          </div>
-          </div>
+        
+          
 
           <div class="md-form mb-4 form_div">
 
@@ -363,7 +361,7 @@ label[for="file-uploadupdate"]:hover {
         //console.log(result.event.event_theme);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value  = result.room.room_name;
-        MaxViewerUpdate.value = result.room.max_viewers;
+        //MaxViewerUpdate.value = result.room.max_viewers;
         viewer_pwUpdate.value = result.room.viewer_pw;
         room_descUpdate.value = result.room.room_desc;
 

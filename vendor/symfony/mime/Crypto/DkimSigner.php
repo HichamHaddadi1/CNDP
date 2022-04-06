@@ -28,7 +28,7 @@ final class DkimSigner
     public const CANON_RELAXED = 'relaxed';
 
     public const ALGO_SHA256 = 'rsa-sha256';
-    public const ALGO_ED25519 = 'ed25519-sha256'; // RFC 7563
+    public const ALGO_ED25519 = 'ed25519-sha256'; // RFC 8463
 
     private $key;
     private $domainName;
@@ -65,7 +65,7 @@ final class DkimSigner
     {
         $options += $this->defaultOptions;
         if (!\in_array($options['algorithm'], [self::ALGO_SHA256, self::ALGO_ED25519], true)) {
-            throw new InvalidArgumentException('Invalid DKIM signing algorithm "%s".', $options['algorithm']);
+            throw new InvalidArgumentException(sprintf('Invalid DKIM signing algorithm "%s".', $options['algorithm']));
         }
         $headersToIgnore['return-path'] = true;
         $headersToIgnore['x-transport'] = true;
@@ -205,7 +205,7 @@ final class DkimSigner
         }
 
         // Add trailing Line return if last line is non empty
-        if (\strlen($currentLine) > 0) {
+        if ('' !== $currentLine) {
             hash_update($hash, "\r\n");
             $length += \strlen("\r\n");
         }

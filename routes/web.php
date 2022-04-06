@@ -99,9 +99,9 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess']],function(){
         {
             return redirect('schedule');
         }
-        elseif(Auth::user()->role)
+        elseif(Auth::user()->role == 4)
         {
-            return redirect('validator/profile');
+            return redirect('validator/statistics');
         }
     })->name('dashboard');
 });

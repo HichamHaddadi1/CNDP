@@ -18,7 +18,7 @@ final class Version
         0x0a4d3,
         0x0bbf6,
         0x0c762,
-        0x0d757,
+        0x0d847,
         0x0e60d,
         0x0f928,
         0x10b78,
@@ -465,7 +465,7 @@ final class Version
             ),
             new self(
                 25,
-                [6, 32, 58, 75, 110],
+                [6, 32, 58, 84, 110],
                 new EcBlocks(26, new EcBlock(8, 106), new EcBlock(4, 107)),
                 new EcBlocks(28, new EcBlock(8, 47), new EcBlock(13, 48)),
                 new EcBlocks(30, new EcBlock(7, 24), new EcBlock(22, 25)),
@@ -569,7 +569,7 @@ final class Version
             ),
             new self(
                 38,
-                [6, 32, 58, 75, 110, 136, 162],
+                [6, 32, 58, 84, 110, 136, 162],
                 new EcBlocks(30, new EcBlock(4, 122), new EcBlock(18, 123)),
                 new EcBlocks(28, new EcBlock(13, 46), new EcBlock(32, 47)),
                 new EcBlocks(30, new EcBlock(48, 24), new EcBlock(14, 25)),

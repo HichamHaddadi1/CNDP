@@ -238,7 +238,7 @@ html , body{
       } 
 } /* End Media*/
 /* 414×896 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 500px) {
   .fb-page{
  display: none;
  }
@@ -253,7 +253,7 @@ padding-top: 40px;
 } 
 
 #body{
- background-image: url('/img/AIWoman.jpg');
+ background-image: url('/img/mobile.jpg');
  background-repeat: no-repeat;
  background-size: cover;
  background-position: center center;

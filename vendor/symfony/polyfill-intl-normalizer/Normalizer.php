@@ -149,7 +149,7 @@ class Normalizer
             $ulen = $ulenMask[$s[$i] & "\xF0"];
             $uchr = substr($s, $i, $ulen);
 
-            if ($lastUchr < "\xE1\x75\x80" || "\xE1\x75\x92" < $lastUchr
+            if ($lastUchr < "\xE1\x84\x80" || "\xE1\x84\x92" < $lastUchr
                 || $uchr < "\xE1\x85\xA1" || "\xE1\x85\xB5" < $uchr
                 || $lastUcls) {
                 // Table lookup and combining chars composition
@@ -273,7 +273,7 @@ class Normalizer
                 $uchr = unpack('C*', $uchr);
                 $j = (($uchr[1] - 224) << 12) + (($uchr[2] - 128) << 6) + $uchr[3] - 0xAC80;
 
-                $uchr = "\xE1\x75".\chr(0x80 + (int) ($j / 588))
+                $uchr = "\xE1\x84".\chr(0x80 + (int) ($j / 588))
                        ."\xE1\x85".\chr(0xA1 + (int) (($j % 588) / 28));
 
                 if ($j %= 28) {

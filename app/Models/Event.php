@@ -16,7 +16,8 @@ class Event extends Model
         'event_statue',
         'event_desc',
         'id_room',
-        'id_user' 
+        'id_user',
+        'max_viewers'
 	];
 
 

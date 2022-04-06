@@ -283,12 +283,13 @@ font-weight: bold;
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
   <div class="container my-auto col-5  live_list">
-    <div class="list-group">
+    <div class="list-group row">
      
       @forelse($seminars as $ev)
                
-      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="m-1 list-group-item list-group-item-action text-center">
-      {{$ev->event_theme}}  
+      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="col m-1 list-group-item list-group-item-action text-center">
+      {{$ev->event_theme}} </span> 
+      <span class="col">
       <a href="{{route('join',['id'=>$ev->id_room ,'_id'=>Crypt::encrypt('$event->id')])}}" class="btn_1 btn btn-primary float-right text-center"> 
       <i class="fas fa-play text-end"></i> 
       </a>

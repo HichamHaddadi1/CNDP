@@ -35,7 +35,7 @@ class ByteString extends AbstractString
     /*
      * The following method was derived from code of the Hack Standard Library (v4.40 - 2020-05-03)
      *
-     * https://github.com/hhvm/hsl/blob/80a42c02f036f72a42f0415e80d6b757f4bf62d5/src/random/private.php#L16
+     * https://github.com/hhvm/hsl/blob/80a42c02f036f72a42f0415e80d6b847f4bf62d5/src/random/private.php#L16
      *
      * Code subject to the MIT license (https://github.com/hhvm/hsl/blob/master/LICENSE).
      *

@@ -5,7 +5,6 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 
 trait RegistersUsers
@@ -18,19 +17,9 @@ trait RegistersUsers
      * @return \Illuminate\View\View
      */
     public function showRegistrationForm()
-    {   
-        $uri_segments = explode('/', url()->previous());
-
-        // dd($uri_segments[3] , '/' , $uri_segments[4]) ; //
-        if(count($uri_segments) > 5 && 'meeting-room/join' == $uri_segments[3] .'/' . $uri_segments[4]) 
-        {
-            // dd('showLoginForm');
-            Redirect::setIntendedUrl(url()->previous());
-        }
-        
+    {
         return view('auth.register');
     }
-
 
     /**
      * Handle a registration request for the application.

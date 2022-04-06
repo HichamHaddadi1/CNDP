@@ -1,10 +1,9 @@
 <?php
 
 namespace Illuminate\Foundation\Auth;
-use App\Providers\RouteServiceProvider;
+
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -19,15 +18,6 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        $uri_segments = explode('/', url()->previous());
-
-        // dd($uri_segments[3] , '/' , $uri_segments[4]) ; //
-        if(count($uri_segments) > 5 && 'meeting-room/join' == $uri_segments[3] .'/' . $uri_segments[4]) 
-        {
-            // dd('showLoginForm');
-            Redirect::setIntendedUrl(url()->previous());
-        }
-        // dd(url()->previous());
         return view('auth.login');
     }
 
@@ -54,6 +44,10 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
+            if ($request->hasSession()) {
+                $request->session()->put('auth.password_confirmed_at', time());
+            }
+
             return $this->sendLoginResponse($request);
         }
 
@@ -89,7 +83,6 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-        
         return $this->guard()->attempt(
             $this->credentials($request), $request->filled('remember')
         );
@@ -136,63 +129,7 @@ trait AuthenticatesUsers
      */
     protected function authenticated(Request $request, $user)
     {
-        if (auth()->user()->role == 1) {
-
-            $uri_segments = explode('/', redirect()->intended('/')->getTargetUrl());
-            // dd($uri_segments);
-        // dd($uri_segments[3] , '/' , $uri_segments[4]) ; //
-        if(count($uri_segments) > 5 && 'meeting-room/join' == $uri_segments[3] .'/' . $uri_segments[4]) 
-        {
-            // dd($uri_segments);
-            // dd(collect($uri_segments)->implode('/'));
-            return redirect(collect($uri_segments)->implode('/'));
-        }
-            
-        
-            return redirect()->route('admin.streams');
-        }
-        elseif (auth()->user()->role == 2)
-        {
-            $uri_segments = explode('/', redirect()->intended('/')->getTargetUrl());
-            // dd($uri_segments);
-        // dd($uri_segments[3] , '/' , $uri_segments[4]) ; //
-        if(count($uri_segments) > 5 && 'meeting-room/join' == $uri_segments[3] .'/' . $uri_segments[4]) 
-        {
-            // dd($uri_segments);
-            // dd(collect($uri_segments)->implode('/'));
-            return redirect(collect($uri_segments)->implode('/'));
-        }
-
-            
-            return redirect()->route('streamers.rooms');
-        }
-        elseif(auth()->user()->role ==3)
-        {
-            $uri_segments = explode('/', redirect()->intended('/')->getTargetUrl());
-            // dd($uri_segments);
-        // dd($uri_segments[3] , '/' , $uri_segments[4]) ; //
-        if(count($uri_segments) > 5 && 'meeting-room/join' == $uri_segments[3] .'/' . $uri_segments[4]) 
-        {
-            // dd($uri_segments);
-            // dd(collect($uri_segments)->implode('/'));
-            return redirect(collect($uri_segments)->implode('/'));
-        }
-            return redirect()->route('userEvents');
-        }
-        elseif(auth()->user()->role == 4)
-        {
-            $uri_segments = explode('/', redirect()->intended('/')->getTargetUrl());
-            // dd($uri_segments);
-        // dd($uri_segments[3] , '/' , $uri_segments[4]) ; //
-        if(count($uri_segments) > 5 && 'meeting-room/join' == $uri_segments[3] .'/' . $uri_segments[4]) 
-        {
-            // dd($uri_segments);
-            // dd(collect($uri_segments)->implode('/'));
-            return redirect(collect($uri_segments)->implode('/'));
-        }
-            return redirect()->route('validator.statistics');
-        }
-        // return '/home';
+        //
     }
 
     /**

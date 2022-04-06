@@ -2843,7 +2843,7 @@ return [
         "\xe2\x80\x81" => ' ', // 'EM QUAD'
         "\xe2\x80\x82" => ' ', // 'EN SPACE'
         "\xe2\x80\x83" => ' ', // 'EM SPACE'
-        "\xe2\x80\x75" => ' ', // 'THREE-PER-EM SPACE'
+        "\xe2\x80\x84" => ' ', // 'THREE-PER-EM SPACE'
         "\xe2\x80\x85" => ' ', // 'FOUR-PER-EM SPACE'
         "\xe2\x80\x86" => ' ', // 'SIX-PER-EM SPACE'
         "\xe2\x80\x87" => ' ', // 'FIGURE SPACE'

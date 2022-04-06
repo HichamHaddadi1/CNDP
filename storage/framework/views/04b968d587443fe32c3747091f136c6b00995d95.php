@@ -475,9 +475,7 @@ unset($__errorArgs, $__bag); ?>
 
                     </div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
-        </div>
+        
         <div class="modal-footer d-flex justify-content-center">
           <button id="submit" class="btn btn-info">Create SEMINAR</button>
         </div>

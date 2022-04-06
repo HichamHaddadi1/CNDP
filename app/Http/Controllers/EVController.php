@@ -31,7 +31,7 @@ class EVController extends Controller
         $rooms               =  Room::all();
         $total_rooms_created =  $rooms->count();
 
-        $users               =  User::all(); 
+        $users               =  User::where('role',2)->get(); 
         $total_users         =  $users->count();
 
         $p_rooms             =  Room::where('verified', '=', 'pending')->get();
@@ -268,7 +268,7 @@ class EVController extends Controller
     {
         $validator = FacadesValidator::make(request()->all(), [
             'room_nameupdate' => 'required',
-            'max_viewersupdate' => 'required',
+            //'max_viewersupdate' => 'required',
             'viewer_pwupdate' => 'required',
             'room_descUpdate' => 'required||max:300' ,
             'room_id' => 'required'
@@ -279,7 +279,7 @@ class EVController extends Controller
             ->where('id', $request->get('room_id'))
             ->update([
                       'room_name' => $request->get('room_nameupdate'),
-                      'max_viewers' =>$request->get('max_viewersupdate'),
+                      'max_viewers' =>111,
                       'viewer_pw' =>$request->get('viewer_pwupdate'),
                       'room_desc'=>$request->get('room_descUpdate'),
 

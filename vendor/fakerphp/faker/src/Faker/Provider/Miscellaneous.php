@@ -242,7 +242,7 @@ class Miscellaneous extends Base
     }
 
     /**
-     * @example 'cfcd207595d565ef66e7dff9f98764da'
+     * @example 'cfcd208495d565ef66e7dff9f98764da'
      *
      * @return string
      */

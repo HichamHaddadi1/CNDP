@@ -192,7 +192,7 @@ integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNm
         startingUpdate.value=result.event.starting_at;
         EndingUpdate.value=result.event.ending_at;
         DescUpdate.value=result.event.event_desc;
-
+        max_viewersUpdate.value=result.event.max_viewers;
         specialURL.href = "";
         specialURL.href +="/"+result.event.id;
 

@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->bigIncrements('id');
             $table->string('room_name');
             $table->text('room_desc');
-            $table->bigInteger('max_viewers');
+            $table->bigInteger('max_viewers')->nullable();
             $table->string('moderator_pw');
             $table->string('viewer_pw')->nullable();
             $table->unsignedBigInteger('id_user');

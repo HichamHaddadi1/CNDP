@@ -25,7 +25,7 @@ class HtmlDumper extends CliDumper
 
     protected static $themes = [
         'dark' => [
-            'default' => 'background-color:#18171B; color:#FF7500; line-height:1.2em; font:12px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:99999; word-break: break-all',
+            'default' => 'background-color:#18171B; color:#FF8400; line-height:1.2em; font:12px Menlo, Monaco, Consolas, monospace; word-wrap: break-word; white-space: pre-wrap; position:relative; z-index:99999; word-break: break-all',
             'num' => 'font-weight:bold; color:#1299DA',
             'const' => 'font-weight:bold',
             'str' => 'font-weight:bold; color:#56DB3A',
@@ -37,7 +37,7 @@ class HtmlDumper extends CliDumper
             'meta' => 'color:#B729D9',
             'key' => 'color:#56DB3A',
             'index' => 'color:#1299DA',
-            'ellipsis' => 'color:#FF7500',
+            'ellipsis' => 'color:#FF8400',
             'ns' => 'user-select:none;',
         ],
         'light' => [
@@ -960,7 +960,7 @@ EOHTML
         }
         $this->lastDepth = $depth;
 
-        $this->line = mb_convert_encoding($this->line, 'HTML-ENTITIES', 'UTF-8');
+        $this->line = mb_encode_numericentity($this->line, [0x80, 0xFFFF, 0, 0xFFFF], 'UTF-8');
 
         if (-1 === $depth) {
             AbstractDumper::dumpLine(0);

@@ -66,7 +66,7 @@ final class MatrixUtil
         [   6,   26,   50,   74,   98, null, null], // Version 22
         [   6,   30,   54,   78,  102, null, null], // Version 23
         [   6,   28,   54,   80,  106, null, null], // Version 24
-        [   6,   32,   58,   75,  110, null, null], // Version 25
+        [   6,   32,   58,   84,  110, null, null], // Version 25
         [   6,   30,   58,   86,  114, null, null], // Version 26
         [   6,   34,   62,   90,  118, null, null], // Version 27
         [   6,   26,   50,   74,   98,  122, null], // Version 28
@@ -79,7 +79,7 @@ final class MatrixUtil
         [   6,   30,   54,   78,  102,  126,  150], // Version 35
         [   6,   24,   50,   76,  102,  128,  154], // Version 36
         [   6,   28,   54,   80,  106,  132,  158], // Version 37
-        [   6,   32,   58,   75,  110,  136,  162], // Version 38
+        [   6,   32,   58,   84,  110,  136,  162], // Version 38
         [   6,   26,   54,   82,  110,  138,  166], // Version 39
         [   6,   30,   58,   86,  114,  142,  170], // Version 40
     ];

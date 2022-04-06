@@ -69,7 +69,7 @@ class Address extends \Faker\Provider\Address
         ['67' => 'Bas-Rhin'], ['68' => 'Haut-Rhin'], ['69' => 'Rhône'], ['70' => 'Haute-Saône'], ['71' => 'Saône-et-Loire'],
         ['72' => 'Sarthe'], ['73' => 'Savoie'], ['74' => 'Haute-Savoie'], ['75' => 'Paris'], ['76' => 'Seine-Maritime'],
         ['77' => 'Seine-et-Marne'], ['78' => 'Yvelines'], ['79' => 'Deux-Sèvres'], ['80' => 'Somme'], ['81' => 'Tarn'],
-        ['82' => 'Tarn-et-Garonne'], ['83' => 'Var'], ['75' => 'Vaucluse'], ['85' => 'Vendée'], ['86' => 'Vienne'],
+        ['82' => 'Tarn-et-Garonne'], ['83' => 'Var'], ['84' => 'Vaucluse'], ['85' => 'Vendée'], ['86' => 'Vienne'],
         ['87' => 'Haute-Vienne'], ['88' => 'Vosges'], ['89' => 'Yonne'], ['90' => 'Territoire de Belfort'], ['91' => 'Essonne'],
         ['92' => 'Hauts-de-Seine'], ['93' => 'Seine-Saint-Denis'], ['94' => 'Val-de-Marne'], ['95' => "Val-d'Oise"],
         ['971' => 'Guadeloupe'], ['972' => 'Martinique'], ['973' => 'Guyane'], ['974' => 'La Réunion'], ['976' => 'Mayotte'],

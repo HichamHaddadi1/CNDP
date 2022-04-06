@@ -126,21 +126,22 @@ class EventsController extends Controller
 
         // //dd($request);
         $this->validate($request,[
-            'event_theme' => 'required',
-            'event_desc' => 'required|max:120',
-            'starting_at' => 'required',
-            'ending_at' => 'required | after_or_equal:starting_at'
+            'event_theme'    => 'required',
+            'event_desc'     => 'required|max:120',
+            'starting_at'    => 'required',
+            'max_viewers'    => 'required',
+            'ending_at'      => 'required | after_or_equal:starting_at'
 
         ]);
 
-             $event = new Event([
-
-            'event_theme' => $request->get('event_theme'),
-            'event_desc' => $request->get('event_desc'),
-            'starting_at' => Carbon::parse($request->get('starting_at'))->format('Y-m-d G:i'),
-            'ending_at' => Carbon::parse($request->get('ending_at'))->format('Y-m-d G:i'),
-            'id_room' => $request->get('id_room'),
-            'id_user' => Auth::user()->id
+        $event = new Event([
+            'event_theme'       =>      $request->get('event_theme'),
+            'event_desc'        =>      $request->get('event_desc'),
+            'starting_at'       =>      Carbon::parse($request->get('starting_at'))->format('Y-m-d G:i'),
+            'ending_at'         =>      Carbon::parse($request->get('ending_at'))->format('Y-m-d G:i'),
+            'id_room'           =>      $request->get('id_room'),
+            'id_user'           =>      Auth::user()->id,
+            'max_viewers'       =>      $request->get('max_viewers')
         ]);
         // dd($event);
         $event->save();
@@ -225,7 +226,7 @@ class EventsController extends Controller
     {
         $rules = collect([
             'room_nameupdate'    =>  'required',
-            'max_viewersupdate'  =>  'required',
+            //'max_viewersupdate'  =>  'required',
             'room_descUpdate'    =>  'required||max:300' ,
             'room_id'            =>  'required',
             //'file_uploadUpdate'  =>  'required|mimes:pdf',
@@ -256,7 +257,7 @@ class EventsController extends Controller
             $room = Room::find($request->get('room_id'));
             $room->room_name = $request->get('room_nameupdate');
             $room->room_desc = $request->get('room_descUpdate');
-            $room->max_viewers = $request->get('max_viewersupdate');
+            $room->max_viewers =111;
 
             $room->presentations = $filenameglobe;
 
@@ -287,6 +288,15 @@ class EventsController extends Controller
 
     public function update(Request $request ,$id)
     {
+        $this->validate($request,[
+            'event_themeUpdate'      =>     'required',
+            'starting_at_Update'     =>     'required',
+            'ending_at_Update'       =>     'required|after_or_equal:starting_at_Update',
+            'max_viewersUpdate'      =>     'required',
+            'event_desc_Update'      =>     'required ',
+            'id_room'                =>     'required'
+
+        ]);
         DB::table('events')
         ->where('id', $id)
         ->update([
@@ -295,7 +305,8 @@ class EventsController extends Controller
                   'ending_at' =>Carbon::parse($request->get('ending_at_Update'))->format('Y-m-d G:i'),
                   'event_desc'=>$request->get('event_desc_Update'),
                   'id_user' =>Auth::user()->id,
-                  'id_room' =>$request->get('id_room')
+                  'id_room' =>$request->get('id_room'),
+                  'max_viewers' =>$request->get('max_viewersUpdate') 
     ]);
     return back()->with('success', __('Successfully Updated'));
     }

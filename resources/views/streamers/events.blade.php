@@ -213,6 +213,7 @@ footer p {
               <th scope="col">Starts at</th>
               <th scope="col">End at</th>
               <th scope="col">Password</th>
+              <th scope="col">Max attendees</th>
               <th scope="col">State</th>
               <th scope="col" style="text-align: center;">Actions</th>
             </tr>
@@ -231,7 +232,10 @@ footer p {
                   <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
                   <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
                   <td>{{\App\Models\Room::where('id',$event->id_room)->first()->viewer_pw}}</td>
+                  <td>{{ $event->max_viewers}}</td>
                   <td>{{ $event->isVerified}}</td>
+
+
                   <td colspan="2">
                     @if(\Carbon\Carbon::now()->lt($event->ending_at))
                       @if($event->isVerified!='Pending' && $event->isVerified!='Denied')
@@ -239,6 +243,7 @@ footer p {
                           <a class="btn btn-primary btn-sm" data-toggle="tooltip" title="Start Room" href="{{ route('streamers.event_start' , [$event->id_room , $event->id ])}}"><i class="fa fa-play fa-sm"></i> </a>
               
                           <button data-toggle="tooltip" title="Edit Seminar"  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}" ><i class="fas fa-pen"></i></button>
+                          
                            <button data-toggle="tooltip" title="Copy Link" class="btn btn-primary btn-sm" id="share_link" style="color: white" data-clipboard-text="{{ route('join' , [$event->id_room,Crypt::encrypt($event->id)])}}">
                             <i class="fas fa-copy"></i>
                           </button>
@@ -248,7 +253,7 @@ footer p {
                       
                       @endif
                       @if($event->isVerified !='Pending' )
-                          <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete"  href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i></a>
+                          {{-- <a class="btn btn-danger btn-sm" data-toggle="tooltip" title="Delete"  href="{{route('delete.event' , $event->id)}}"><i class="fas fa-trash"></i></a> --}}
                       @endif
       
                       @else
@@ -262,7 +267,7 @@ footer p {
                   </td>
               </tr>
            @empty
-                <td colspan="5" class="text-center">No Seminars Created Yet</td>
+                <td colspan="7" class="text-center">No Seminars Created Yet</td>
       
             @endforelse
         </tbody>
@@ -278,9 +283,9 @@ footer p {
           <thead>
             <tr>
               <th scope="col">Seminar Theme</th>
+              
               <th scope="col">Starts at</th>
               <th scope="col">End at</th>
-              
               <th scope="col">State</th>
               <th scope="col" style="text-align: center;">Actions</th>
             </tr>
@@ -369,9 +374,17 @@ footer p {
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror
+            @enderror
         </div>
-
+        <div class="md-form mb-3">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Max Viewers<small class="red_req">*</small></label>
+          <input type="number" id="RoomName" name="max_viewers" class="form-control @error('max_viewers') is-invalid @enderror" >
+         @error('max_viewers')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+          @enderror
+      </div>
         <div class="time-picker">
 
 
@@ -415,9 +428,7 @@ footer p {
 
                     </div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..." required> I Agree to <a href="">Condition & Terms</a>
-        </div>
+        
         <div class="modal-footer d-flex justify-content-center">
           <button id="submit" class="btn btn-info">Create SEMINAR</button>
         </div>
@@ -478,7 +489,10 @@ footer p {
             <label data-error="wrong" data-success="right" for="orangeForm-email">SEMINAR Theme <small class="red_req">*</small></label>
             <input type="text" id="RoomNameUpdate" name="event_themeUpdate" class="form-control validate"   >
         </div>
-
+        <div class="md-form mb-3">
+          <label data-error="wrong" data-success="right" for="orangeForm-email">Max Viewers <small class="red_req">*</small></label>
+          <input type="number" id="max_viewersUpdate" name="max_viewersUpdate" class="form-control validate"   >
+        </div>
         <div class="time-picker">
             <div class="row">
               <div class="col">

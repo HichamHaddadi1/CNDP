@@ -50,7 +50,7 @@ class PhoneNumber extends Base
         '+66##########',
         '+81##########',
         '+82##########',
-        '+75##########',
+        '+84##########',
         '+86##########',
         '+90##########',
         '+91##########',
@@ -256,7 +256,7 @@ class PhoneNumber extends Base
      * @see http://en.wikipedia.org/wiki/International_Mobile_Station_Equipment_Identity
      * @see http://imei-number.com/imei-validation-check/
      *
-     * @example '720075494799532'
+     * @example '720084494799532'
      *
      * @return int $imei
      */

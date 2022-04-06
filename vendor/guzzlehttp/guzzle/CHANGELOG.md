@@ -2,6 +2,42 @@
 
 Please refer to [UPGRADING](UPGRADING.md) guide for upgrading to a major version.
 
+## 7.4.2 - 2022-03-20
+
+### Fixed
+
+- Remove curl auth on cross-domain redirects to align with the Authorization HTTP header
+- Reject non-HTTP schemes in StreamHandler
+- Set a default ssl.peer_name context in StreamHandler to allow `force_ip_resolve`
+
+## 7.4.1 - 2021-12-06
+
+### Changed
+
+- Replaced implicit URI to string coercion [#2946](https://github.com/guzzle/guzzle/pull/2946)
+- Allow `symfony/deprecation-contracts` version 3 [#2961](https://github.com/guzzle/guzzle/pull/2961)
+
+### Fixed
+
+- Only close curl handle if it's done [#2950](https://github.com/guzzle/guzzle/pull/2950)
+
+## 7.4.0 - 2021-10-18
+
+### Added
+
+- Support PHP 8.1 [#2929](https://github.com/guzzle/guzzle/pull/2929), [#2939](https://github.com/guzzle/guzzle/pull/2939)
+- Support `psr/log` version 2 and 3 [#2943](https://github.com/guzzle/guzzle/pull/2943)
+
+### Fixed
+
+- Make sure we always call `restore_error_handler()` [#2915](https://github.com/guzzle/guzzle/pull/2915)
+- Fix progress parameter type compatibility between the cURL and stream handlers [#2936](https://github.com/guzzle/guzzle/pull/2936)
+- Throw `InvalidArgumentException` when an incorrect `headers` array is provided [#2916](https://github.com/guzzle/guzzle/pull/2916), [#2942](https://github.com/guzzle/guzzle/pull/2942)
+
+### Changed
+
+- Be more strict with types [#2914](https://github.com/guzzle/guzzle/pull/2914), [#2917](https://github.com/guzzle/guzzle/pull/2917), [#2919](https://github.com/guzzle/guzzle/pull/2919), [#2945](https://github.com/guzzle/guzzle/pull/2945)
+
 ## 7.3.0 - 2021-03-23
 
 ### Added
@@ -172,7 +208,7 @@ Please see [the upgrade document](UPGRADING.md) that describes all BC breaking c
 * Fix: Add support for GUZZLE_CURL_SELECT_TIMEOUT environment variable [#2161](https://github.com/guzzle/guzzle/pull/2161)
 * Improvement: Added `GuzzleHttp\Exception\InvalidArgumentException` [#2163](https://github.com/guzzle/guzzle/pull/2163)
 * Improvement: Added `GuzzleHttp\_current_time()` to use `hrtime()` if that function exists. [#2242](https://github.com/guzzle/guzzle/pull/2242)
-* Improvement: Added curl's `appconnect_time` in `TransferStats` [#2275](https://github.com/guzzle/guzzle/pull/2275)
+* Improvement: Added curl's `appconnect_time` in `TransferStats` [#2284](https://github.com/guzzle/guzzle/pull/2284)
 * Improvement: Make GuzzleException extend Throwable wherever it's available [#2273](https://github.com/guzzle/guzzle/pull/2273)
 * Fix: Prevent concurrent writes to file when saving `CookieJar` [#2335](https://github.com/guzzle/guzzle/pull/2335)
 * Improvement: Update `MockHandler` so we can test transfer time [#2362](https://github.com/guzzle/guzzle/pull/2362)
@@ -215,7 +251,7 @@ Please see [the upgrade document](UPGRADING.md) that describes all BC breaking c
 * Improvement: Check handler type during construction [#1745](https://github.com/guzzle/guzzle/pull/1745)
 * Improvement: Always include the Content-Length if there's a body [#1721](https://github.com/guzzle/guzzle/pull/1721)
 * Feature: Added convenience method to access a cookie by name [#1318](https://github.com/guzzle/guzzle/pull/1318)
-* Bug fix: Fill `CURLOPT_CAPATH` and `CURLOPT_CAINFO` properly [#1675](https://github.com/guzzle/guzzle/pull/1675)
+* Bug fix: Fill `CURLOPT_CAPATH` and `CURLOPT_CAINFO` properly [#1684](https://github.com/guzzle/guzzle/pull/1684)
 * Improvement:  	Use `\GuzzleHttp\Promise\rejection_for` function instead of object init [#1827](https://github.com/guzzle/guzzle/pull/1827)
 
 
@@ -1107,7 +1143,7 @@ interfaces.
 * Refactored how operation responses are parsed. Visitors now include a before() method responsible for parsing the
   response body. For example, the XmlVisitor now parses the XML response into an array in the before() method.
 * Fixed an issue where cURL would not automatically decompress responses when the Accept-Encoding header was sent
-* CURLOPT_SSL_VERIFYHOST is never set to 1 because it is deprecated (see 5e0ff2ef20f839e19d1eeb298f90ba3598775444)
+* CURLOPT_SSL_VERIFYHOST is never set to 1 because it is deprecated (see 5e0ff2ef20f839e19d1eeb298f90ba3598784444)
 * Fixed a bug where redirect responses were not chained correctly using getPreviousResponse()
 * Setting default headers on a client after setting the user-agent will not erase the user-agent setting
 

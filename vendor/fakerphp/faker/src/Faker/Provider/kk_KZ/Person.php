@@ -48,7 +48,7 @@ class Person extends \Faker\Provider\Person
     ];
 
     /**
-     * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%75%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
+     * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
      *
      * @var array
      */
@@ -57,7 +57,7 @@ class Person extends \Faker\Provider\Person
     ];
 
     /**
-     * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%75%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
+     * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
      *
      * @var array
      */
@@ -140,7 +140,7 @@ class Person extends \Faker\Provider\Person
 
     /**
      * @see http://koshpendi.kz/index.php/nomad/imena/
-     * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%75%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
+     * @see https://ru.wikipedia.org/wiki/%D0%9A%D0%B0%D0%B7%D0%B0%D1%85%D1%81%D0%BA%D0%B0%D1%8F_%D1%84%D0%B0%D0%BC%D0%B8%D0%BB%D0%B8%D1%8F
      *
      * @var array
      */
@@ -176,13 +176,21 @@ class Person extends \Faker\Provider\Person
     ];
 
     /**
+     * Note! When calculating individual identification number
+     *   2000-01-01 - 2000-12-31 counts as 21th century
+     *   1900-01-01 - 1900-12-31 counts as 20th century
+     *
      * @param int $year
      *
-     * @return int|null
+     * @return int
      */
     private static function getCenturyByYear($year)
     {
-        if ($year >= 2000 && $year <= DateTime::year()) {
+        if (($year >= 2100) || ($year < 1800)) {
+            throw new \InvalidArgumentException('Unexpected century');
+        }
+
+        if ($year >= 2000) {
             return self::CENTURY_21ST;
         }
 
@@ -190,18 +198,14 @@ class Person extends \Faker\Provider\Person
             return self::CENTURY_20TH;
         }
 
-        if ($year >= 1800) {
-            return self::CENTURY_19TH;
-        }
-
-        return null;
+        return self::CENTURY_19TH;
     }
 
     /**
      * National Individual Identification Numbers
      *
      * @see   http://egov.kz/wps/portal/Content?contentPath=%2Fegovcontent%2Fcitizen_migration%2Fpassport_id_card%2Farticle%2Fiin_info&lang=en
-     * @see   https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%B8%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D1%75%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BD%D0%BE%D0%BC%D0%B5%D1%80
+     * @see   https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9_%D0%B8%D0%B4%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BD%D0%BE%D0%BC%D0%B5%D1%80
      *
      * @param \DateTime $birthDate
      * @param int       $gender

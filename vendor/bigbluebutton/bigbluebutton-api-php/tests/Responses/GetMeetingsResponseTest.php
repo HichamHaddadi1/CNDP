@@ -45,7 +45,7 @@ class GetMeetingsResponseTest extends TestCase
 
         $aMeeting = $this->meetings->getMeetings()[2];
 
-        $this->assertEquals('56e1ae16-3dfc-390d-b0d8-5aa754a25874', $aMeeting->getMeetingId());
+        $this->assertEquals('56e1ae16-3dfc-390d-b0d8-5aa844a25874', $aMeeting->getMeetingId());
         $this->assertEquals('Marty Lueilwitz', $aMeeting->getMeetingName());
         $this->assertEquals(1453210075799, $aMeeting->getCreationTime());
         $this->assertEquals('Tue Jan 19 08:27:55 EST 2016', $aMeeting->getCreationDate());

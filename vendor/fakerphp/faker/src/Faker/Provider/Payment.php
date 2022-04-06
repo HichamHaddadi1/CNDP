@@ -92,6 +92,7 @@ class Payment extends Base
         'DK' => [['n', 4],    ['n', 9],  ['n', 1]],
         'DO' => [['c', 4],    ['n', 20]],
         'EE' => [['n', 2],    ['n', 2],  ['n', 11], ['n', 1]],
+        'EG' => [['n', 4],    ['n', 4],  ['n', 17]],
         'ES' => [['n', 4],    ['n', 4],  ['n', 1],  ['n', 1],  ['n', 10]],
         'FI' => [['n', 6],    ['n', 7],  ['n', 1]],
         'FR' => [['n', 5],    ['n', 5],  ['c', 11], ['n', 2]],
@@ -157,7 +158,7 @@ class Payment extends Base
      *
      * @return string
      *
-     * @example '4485480221075675'
+     * @example '4485480221084675'
      */
     public static function creditCardNumber($type = null, $formatted = false, $separator = '-')
     {

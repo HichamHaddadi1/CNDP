@@ -41,7 +41,7 @@ body {
 }
 
 .table tbody tr.covered-by-small-tests, li.covered-by-small-tests {
- background-color: #99cb75;
+ background-color: #99cb84;
 }
 
 .table tbody tr.danger, .table tbody td.danger, li.danger, span.danger {
@@ -94,11 +94,6 @@ span.success, span.warning, span.danger {
  padding-left: 10px;
  padding-right: 10px;
  text-align: center;
-}
-
-#classCoverageDistribution, #classComplexity {
- height: 200px;
- width: 475px;
 }
 
 #toplink {

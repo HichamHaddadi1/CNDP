@@ -149,13 +149,11 @@ class RegisterController extends Controller
         if(url('/').'/user//register' != url()->previous())
         // Redirect::setIntendedUrl(url()->previous());
          if (auth()->user()->role == 3) {
-        //     return 'user/profile';
-        // }
-        // return '/';
-            // dd
+       
             return redirect()->intended('/')->getTargetUrl();
 
          }
+         
          return "/";
     }
 

@@ -38,7 +38,7 @@ final class DisallowedRanges
             return true;
         }
 
-        if ($codePoint >= 6759 && $codePoint <= 6911) {
+        if ($codePoint >= 6849 && $codePoint <= 6911) {
             return true;
         }
 
@@ -186,7 +186,7 @@ final class DisallowedRanges
             return true;
         }
 
-        if ($codePoint >= 92775 && $codePoint <= 92879) {
+        if ($codePoint >= 92784 && $codePoint <= 92879) {
             return true;
         }
 

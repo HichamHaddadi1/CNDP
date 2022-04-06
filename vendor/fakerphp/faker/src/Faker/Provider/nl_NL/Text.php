@@ -2386,7 +2386,7 @@ ziel te groot is." Zoo'n uitvreter toch! "Wat moeten die kranten,
 Japi?" vroeg ik. Japi gaf een klap op 't pak. "Nieuwzen van den Dag,
 Koekebakker, Nieuwzen van den dag. Er zijn er bij van een maand
 oud." "Moet je weer solliciteeren, Japi?" "Juist geraden man. 't
-Gaat zoo niet langer. Pak een stoel. Kijk eens aan, K H 14675
+Gaat zoo niet langer. Pak een stoel. Kijk eens aan, K H 14684
 Nieuws van den Dag. WelEdl. Heeren."--"De hoeveelste is dat?" vroeg
 ik.--"De eerste pas. Dat gaat niet zoo gauw. Dat komt, omdat jelui
 nooit in den handel zijn geweest, jelui weet niet, hoe 'n toer dat

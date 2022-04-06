@@ -31,7 +31,7 @@ class Company extends \Faker\Provider\Company
     protected static $companySuffix = ['科技', '网络', '信息', '传媒'];
 
     /**
-     * @see blog.renren.com/share/223754062/2387611567
+     * @see blog.renren.com/share/223844062/2387611567
      *
      * @var array
      */

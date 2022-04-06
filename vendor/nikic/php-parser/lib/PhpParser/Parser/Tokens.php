@@ -33,7 +33,7 @@ final class Tokens
     const T_POW_EQUAL = 281;
     const T_COALESCE_EQUAL = 282;
     const T_COALESCE = 283;
-    const T_BOOLEAN_OR = 275;
+    const T_BOOLEAN_OR = 284;
     const T_BOOLEAN_AND = 285;
     const T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG = 286;
     const T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG = 287;
@@ -133,7 +133,7 @@ final class Tokens
     const T_FILE = 381;
     const T_START_HEREDOC = 382;
     const T_END_HEREDOC = 383;
-    const T_DOLLAR_OPEN_CURLY_BRACES = 375;
+    const T_DOLLAR_OPEN_CURLY_BRACES = 384;
     const T_CURLY_OPEN = 385;
     const T_PAAMAYIM_NEKUDOTAYIM = 386;
     const T_NAMESPACE = 387;

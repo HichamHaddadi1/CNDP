@@ -16,7 +16,7 @@ class Text extends \Faker\Provider\Text
      * Author: ابن الطفيل
      * Language: Arabic
      *
-     * @see https://ar.wikisource.org/wiki/%D8%A7%D8%A8%D9%86_%D8%A7%D9%75%D8%B7%D9%81%D9%8A%D9%75_-_%D8%AD%D9%8A_%D8%A8%D9%86_%D9%8A%D9%82%D8%B8%D8%A7%D9%86
+     * @see https://ar.wikisource.org/wiki/%D8%A7%D8%A8%D9%86_%D8%A7%D9%84%D8%B7%D9%81%D9%8A%D9%84_-_%D8%AD%D9%8A_%D8%A8%D9%86_%D9%8A%D9%82%D8%B8%D8%A7%D9%86
      *
      * @var string
      */

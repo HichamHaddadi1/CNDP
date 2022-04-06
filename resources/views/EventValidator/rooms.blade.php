@@ -52,7 +52,7 @@ color:rgb(90, 30, 255) !important;
       <tr>
         <th>Room Name</th>
         <th  class="room_desc">Room Description</th>
-        <th >Max Attendees</th>
+        {{-- <th >Max Attendees</th> --}}
         <th >Access Code</th>
         <th >State</th>
         <th >Created at</th>
@@ -65,7 +65,7 @@ color:rgb(90, 30, 255) !important;
         <tr>
         <td>{{ $room->room_name }}</td>
         <td class="room_desc">{{ $room->room_desc }}</td>
-        <td >{{ $room->max_viewers }}</td>
+        {{-- <td >{{ $room->max_viewers }}</td> --}}
         <td>{{$room->viewer_pw}}</td>
         <td>{{$room->verified}}</td>
         <td>{{$room->created_at}}</td>
@@ -127,11 +127,11 @@ color:rgb(90, 30, 255) !important;
         <input type="hidden" name="room_id" id="room_id">
         <div class="row">
           <div class="col">
-            <div class="md-form mb-3">
+            {{-- <div class="md-form mb-3">
                 <label data-error="wrong" data-success="right" for="orangeForm-email">Max Attendees</label>
                 <input type="text" id="MaxViewerUpdate" name="max_viewersupdate" class="form-control validate">
                 <small class="text-error max_viewersupdate_error"  style="color:red;"></small>
-            </div>
+            </div> --}}
             </div>
             <div class="col">
             <div class="md-form mb-3">
@@ -191,7 +191,7 @@ color:rgb(90, 30, 255) !important;
         console.log(result.room.room_name);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value=result.room.room_name;
-        MaxViewerUpdate.value=result.room.max_viewers;
+        //MaxViewerUpdate.value=result.room.max_viewers;
         viewer_pwUpdate.value=result.room.viewer_pw;
         room_descUpdate.value=result.room.room_desc;
         }

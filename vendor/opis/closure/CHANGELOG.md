@@ -7,7 +7,7 @@ CHANGELOG
 
 ### v3.6.1, 2020.11.07
 
-- Fixed serialization error [#75](https://github.com/opis/closure/issues/75)
+- Fixed serialization error [#84](https://github.com/opis/closure/issues/84)
 
 ### v3.6.0, 2020.10.12
 

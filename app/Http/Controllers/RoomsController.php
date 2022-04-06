@@ -138,7 +138,7 @@ class RoomsController extends Controller
             $this->validate($request,[
                 'room_name' => 'required',
                 'room_desc' => 'required',
-                'max_viewers' => 'required',
+                //'max_viewers' => 'required',
                 'viewer_pw' => 'required',
                 'file_upload' => 'required'
             ]);
@@ -155,7 +155,7 @@ class RoomsController extends Controller
             $room = new Room([
                 'room_name'     =>  $request->get('room_name'),
                 'room_desc'     =>  $request->get('room_desc'),
-                'max_viewers'   =>  $request->get('max_viewers'),
+                'max_viewers'   =>  111,
                 'moderator_pw'  =>  Auth::user()->email,
                 'viewer_pw'     =>  $request->get('viewer_pw'),
                 'id_user'       =>  Auth::user()->id,
@@ -223,20 +223,20 @@ class RoomsController extends Controller
              return back()->with('errorsUnique' , 'Meeting not started yet , wait until a moderator launch the event');
             }
 
-            $meetingInfo=\Bigbluebutton::getMeetingInfo([
-                'meetingID' => $room->id.'cmp',
-                 //moderator password set here
-            ]);
-            $collection = collect($meetingInfo['attendees']['attendee']);
-            $max_counter=$collection->count()-1 ;
-          //dd($meetingInfo['attendees']['attendee']);
-            if($collection->count()-1 >= $room->max_viewers)
-            {
-                return back()->with('errorsUnique' , 'the Seminars has reached the max viewers Count '.$max_counter);
-            }
-            else{
+        //     $meetingInfo=\Bigbluebutton::getMeetingInfo([
+        //         'meetingID' => $room->id.'cmp',
+        //          //moderator password set here
+        //     ]);
+        //     $collection = collect($meetingInfo['attendees']['attendee']);
+        //     $max_counter=$collection->count()-1 ;
+        //   //dd($meetingInfo['attendees']['attendee']);
+        //     if($collection->count()-1 >= $room->max_viewers)
+        //     {
+        //         return back()->with('errorsUnique' , 'the Seminars has reached the max viewers Count '.$max_counter);
+        //     }
+            
                 return redirect()->to($url);
-             }
+            
 
 
     }
@@ -382,7 +382,7 @@ class RoomsController extends Controller
             'moderatorPW' => Auth::user()->email, //moderator password set here
             'attendeePW' => $room->id.'cmp', //attendee password here
             'userName' => Auth::user()->name,//for join meeting
-            'maxParticipants'=>$room->max_viewers,
+            //'maxParticipants'=>$room->max_viewers,
         ]);
         // dd($url);
         $event->event_statue = 1;
