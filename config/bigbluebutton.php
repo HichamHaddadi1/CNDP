@@ -33,6 +33,7 @@ return [
     //    'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'https://workplace.cndp-cdai.tamkine.org/bigbluebutton/'),
 //    'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', 'O0TSwG7kgybAC6UGH58SL6CIXLjCuUkvSknXA6JJqKU'),
 //        'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'https://conferences.tamtechsolution.com/bigbluebutton/'),
+
        'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', '8cd8ef52e8e101574e400365b55e11a6'),
        'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'http://test-install.blindsidenetworks.com/bigbluebutton/'),
 

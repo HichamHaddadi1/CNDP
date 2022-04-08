@@ -8,7 +8,8 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
+use App\Models\Tickit;
+use Illuminate\Support\Facades\Auth;
 
 class ViewersController extends Controller
 {
@@ -115,5 +116,53 @@ class ViewersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function applyForEvent($room_id, $event_id)
+    {
+       $max_viewers=Event::where('id',$event_id)->first()->max_viewers;
+        //    max_viewers 
+       $tickits = Tickit::where('room_id',$room_id);
+       $tickitsCount = $tickits->count();
+       
+        /*Preventing multi applying*/
+        $multi_apply     =   Tickit::where('user_id',Auth::user()->id)
+                                    ->where('room_id',$room_id)
+                                    ->where('event_id',$event_id)
+                                    ->get();
+        $multiCounter    =   $multi_apply->count();
+        if($multiCounter>=1)
+        {
+         return response()->json(['status' => 0, 'message' => "you are already applied for this Seminar"]);
+        }
+        /*********************************************************/
+        else if($max_viewers == $tickitsCount)
+        {
+        return response()->json(['status' => 2, 'message' => "this Simenar is full "]);
+        }	
+    
+       
+        $tickit=new Tickit([
+            'user_id'  => Auth::user()->id,
+            'room_id'  => $room_id,
+            'event_id' => $event_id
+        ]);
+        $tickit->save();
+        return response()->json(['status' => 1, 'message' => "success"]);
+    }
+
+    public function applyCheck($room_id,$event_id)
+    {
+        $multi_apply     =   Tickit::where('user_id',Auth::user()->id)
+                                   ->where('room_id',$room_id)
+                                   ->where('event_id',$event_id)->get();
+
+        $multiCounter    =   $multi_apply->count();
+        //dd($multi_apply);
+        if($multiCounter==1)
+        {
+         return response()->json(['status' => 0, 'message' => "you are already applied for this Seminar"]);
+        }
+        return response()->json(['status' => 1, 'message' => "not there"]);
     }
 }

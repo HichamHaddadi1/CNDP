@@ -50,7 +50,8 @@ class EventsController extends Controller
                 'start' => $event->starting_at,
                 'end'   => $event->ending_at,
                 'id_user' =>$event->id_user,
-                'id_room' =>$event->id_room
+                'id_room' =>$event->id_room,
+                'id_event' => $event->id
             ];
            array_push($eventsArray,$data);
             }
@@ -76,7 +77,8 @@ class EventsController extends Controller
                 'id_user' =>$event->id_user,
                 'id_room' =>$event->id_room,
                 'user' => User::where('id' , '=' , $event->id_user)->get(),
-                'isVerified' =>$event->isVerified
+                'isVerified' =>$event->isVerified,
+                'id_event' => $event->id
             ];
            array_push($eventsArray,$data);
         }
@@ -127,7 +129,7 @@ class EventsController extends Controller
         // //dd($request);
         $this->validate($request,[
             'event_theme'    => 'required',
-            'event_desc'     => 'required|max:120',
+            'event_desc'     => 'required|max:300',
             'starting_at'    => 'required',
             'max_viewers'    => 'required',
             'ending_at'      => 'required | after_or_equal:starting_at'
@@ -156,7 +158,7 @@ class EventsController extends Controller
      */
     public function show()
     {
-
+        $roomcheck=Room::where('id_user',Auth::user()->id)->get();
         $data = DB::table('events')->get();
         //  $name = DB::table('users')->select('user_name')->where('id_user','=',$data->id_user);
         $events =DB::table('events')
@@ -170,7 +172,7 @@ class EventsController extends Controller
         $rooms = Room::all();
         $rooms_count = $rooms->count();
         //dd($events);
-         return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count','oldevents'));
+         return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count','oldevents','roomcheck'));
 
     }
 

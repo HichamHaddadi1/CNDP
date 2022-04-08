@@ -34,8 +34,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
+    //protected $redirectTo = RouteServiceProvider::HOME;
+    
+  
     /**
      * Create a new controller instance.
      *
@@ -146,15 +147,17 @@ class RegisterController extends Controller
 
            return url('streamer/rooms');
         }
-        if(url('/').'/user//register' != url()->previous())
-        // Redirect::setIntendedUrl(url()->previous());
-         if (auth()->user()->role == 3) {
-       
-            return redirect()->intended('/')->getTargetUrl();
-
-         }
+        // if(url('/').'/user/register' != url()->previous())
+        //      Redirect::setIntendedUrl(url()->previous());
+        //  if (auth()->user()->role == 3) {
+                
+        //      return redirect()->intended('/')->getTargetUrl();
+           
+        //  }
          
-         return "/";
+        if(url('/').'/login' != url()->previous() && url('/').'/register' != url()->previous() && auth()->user()->role == 3)
+                Redirect::setIntendedUrl(url()->previous());
+         return "/dashboard";
     }
 
 

@@ -148,7 +148,7 @@ function dec2hex (dec) {
             console.log(event.id_room);
             var room_id = event.id_room;
             console.log(room_id);
-            var url = `{{route('join')}}/${room_id}/${generateId()}`;
+            var url =  `{{route('join')}}/${room_id}/${event.id_event}/${generateId()}`;
             $('#invite-link').val(url);
             $('#event-title').val(event.title);
             $('#event-start').val(event.start.toISOString().replace('T' , " at ").replace(':00' , ""));

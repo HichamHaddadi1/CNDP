@@ -49,7 +49,7 @@ margin-bottom: 10%;
 <div class="event_info "style="">
   <h3 class="display-4">Seminars Schedule</h3>
   <div class="alert alert-info p-3 ">
-  <p class="text-muted h3">All the Seminars are listed here , and you can have access to all of them and be part of <strong>CNDP</strong>  community</p>
+  <p class="text-muted h3">All the Seminars are listed here , and you can have access to all of them and be part of <strong>CNDP</strong> community</p>
   </div>
  
 
@@ -69,6 +69,8 @@ margin-bottom: 10%;
           <!-- Modal body -->
           <div class="modal-body">
           <div class="form-group">
+            <input type="hidden" id="room_id">
+            <input type="hidden" id="event_id">
         <div class="row mb-3">
           <div class="col">
               <label for="title">Title</label>
@@ -93,10 +95,18 @@ margin-bottom: 10%;
           </div> -->
         
           <div class="form-group ">
-            <a href="" class="btn btn-outline-primary btn-md form-control" id="invite-link"><i class="fas fa-door-open"></i>&nbsp Join Meeting</a>
+           
             <?php if(!Auth::check()): ?>
             <a href="<?php echo e(route('userRegister')); ?>" class="btn btn-outline-primary btn-md form-control"><i class="fas fa-user-plus"></i>&nbsp Register</a>
+            <?php else: ?>
+        <div class="text-center" id="appliedbtn" style="display: none">
+            <button type="button" class="btn btn-lg btn-primary" disabled>Applied <i class="fas fa-check"></i></button>
+        </div>
+            <button type="submit" class="btn btn-info btn-md form-control"  id="apply_event">&nbsp Apply </button>
+
+        
             <?php endif; ?>
+            
           <div class="text-center alert alert-info justify-content-center" id="msg_warning"></div>
           </div>
           </div>
@@ -115,17 +125,57 @@ margin-bottom: 10%;
     
    
 
-    
+    <script>
+     const room_id = $('#room_id'),event_id =$('#event_id');
+      $('#apply_event').click(function(){
+        $('#apply_event').show();
+        console.log(event_id.val());
+      $.ajax({
+
+      url: '/schedule/'+room_id.val()+'/'+event_id.val(),
+      method:"GET",
+      processData: false,
+      contentType: false,
+      dataType: 'json',
+     
+      success:function (result){
+        if (result.status == 0) {
+         
+          // $('#apply_event').hide();
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text:result.message ,
+           
+            })
+          } else if (result.status == 1) {
+           
+            Swal.fire(
+                   'Applied',
+                   'Successfully',
+                   'success'
+                 )
+          } else if(result.status == 2)
+          {
+            Swal.fire({
+              icon: 'info',
+              title: 'Max attendees',
+              text:result.message ,
+           
+            })
+          }
+      }
+});
+      });
+    </script>
     
     <script>
         function myFunction() {
       /* Get the text field */
       var copyText = document.getElementById("invite-link");
-    
       /* Select the text field */
       copyText.select();
       copyText.setSelectionRange(0, 99999); /* For mobile devices */
-    
        /* Copy the text inside the text field */
       navigator.clipboard.writeText(copyText.value);
       document.getElementById("copy").innerHTML = "<span class='text-success'>Copied to clipboard</span>";
@@ -137,7 +187,6 @@ margin-bottom: 10%;
       $.getJSON("/adminev/", function(result) {
     var options = $("#dropdown");
     //don't forget error handling!
-    
     // $.each(result, function(item) {
     //   console.log(result[item]);
     //   console.log(result[item]['user'][0]['name']);
@@ -214,16 +263,40 @@ function dec2hex (dec) {
                 eventClick: function(event){
                 //console.log(event);
                 //console.log(event.user[0]['fname'] , event.user[0]['lname']);
-                var room_id = event.id_room;
                 //console.log(room_id);
-                
+                //console.log(event);
+                $.ajax({
+                    url: '/check/'+event.id_room+'/'+event.id_event,
+                    method:"GET",
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+
+                    success:function (result){
+                    if (result.status == 0) {
+                        $('#appliedbtn').show();
+                        $('#apply_event').hide();
+
+                      } else if (result.status == 1) {
+                        $('#appliedbtn').hide();
+                        $('#apply_event').show();
+                      } 
+                    }
+                    });
+  /*FIll the inputs*/
+                var room_id = event.id_room;
+             
                 var url = `<?php echo e(route('join')); ?>/${room_id}/${generateId()}`;
                 $('#invite-link').attr('href' , url);
                 $('#event-title').val(event.title);
-              
+                $('#room_id').val(event.id_room);
+                $('#event_id').val(event.id_event);
                 $('#event-presenter').val(event.user[0]['fname'] +' '+  event.user[0]['lname']);
                 $('#event-start').val(event.start.toISOString().replace('T' , " at ").replace(':00' , ""));
                 $('#event-end').val(event.end.toISOString().replace('T' , " at ").replace(':00' , ""));
+                 /*applied logic*/
+               
+
              //console.log(event.end.toISOString().replace('T' , " at ").replace(':00' , ""));
               var d=new Date();    
               var enddate=event.end;
@@ -252,7 +325,7 @@ function dec2hex (dec) {
                 tooltip :true,
                 selectHelper: true,
             });
-           console.log(calendar);
+           //console.log(calendar);
             
       });
   

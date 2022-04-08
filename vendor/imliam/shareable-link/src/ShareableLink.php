@@ -53,14 +53,9 @@ class ShareableLink
     {
         $env = function_exists('env') ? 'env' : 'getenv';
 
-        /*return $this->buildFormattedUrl('https://www.facebook.com/dialog/share?', [
+        return $this->buildFormattedUrl('https://www.facebook.com/dialog/share?', [
             'app_id' => $appId ?? $env('FACEBOOK_APP_ID') ?: '',
             'href' => $this->url,
-            'display' => 'page',
-            'title' => urlencode($this->title),
-        ]); */
-        return $this->buildFormattedUrl('https://www.facebook.com/sharer/sharer.php?', [
-            'u' => $this->url,
             'display' => 'page',
             'title' => urlencode($this->title),
         ]);
@@ -70,7 +65,7 @@ class ShareableLink
     {
         return $this->buildFormattedUrl('https://twitter.com/intent/tweet?', [
             'url' => $this->url,
-            'text' => urlencode($this->limit($this->title, 120)),
+            'text' => urlencode($this->limit($this->title, 240)),
         ]);
     }
 
@@ -83,11 +78,7 @@ class ShareableLink
 
     public function getLinkedinUrl(): string
     {
-        /*return $this->buildFormattedUrl('https://www.linkedin.com/shareArticle?mini=true&', [
-            'url' => $this->url,
-            'summary' => urlencode($this->title),
-        ]);*/
-        return $this->buildFormattedUrl('https://www.linkedin.com/sharing/share-offsite/?', [
+        return $this->buildFormattedUrl('https://www.linkedin.com/shareArticle?mini=true&', [
             'url' => $this->url,
             'summary' => urlencode($this->title),
         ]);
@@ -107,14 +98,6 @@ class ShareableLink
             'url' => $this->url,
         ]);
     }
-
-    public function getTelegramUrl(): string
-    {
-        return $this->buildFormattedUrl('https://telegram.me/share?', [
-            'url' => $this->url,
-        ]);
-    }
-
 
     /**
      * Limit the number of characters in a string.

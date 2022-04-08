@@ -40,7 +40,7 @@
   </div>
 
     {{-- @if(auth()->user()) --}}
-    <form method="POST" action="{{route('join_stream' ,$id)}}"  id="redirect" name="redirect">
+    <form method="POST" action="{{route('join_stream' ,[$id,$event_id])}}"  id="redirect" name="redirect">
         @csrf
 {{--
       <span class="alert alert-warning" id="warning">
@@ -53,16 +53,27 @@
                       </div>
           @endif
           @if($errors->has('txtName'))
+         
           <span class="text-danger" role="alert">
               <strong>{{ $errors->first('txtName') }}</strong>
           </span>
           @enderror
-      <input type="text" class="form-control mb-3" placeholder="Your Name" name="txtName" >
+          @if(Auth::check())
+         
+              <input type="text" class="form-control mb-3" placeholder="{{Auth::user()->name}}" name="txtName" value="{{Auth::user()->name}}" readonly >
+              @else
+              <input type="text" class="form-control mb-3" placeholder="your Name" name="txtName" >
+          @endif
+        {{-- @if($errors->any())
+        {{dd($errors)}}
+        @endif --}}
       @if($errors->has('code'))
+     
       <span class="text-danger" role="alert">
           <strong>{{ $errors->first('code') }}</strong>
       </span>
       @enderror
+      
       <input type="text" class="form-control mb-3" name="code" id="code" placeholder="Access Code" >
         <div class="row">
             <button type="submit" class="form-control btn-primary text-uppercase text-primary {{ !Auth::check() ? "btn_ col-md-5" : "btn_f" }} showhim"> Join <div class="showme">You can directly join the ongoing seminar by clicking on join after having entered your name and the access code to the seminar's virtual room that you would have received with the invitation or via email. </div></button>

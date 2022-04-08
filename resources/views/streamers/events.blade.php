@@ -177,9 +177,12 @@ footer p {
         {{ Session::get('success') }}
       </div>
 @endif
+
+@if(!$roomcheck->isEmpty())
   <div class="btn mb-4 mr-4" style="float: right">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
+@endif
   <form action="{{ route('search_event_streamer') }}" method="GET">
     <div class="row">
      <div class="col-lg-4 col-lg-offset-4">
@@ -244,7 +247,7 @@ footer p {
               
                           <button data-toggle="tooltip" title="Edit Seminar"  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}" ><i class="fas fa-pen"></i></button>
                           
-                           <button data-toggle="tooltip" title="Copy Link" class="btn btn-primary btn-sm" id="share_link" style="color: white" data-clipboard-text="{{ route('join' , [$event->id_room,Crypt::encrypt($event->id)])}}">
+                           <button data-toggle="tooltip" title="Copy Link" class="btn btn-primary btn-sm" id="share_link" style="color: white" data-clipboard-text="{{ route('join' , ['id'=>$event->id_room ,'event_id'=>$event->id,'_id'=>Crypt::encrypt('$event->id')])}}">
                             <i class="fas fa-copy"></i>
                           </button>
                          <span data-toggle="tooltip" title="Share link">
@@ -576,10 +579,10 @@ footer p {
                         </div>
                         <!-- Telegram -->
                         <div class="smd">
-                            <a href='{{ $url->telegram}}' target='_blank'>
+                            {{-- <a href='{{ $url->telegram}}' target='_blank'>
                               <i class="img-thumbnail fab fa-telegram fa-2x" style="color: #4c6ef5;background-color: aliceblue"></i>
                               <p>Telegram</p>
-                            </a>
+                            </a> --}}
                         </div>
                         <!-- E-mail -->
                         <div class="smd">

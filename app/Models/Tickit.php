@@ -9,7 +9,8 @@ class Tickit extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
-        'room_id'
+            'user_id',
+            'room_id',
+            'event_id'
         ];
 }

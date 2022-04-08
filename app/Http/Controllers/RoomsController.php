@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Room;
+use App\Models\Tickit;
 use App\Models\User;
 use App\Providers\EventServiceProvider;
 use Carbon\Carbon;
@@ -198,16 +199,32 @@ class RoomsController extends Controller
     }
 
 
-    public function joinMeeting(Request $request, $id)
+    public function joinMeeting(Request $request, $id,$event_id)
     {
 
         $this->validate($request,[
             'txtName' => 'required',
-
-            // 'viewer_pw' => 'required'
+            'code' => 'required'
         ]);
+        $room = Room::findOrFail($id); 
+      //dd($_id);
+        /*Preventing multi applying*/
+        $multi_apply     =   Tickit::where('user_id',Auth::user()->id)
+        ->where('room_id',$id)
+        ->where('event_id',$event_id)
+        ->get();
+            $multiCounter    =   $multi_apply->count();
+            if($multiCounter==0)
+            {
+            return back()->with('errorsUnique' , 'you have to apply to this seminar before trying to join');
+            }
 
-        $room = Room::findOrFail($id);
+
+
+
+
+
+        
         $url = \Bigbluebutton::join([
             'meetingID' => $room->id.'cmp',
             'userName' => request()->get('txtName'),
@@ -302,7 +319,7 @@ class RoomsController extends Controller
 
     public function startMeeting($id)
     {
-
+        
         $room = Room::findOrFail($id);
         // $path = asset('presentations/main.pdf');
         $presentation=asset('uploads/images/'.$room->presentations);

@@ -40,7 +40,7 @@
   </div>
 
     
-    <form method="POST" action="<?php echo e(route('join_stream' ,$id)); ?>"  id="redirect" name="redirect">
+    <form method="POST" action="<?php echo e(route('join_stream' ,[$id,$event_id])); ?>"  id="redirect" name="redirect">
         <?php echo csrf_field(); ?>
 
       <div class="container w-40 p-3 ">
@@ -50,6 +50,7 @@
                       </div>
           <?php endif; ?>
           <?php if($errors->has('txtName')): ?>
+         
           <span class="text-danger" role="alert">
               <strong><?php echo e($errors->first('txtName')); ?></strong>
           </span>
@@ -57,8 +58,15 @@
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-      <input type="text" class="form-control mb-3" placeholder="Your Name" name="txtName" >
+          <?php if(Auth::check()): ?>
+         
+              <input type="text" class="form-control mb-3" placeholder="<?php echo e(Auth::user()->name); ?>" name="txtName" value="<?php echo e(Auth::user()->name); ?>" readonly >
+              <?php else: ?>
+              <input type="text" class="form-control mb-3" placeholder="your Name" name="txtName" >
+          <?php endif; ?>
+        
       <?php if($errors->has('code')): ?>
+     
       <span class="text-danger" role="alert">
           <strong><?php echo e($errors->first('code')); ?></strong>
       </span>
@@ -66,6 +74,7 @@ unset($__errorArgs, $__bag); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+      
       <input type="text" class="form-control mb-3" name="code" id="code" placeholder="Access Code" >
         <div class="row">
             <button type="submit" class="form-control btn-primary text-uppercase text-primary <?php echo e(!Auth::check() ? "btn_ col-md-5" : "btn_f"); ?> showhim"> Join <div class="showme">You can directly join the ongoing seminar by clicking on join after having entered your name and the access code to the seminar's virtual room that you would have received with the invitation or via email. </div></button>

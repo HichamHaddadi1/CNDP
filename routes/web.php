@@ -40,7 +40,7 @@ Route::get('/logout', [LoginController::class , 'logout'])->name('logout');
 /**This One if for login */
 
 //this route is for the user to join the meeting
-Route::get('/meeting-room/join/{id?}/{_id?}',[MainController::class , 'join_meeting'] )->name('join');
+Route::get('/meeting-room/join/{id?}/{event_id?}/{_id?}',[MainController::class , 'join_meeting'] )->name('join');
 // Route::post('/check',[MainController::class,'check'])->name('auth.check');
 Route::get('streamer/rooms/search', [RoomsController::class , 'search_room'])->name('search_room_streamer');
 Route::get('admin/users/search', [UserController::class , 'search_users'])->name('search_users');
@@ -89,17 +89,17 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess']],function(){
     Route::get('dashboard' , function(){
         if(Auth::user()->role == 1)
         {
-            return redirect('admin/profile');
+            return redirect('admin/pending');
         }
         elseif(Auth::user()->role == 2)
         {
-            return redirect('streamer/profile');
+            return redirect('streamer/rooms');
         }
         elseif(auth()->user()->role == 3)
         {
             return redirect('schedule');
         }
-        elseif(Auth::user()->role == 4)
+        elseif(Auth::user()->role)
         {
             return redirect('validator/statistics');
         }
@@ -207,7 +207,7 @@ Route::get('/validator/statistics',[EVController::class , 'showStatistics'])->na
 
 // });
 //this one is for joining the stream after passing from the join view
-    Route::post('/virtual-room/{id}' ,[RoomsController::class ,'joinMeeting'])->name('join_stream');
+    Route::post('/virtual-room/{id?}/{event_id?}' ,[RoomsController::class ,'joinMeeting'])->name('join_stream');
 //this one is for passing the JSON data to the fulCalendar
     Route::get('/test' , [EventsController::class , 'index'])->name('test');
     Route::get('/adminev' , [EventsController::class , 'adminEvents'])->name('test');
@@ -221,6 +221,9 @@ Route::get('/validator/statistics',[EVController::class , 'showStatistics'])->na
     Route::get('/contact',[ViewersController::class,'contact'])->name('viewer_contact_us');
     Route::post('send', [ContactUsController::class, 'send'])->name('contact.send');
     Route::get('/schedule',[ViewersController::class,'schedule'])->name('viewer_schedule');
+    Route::get('/schedule/{id}/{_id}',[ViewersController::class,'applyForEvent'])->name('viewer_apply');
+    
+    Route::get('/check/{id}/{_id}',[ViewersController::class,'applyCheck'])->name('viewer_apply');
     // /**********************Streamers Routes  */
     // Route::get('/streamer', function(){
     //     return view('streamers.streamer');

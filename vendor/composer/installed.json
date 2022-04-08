@@ -991,12 +991,12 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "Facade\\FlareClient\\": "src"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Facade\\FlareClient\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1861,11 +1861,11 @@
             "type": "library",
             "installation-source": "dist",
             "autoload": {
-                "classmap": [
-                    "src/ShareableLink.php"
-                ],
                 "files": [
                     "src/Functions.php"
+                ],
+                "classmap": [
+                    "src/ShareableLink.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1886,6 +1886,10 @@
                 }
             ],
             "description": "Conveniently generate shareable URLs for various social media websites",
+            "support": {
+                "issues": "https://github.com/imliam/shareable-link/issues",
+                "source": "https://github.com/imliam/shareable-link/tree/v1.0.2"
+            },
             "install-path": "../imliam/shareable-link"
         },
         {
@@ -2138,12 +2142,12 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "JoisarJignesh\\Bigbluebutton\\": "src/"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "JoisarJignesh\\Bigbluebutton\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -5593,12 +5597,12 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "Ramsey\\Uuid\\": "src/"
-                },
                 "files": [
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Ramsey\\Uuid\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

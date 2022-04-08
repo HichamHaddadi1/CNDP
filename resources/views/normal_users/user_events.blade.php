@@ -148,7 +148,7 @@ function dec2hex (dec) {
             console.log(event.user[0]['fname'] , event.user[0]['lname']);
             var room_id = event.id_room;
             console.log(room_id);
-            var url = `{{route('join')}}/${room_id}/${generateId()}`;
+            var url =  `{{route('join')}}/${room_id}/${event.id_event}/${generateId()}`;
             $('#invite-link').attr('href' , url);
             $('#event-title').val(event.title);
             $('#event-presenter').val(event.user[0]['fname'] +' '+  event.user[0]['lname']);

@@ -274,7 +274,7 @@ font-weight: bold;
 	font-weight: 600;
 }
 .live_list{
-  top: 25vh;
+  top: 12vh;
   
 }
 
@@ -282,18 +282,18 @@ font-weight: bold;
 
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
-  <div class="container my-auto col-5  live_list">
-    <div class="list-group row">
+  <div class="container my-auto col-6  live_list">
+    <div class="list-group">
      
       @forelse($seminars as $ev)
                
-      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class="col m-1 list-group-item list-group-item-action text-center">
-      {{$ev->event_theme}} </span> 
-      <span class="col">
-      <a href="{{route('join',['id'=>$ev->id_room ,'_id'=>Crypt::encrypt('$event->id')])}}" class="btn_1 btn btn-primary float-right text-center"> 
+      <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class=" m-1 list-group-item list-group-item-action text-center">
+      {{$ev->event_theme}} 
+     
+      <a href="{{route('join',['id'=>$ev->id_room ,'event_id'=>$ev->id,'_id'=>Crypt::encrypt('$event->id')])}}" class="btn_1 btn btn-primary float-right text-center"> 
       <i class="fas fa-play text-end"></i> 
       </a>
-      </span>
+    </span> 
       @if ($loop->index  == 5)
           @break
       @endif
@@ -425,10 +425,6 @@ font-weight: bold;
       <ul class="btn-group-vertical">
 
         {{-- <li><a href="{{route('register')}}" class="btn-group btnstyle2" style="color: #fff">Register as a Seminarist</a></li> --}}
-
-
-
-  
       </ul>
     </div>
   </div>
@@ -869,11 +865,11 @@ var createCountdown = function (id, date) {
     // POPULATE IT WITH OBJECTS THAT LOOK LIKE THIS
     // { id: "countdown-6", date: "2014-07-01" }
 
-  $("#tous-par").css("display",'block');
+    $("#tous-par").css("display",'block');
     $("#media").css("display",'none');
     $("#partenaire-academique").css("display",'none');
     $("#ofi").css("display",'none');
-  $(this).addClass("btn-active shadow");
+    $(this).addClass("btn-active shadow");
     $('.btn-par').removeClass("btn-active shadow");
 $('button.b[type]').click(function () {
   // var type=document.querySelectorAll('button.b[type]');

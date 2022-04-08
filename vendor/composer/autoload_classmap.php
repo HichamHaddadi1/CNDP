@@ -49,6 +49,7 @@ return array(
     'App\\Models\\Event' => $baseDir . '/app/Models/Event.php',
     'App\\Models\\RoleUser' => $baseDir . '/app/Models/RoleUser.php',
     'App\\Models\\Room' => $baseDir . '/app/Models/Room.php',
+    'App\\Models\\Tickit' => $baseDir . '/app/Models/Tickit.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Notifications\\RoomVerificationEmail' => $baseDir . '/app/Notifications/RoomVerificationEmail.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
