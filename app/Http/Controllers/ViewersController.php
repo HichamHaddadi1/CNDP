@@ -55,6 +55,7 @@ class ViewersController extends Controller
      */
     public function create()
     {
+        
         //
     }
     public function schedule()

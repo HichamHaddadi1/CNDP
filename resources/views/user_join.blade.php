@@ -33,6 +33,13 @@
         max-width: 60%;
     }
 </style>
+@php
+$join_us = url()->current();
+    if(!Auth::check())
+    {
+      session()->put('joinusUrl', $join_us);
+    }
+@endphp
 <div class="container border rounded border-primary mt-5 w-40 p-3 col-md-6">
   <div class="text-center">
   <h3 class="text-primary  text-uppercase mt-3 ">Welcome </h3>

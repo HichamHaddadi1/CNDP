@@ -51,9 +51,15 @@ margin-bottom: 10%;
   <div class="alert alert-info p-3 ">
   <p class="text-muted h3">All the Seminars are listed here , and you can have access to all of them and be part of <strong>CNDP</strong> community</p>
   </div>
- 
-
 </div>
+
+<?php
+$schedule = url()->current();
+    if(!Auth::check())
+    {
+      session()->put('schduleUrl', $schedule);
+    }
+?>
 <div class=" clander-container" style="" >
 
   

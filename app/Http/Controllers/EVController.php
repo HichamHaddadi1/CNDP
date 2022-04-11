@@ -202,7 +202,7 @@ class EVController extends Controller
                 ];
             $event->isVerified='Verified';
             $event->update();
-            Mail::bcc($emails)->send(new EventsNotification($details));
+            //Mail::bcc($emails)->send(new EventsNotification($details));
             Mail::to($user->email)->send(new ValidatedEvent($msg));
             return back();
         }

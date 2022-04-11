@@ -17,7 +17,11 @@ use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\Console\Input\Input;
 use App\Http\Controllers\ViewersController;
+use App\Models\Tickit;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EventsNotification;
 
 class EventsController extends Controller
 {
@@ -311,6 +315,38 @@ class EventsController extends Controller
                   'id_room' =>$request->get('id_room'),
                   'max_viewers' =>$request->get('max_viewersUpdate') 
     ]);
+
+   
+                $tickets =  DB::table('tickits')
+                ->join('users', 'tickits.user_id', '=', 'users.id')
+                ->join('events', 'tickits.event_id', '=', 'events.id')
+                ->join('rooms','tickits.room_id','=','rooms.id')
+                ->select('users.*','events.*','rooms.viewer_pw')
+                ->where('tickits.event_id','=',$id)
+                ->get();
+        //dd($tickets);
+      foreach($tickets as $t)
+      {
+            $details = [
+                'subject'    => 'Seminarist Update : ',
+                'greeting'   => 'Hello ' .$t->name  ,
+                'message'    => '' ,
+                'event_name' => 'Seminar Theme :'. $t->event_theme,
+                'event_pw'   => 'Password :'.$t->viewer_pw,
+                'actionUrl'  => route('join',['id'=>$t->id_room ,'event_id'=>$id,'_id'=>Crypt::encrypt('$event->id')])
+                ];
+            Mail::to($t->email)->send(new EventsNotification($details));
+    }
+
+
+
+
+
+
+
+
+
+
     return back()->with('success', __('Successfully Updated'));
     }
 

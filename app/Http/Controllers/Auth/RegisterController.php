@@ -11,6 +11,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use PharIo\Manifest\Email;
 use Symfony\Contracts\Service\Attribute\Required;
 
@@ -142,7 +143,6 @@ class RegisterController extends Controller
     protected function redirectTo()
     {
 
-
         if (Auth::user()->role ==2 && Auth::user()->status == 'verified') {
 
            return url('streamer/rooms');
@@ -156,7 +156,15 @@ class RegisterController extends Controller
         //  }
          
         if(url('/').'/login' != url()->previous() && url('/').'/register' != url()->previous() && auth()->user()->role == 3)
-                Redirect::setIntendedUrl(url()->previous());
+        Redirect::setIntendedUrl(url()->previous());
+
+        if(session()->has('joinusUrl'))
+        {
+            $url_s=Session::get('joinusUrl');
+            //dd(str_replace(url('/'), '', $url_s));
+            $str =str_replace(url('/'), '', $url_s);
+            return $str;
+        }
          return "/dashboard";
     }
 
