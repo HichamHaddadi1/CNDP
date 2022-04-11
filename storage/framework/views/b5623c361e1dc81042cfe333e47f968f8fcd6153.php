@@ -71,14 +71,31 @@
 												</tr>
 												<tr>
 													<td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="center" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                    <?php echo e($details['message']); ?>
+                          <?php echo e($details['message']); ?>
 
                          
 													</td>
 												</tr>
 												<tr>
 													<td style="padding:0 0 20px;">
-														</table>
+											</table>
+                      <table width="100%" cellpadding="0" cellspacing="0">
+												<tr>
+													<td data-color="title" data-size="size title" data-min="25" data-max="45" data-link-color="link title color" data-link-style="text-decoration:none; color:#292c34;" class="title" align="center" style="font:30px/34px Arial, Helvetica, sans-serif; color:#292c34; padding:0 0 24px;">
+													<?php echo e($details['event_name']); ?>
+
+													</td>
+												</tr>
+												<tr>
+													<td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" align="center" style="font:30px/34px Arial, Helvetica, sans-serif; color:#292c34; padding:0 0 24px;">
+                                                    <?php echo e($details['event_pw']); ?>
+
+                         
+													</td>
+												</tr>
+												<tr>
+													<td style="padding:0 0 20px;">
+											</table>
                             <table width="134" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
 															<tr>
 																<td data-bgcolor="bg-button" data-size="size button" data-min="10" data-max="16" class="btn" align="center" style="font:12px/14px Arial, Helvetica, sans-serif; color:#f8f9fb; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;" bgcolor="#2f589e">

@@ -85,7 +85,7 @@ class AdminRoomsVerification extends Controller
     public function update( $id,$mode,Request $request)
     { 
         $room = Room::where('id', '=', $id)->first();
-        $user = User::where('id', '=', $room->id_user   )->first();
+        $user = User::where('id', '=', $room->id_user)->first();
 
         // dd($room . ' ^^^ '.$user);
 

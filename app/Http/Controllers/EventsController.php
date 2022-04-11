@@ -231,6 +231,7 @@ class EventsController extends Controller
             //'max_viewersupdate'  =>  'required',
             'room_descUpdate'    =>  'required||max:300' ,
             'room_id'            =>  'required',
+            'viewer_pwupdate'    =>  'required',
             //'file_uploadUpdate'  =>  'required|mimes:pdf',
         ]);
         if($request->input('viewer_password') == 'with_password') {
@@ -260,7 +261,7 @@ class EventsController extends Controller
             $room->room_name = $request->get('room_nameupdate');
             $room->room_desc = $request->get('room_descUpdate');
             $room->max_viewers =111;
-
+            $room->viewer_pw = $request->get('viewer_pwupdate');
             $room->presentations = $filenameglobe;
 
             if($request->input('viewer_password') == 'with_password'){

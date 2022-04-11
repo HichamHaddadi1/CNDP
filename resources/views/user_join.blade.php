@@ -59,10 +59,8 @@
           </span>
           @enderror
           @if(Auth::check())
-         
               <input type="text" class="form-control mb-3" placeholder="{{Auth::user()->name}}" name="txtName" value="{{Auth::user()->name}}" readonly >
-              @else
-              <input type="text" class="form-control mb-3" placeholder="your Name" name="txtName" >
+             
           @endif
         {{-- @if($errors->any())
         {{dd($errors)}}
@@ -73,12 +71,18 @@
           <strong>{{ $errors->first('code') }}</strong>
       </span>
       @enderror
-      
+      @if(Auth::check())
       <input type="text" class="form-control mb-3" name="code" id="code" placeholder="Access Code" >
+      @endif
+
         <div class="row">
+            @if(Auth::check())
             <button type="submit" class="form-control btn-primary text-uppercase text-primary {{ !Auth::check() ? "btn_ col-md-5" : "btn_f" }} showhim"> Join <div class="showme">You can directly join the ongoing seminar by clicking on join after having entered your name and the access code to the seminar's virtual room that you would have received with the invitation or via email. </div></button>
+            @endif
             @if(!Auth::check())
-               <a href="{{route('userRegister')}}" class="form-control btn-primary text-uppercase text-primary text-center col-md-5 showhim btn_">Register <div class="showme">You can join the ongoing seminar by creating your own account, which will allow us to identify you everytime you join a seminar on our platform, and to notify you about the latest seminars and conferences.</div></a>
+           
+               <a href="{{route('userRegister')}}" class="form-control btn-primary text-uppercase text-primary text-center col-md-5 showhim btn_ ">Register <div class="showme">You can join the ongoing seminar by creating your own account, which will allow us to identify you everytime you join a seminar on our platform, and to notify you about the latest seminars and conferences.</div></a>
+           
             @endif
         </div><!-- fin row -->
      </div>

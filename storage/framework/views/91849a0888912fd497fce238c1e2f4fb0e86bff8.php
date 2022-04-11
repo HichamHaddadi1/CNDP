@@ -100,8 +100,12 @@ margin-bottom: 10%;
             <a href="<?php echo e(route('userRegister')); ?>" class="btn btn-outline-primary btn-md form-control"><i class="fas fa-user-plus"></i>&nbsp Register</a>
             <?php else: ?>
         <div class="text-center" id="appliedbtn" style="display: none">
-            <button type="button" class="btn btn-lg btn-primary" disabled>Applied <i class="fas fa-check"></i></button>
+            <button type="button" class="btn btn-lg btn-success" disabled>Applied <i class="fas fa-check"></i></button>
         </div>
+        <br>
+       <div class="text-center" id="joinbtn" style="display: none">
+          <a id="invite-link" href="" class="btn btn-lg btn-primary form-control"><i class="fas fa-door-open"></i>&nbsp Join Seminar</a>
+       </div>
             <button type="submit" class="btn btn-info btn-md form-control"  id="apply_event">&nbsp Apply </button>
 
         
@@ -122,7 +126,7 @@ margin-bottom: 10%;
     <div id="calendar" class="" style=""></div>
 
 </div>
-    
+
    
 
     <script>
@@ -147,14 +151,16 @@ margin-bottom: 10%;
               title: 'Error',
               text:result.message ,
            
-            })
+            });
+            $('#joinbtn').show();
           } else if (result.status == 1) {
            
             Swal.fire(
                    'Applied',
                    'Successfully',
                    'success'
-                 )
+                 );
+                 $('#joinbtn').show();
           } else if(result.status == 2)
           {
             Swal.fire({
@@ -163,6 +169,7 @@ margin-bottom: 10%;
               text:result.message ,
            
             })
+            $('#joinbtn').hide();
           }
       }
 });
@@ -265,6 +272,14 @@ function dec2hex (dec) {
                 //console.log(event.user[0]['fname'] , event.user[0]['lname']);
                 //console.log(room_id);
                 //console.log(event);
+                if( $('#msg_warning').text() == 'Event Expired')
+                {
+                  $('#apply_event').hide();
+                }
+                else
+                {
+                  $('#apply_event').show();
+                }
                 $.ajax({
                     url: '/check/'+event.id_room+'/'+event.id_event,
                     method:"GET",
@@ -276,17 +291,18 @@ function dec2hex (dec) {
                     if (result.status == 0) {
                         $('#appliedbtn').show();
                         $('#apply_event').hide();
-
+                        $('#joinbtn').show();
                       } else if (result.status == 1) {
                         $('#appliedbtn').hide();
                         $('#apply_event').show();
+                        $('#joinbtn').hide();
                       } 
                     }
                     });
   /*FIll the inputs*/
                 var room_id = event.id_room;
              
-                var url = `<?php echo e(route('join')); ?>/${room_id}/${generateId()}`;
+                var url = `<?php echo e(route('join')); ?>/${room_id}/${event.id_event}/${generateId()}`;
                 $('#invite-link').attr('href' , url);
                 $('#event-title').val(event.title);
                 $('#room_id').val(event.id_room);
@@ -307,12 +323,15 @@ function dec2hex (dec) {
             if(res>0)
             {
                $('#invite-link').hide();
+               $('#msg_warning').show();
                $('#msg_warning').text('Event Expired');
+               $('#apply_event').hide();
             }
             else
             {
               $('#invite-link').show();
               $('#msg_warning').hide();
+              $('#apply_event').show();
             }
                 $("#schedule-edit").modal();
                

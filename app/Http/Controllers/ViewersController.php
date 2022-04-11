@@ -8,8 +8,12 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Mail\EventsNotification;
+use App\Mail\RoomVerification;
 use App\Models\Tickit;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 
 class ViewersController extends Controller
 {
@@ -120,7 +124,9 @@ class ViewersController extends Controller
 
     public function applyForEvent($room_id, $event_id)
     {
-       $max_viewers=Event::where('id',$event_id)->first()->max_viewers;
+        $room           =       Room::find($room_id);
+        $event          =       Event::find($event_id);
+        $max_viewers    =       Event::where('id',$event_id)->first()->max_viewers;
         //    max_viewers 
        $tickits = Tickit::where('room_id',$room_id);
        $tickitsCount = $tickits->count();
@@ -140,13 +146,22 @@ class ViewersController extends Controller
         {
         return response()->json(['status' => 2, 'message' => "this Simenar is full "]);
         }	
-    
+        $details = [
+            'subject'    => 'Seminarist : ',
+            'greeting'   => 'Hello ' .auth()->user()->name  ,
+            'message'    => '' ,
+            'event_name' => 'Seminar Theme :'. $event->event_theme,
+            'event_pw'   => 'Password :'.$room->viewer_pw,
+            'actionUrl' => route('join',['id'=>$event->id_room ,'event_id'=>$event->id,'_id'=>Crypt::encrypt('$event->id')])
+            ];
        
         $tickit=new Tickit([
             'user_id'  => Auth::user()->id,
             'room_id'  => $room_id,
             'event_id' => $event_id
         ]);
+       
+        Mail::to(auth()->user()->email)->send(new EventsNotification($details));
         $tickit->save();
         return response()->json(['status' => 1, 'message' => "success"]);
     }

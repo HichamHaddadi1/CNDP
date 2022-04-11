@@ -180,9 +180,9 @@ class EVController extends Controller
 
      public function verify_event( $id,$mode,Request $request)
     {
-        $event = Event::find($id);
-        $room = Room::where('id' , '=' , $event->id_room)->first();
-        $user = User::where('id', '=', $event->id_user)->first();
+        $event  = Event::find($id);
+        $room   = Room::where('id' , '=' , $event->id_room)->first();
+        $user   = User::where('id', '=', $event->id_user)->first();
         $emails = User::where('role' , '=' , 3)->get('email');
         // $emails = User::select('email')->get();
         // dd($emails);

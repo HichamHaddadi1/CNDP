@@ -152,6 +152,12 @@ return [
     |
     */
 
-    'attributes' => ['txtName'=> 'Name', 'file_uploadUpdate' => 'File Upload (pdf) '],
+    'attributes' => [
+        'txtName'=> 'Name', 
+        'file_uploadUpdate' => 'File Upload (pdf) ',
+        'room_nameupdate' => 'Room Name',
+        'viewer_pwUpdate' => 'Room Password',
+        'room_descUpdate' => 'Room Description'
+    ],
 
 ];

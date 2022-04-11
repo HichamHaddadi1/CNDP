@@ -59,10 +59,8 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
           <?php if(Auth::check()): ?>
-         
               <input type="text" class="form-control mb-3" placeholder="<?php echo e(Auth::user()->name); ?>" name="txtName" value="<?php echo e(Auth::user()->name); ?>" readonly >
-              <?php else: ?>
-              <input type="text" class="form-control mb-3" placeholder="your Name" name="txtName" >
+             
           <?php endif; ?>
         
       <?php if($errors->has('code')): ?>
@@ -74,12 +72,18 @@ unset($__errorArgs, $__bag); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-      
+      <?php if(Auth::check()): ?>
       <input type="text" class="form-control mb-3" name="code" id="code" placeholder="Access Code" >
+      <?php endif; ?>
+
         <div class="row">
+            <?php if(Auth::check()): ?>
             <button type="submit" class="form-control btn-primary text-uppercase text-primary <?php echo e(!Auth::check() ? "btn_ col-md-5" : "btn_f"); ?> showhim"> Join <div class="showme">You can directly join the ongoing seminar by clicking on join after having entered your name and the access code to the seminar's virtual room that you would have received with the invitation or via email. </div></button>
+            <?php endif; ?>
             <?php if(!Auth::check()): ?>
-               <a href="<?php echo e(route('userRegister')); ?>" class="form-control btn-primary text-uppercase text-primary text-center col-md-5 showhim btn_">Register <div class="showme">You can join the ongoing seminar by creating your own account, which will allow us to identify you everytime you join a seminar on our platform, and to notify you about the latest seminars and conferences.</div></a>
+           
+               <a href="<?php echo e(route('userRegister')); ?>" class="form-control btn-primary text-uppercase text-primary text-center col-md-5 showhim btn_ ">Register <div class="showme">You can join the ongoing seminar by creating your own account, which will allow us to identify you everytime you join a seminar on our platform, and to notify you about the latest seminars and conferences.</div></a>
+           
             <?php endif; ?>
         </div><!-- fin row -->
      </div>
