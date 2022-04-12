@@ -191,7 +191,7 @@ class EVController extends Controller
             $details = [
                 'greeting' =>'Hello there' ,
                 'subject' => 'Event Invitation',
-                'message' => 'We are happy to let you know that there is an event "'.$event->event_theme .'" which will be on '.str_replace('00:', '',$event->starting_at) .' if you would like to join use the link down below and use this access code "'.$room->viewer_pw.'"',
+                'message' => 'We are happy to let you know that there is an event "'.$event->event_theme .'" which will be on '.str_replace('00:', '',$event->starting_at) .' if you would like to join use the link down below and use this access code "'.$event->viewer_pw.'"',
                 'actionUrl' => route('join',['id'=>$event->id_room ,'event_id'=>$event->id,'_id'=>Crypt::encrypt('$event->id')])
 
             ];
@@ -204,7 +204,7 @@ class EVController extends Controller
             $event->update();
             //Mail::bcc($emails)->send(new EventsNotification($details));
             Mail::to($user->email)->send(new ValidatedEvent($msg));
-            return back();
+            return back()->with('success','Seminar validated');
         }
         elseif($mode=='d')
         {
@@ -218,7 +218,7 @@ class EVController extends Controller
             $event->update();
             Mail::to($user->email)->send(new ValidatedEvent($msg));
             // Mail::to()->send(new EventsNotification($details));
-            return back();
+            return back()->with('deny','Seminar Denied');
         }
 
     }

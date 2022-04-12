@@ -3,7 +3,22 @@
 
 
 <?php $__env->startSection('validator_content'); ?>
+
 <div class="container">
+  <?php if(Session::get('success')): ?>
+      <div class="alert alert-success mt-3" role="alert">
+        <?php echo e(Session::get('success')); ?>
+
+      </div>
+      
+<?php endif; ?>
+<?php if(Session::get('deny')): ?>
+<div class="alert alert-success mt-3" role="alert">
+  <?php echo e(Session::get('deny')); ?>
+
+</div>
+
+<?php endif; ?>
 <table class="table table-hover">
 
     <thead>

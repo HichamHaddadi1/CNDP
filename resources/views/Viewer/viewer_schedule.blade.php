@@ -357,7 +357,7 @@ function dec2hex (dec) {
             }
                 $("#schedule-edit").modal();
                
-                },
+            },
                 
                 // eventClick: function(event) {
                 //     $("#exampleModal").modal("show");

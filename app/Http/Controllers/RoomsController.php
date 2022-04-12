@@ -336,7 +336,7 @@ class RoomsController extends Controller
             'presentation' => [
                 ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
-            'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
+            // 'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
 
         ]);
 
@@ -387,7 +387,7 @@ class RoomsController extends Controller
             'presentation' => [
                 ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
-            'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
+            // 'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
 
         ]);
 

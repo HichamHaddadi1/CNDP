@@ -61,12 +61,18 @@
     @if($v->event_statue==true &&\Carbon\Carbon::now()->lte($v->ending_at) && $v->isVerified=="Verified")
   
     
-     
+   
         <div class="card-grid-space">
           @php
             $l=0;
           @endphp
-           <a class="card1" href="{{ route('join' , [$v->id_room,Crypt::encrypt($v->id)])}}" style="background-image: url(/upload/{{$v->avatar}});">
+         @if($v->avatar != null)
+                <a class="card1" href="{{ route('join' , [$v->id_room,Crypt::encrypt($v->id)])}}" style="background-image: url(/upload/{{$v->avatar}});">
+          @else
+                <a class="card1" href="{{ route('join' , [$v->id_room,Crypt::encrypt($v->id)])}}" style="background-image: url(/img/user.jpg);">  
+          @endif
+
+      
              <div>
                <div class="live-dot"></div>
                <h1>{{$v->name}}</h1>
@@ -108,13 +114,17 @@
    STREAMING SOON</h6>
   <div class="owl-carousel">
       @foreach($users_rooms as $v)
+    
       @php
       $date_soon=\Carbon\Carbon::create($v->starting_at);
       @endphp
       @if(\Carbon\Carbon::now()->lte($v->starting_at) && $v->event_statue==false && \Carbon\Carbon::now()->diffInHours($v->starting_at)<24 && $v->isVerified=="Verified")
       <div class="card-grid-space">
-   
-        <a class="shadow card1" href="" style="background-image: url(/upload/{{$v->avatar}});">
+        @if($v->avatar != null)
+            <a class="shadow card1" href="" style="background-image: url(/upload/{{$v->avatar}});">    
+        @else
+            <a class="shadow card1" href="" style="background-image: url(/img/user.jpg);">  
+        @endif
           <div>
             
             <h1>{{$v->name}}</h1>
@@ -178,7 +188,11 @@
       </div> -->
       <div class="card-grid-space">
    
-         <a class="shadow card1" href="" style="background-image: url(/upload/{{$v->avatar}});">
+        @if($v->avatar != null)
+        <a class="shadow card1" href="" style="background-image: url(/upload/{{$v->avatar}});">    
+        @else
+        <a class="shadow card1" href="" style="background-image: url(/img/user.jpg);">  
+    @endif
            <div>
              
              <h1>{{$v->name}}</h1>

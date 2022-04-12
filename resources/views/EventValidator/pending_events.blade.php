@@ -3,7 +3,20 @@
 
 
 @section('validator_content')
+
 <div class="container">
+  @if (Session::get('success'))
+      <div class="alert alert-success mt-3" role="alert">
+        {{ Session::get('success') }}
+      </div>
+      
+@endif
+@if (Session::get('deny'))
+<div class="alert alert-success mt-3" role="alert">
+  {{ Session::get('deny') }}
+</div>
+
+@endif
 <table class="table table-hover">
 
     <thead>

@@ -31,7 +31,7 @@ color:rgb(90, 30, 255) !important;
         <?php echo e(Session::get('error')); ?>
 
       </div>
-      <?php endif; ?>
+  <?php endif; ?>
 
     <table class="table table-hover">
  
@@ -65,15 +65,11 @@ color:rgb(90, 30, 255) !important;
        <?php endif; ?>
 
        <?php if($room->verified!='Pending'): ?>
-       <a  href="<?php echo e(route('delete.room' , $room->id)); ?>"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a>
+       
+       <a class="delete_room" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #dc3545" >Delete Room</button></a>
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: Green" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
-
-
-        </td>
-
-        <!-- Trigger -->
-
-
+      </td>
+      <!-- Trigger -->
       </tr>
       <?php endif; ?>
      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -86,9 +82,30 @@ color:rgb(90, 30, 255) !important;
     <span class="pagination justify-content-center" >
     
     </span>
+<!--///////////////////////////////////////////////////////////////////////////-->
 
 
+<!-- Modal -->
+<div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Room Confirmiation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       Are you sure u wanna delete this Room?
+      </div>
+      <div class="modal-footer">
+      
+        <a style="color:white" type="button" class="btn btn-danger btn_c_delete">Confirm Delete</a>
+        <a style="color:white" type="button" class="btn btn-info btn_cancel">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!--///////////////////////////////////////////////////////////////////////////-->
 
 
 
@@ -141,6 +158,21 @@ color:rgb(90, 30, 255) !important;
   </div>
 </div>
 </form>
+
+<script>
+  // btn_c_delete
+    $('.btn-close ,.btn_cancel').click(function(){
+      $('#deleteModal').modal('hide');
+    });
+      $('.delete_room').click(function(){
+          var room_id= $('.delete_room').attr("id");
+        
+          var str='<?php echo e(route("delete.room",":id")); ?>';
+          str= str.replace(':id',room_id);
+          $('#deleteModal').modal('show');
+          $('.btn_c_delete').attr('href',str);
+      });
+  </script>
 
 <script src="\js\sweetalert2.js"></script>
 <script>

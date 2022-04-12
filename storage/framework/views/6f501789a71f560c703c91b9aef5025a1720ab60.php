@@ -61,12 +61,18 @@
     <?php if($v->event_statue==true &&\Carbon\Carbon::now()->lte($v->ending_at) && $v->isVerified=="Verified"): ?>
   
     
-     
+   
         <div class="card-grid-space">
           <?php
             $l=0;
           ?>
-           <a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
+ <?php if($v->avatar != null): ?>
+ <a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
+<?php else: ?>.
+<a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/img/user.jpg);">  
+<?php endif; ?>
+
+      
              <div>
                <div class="live-dot"></div>
                <h1><?php echo e($v->name); ?></h1>
@@ -107,13 +113,17 @@
    STREAMING SOON</h6>
   <div class="owl-carousel">
       <?php $__currentLoopData = $users_rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    
       <?php
       $date_soon=\Carbon\Carbon::create($v->starting_at);
       ?>
       <?php if(\Carbon\Carbon::now()->lte($v->starting_at) && $v->event_statue==false && \Carbon\Carbon::now()->diffInHours($v->starting_at)<24 && $v->isVerified=="Verified"): ?>
       <div class="card-grid-space">
-   
-        <a class="shadow card1" href="" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
+        <?php if($v->avatar != null): ?>
+            <a class="shadow card1" href="" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">    
+        <?php else: ?>
+            <a class="shadow card1" href="" style="background-image: url(/img/user.jpg);">  
+        <?php endif; ?>
           <div>
             
             <h1><?php echo e($v->name); ?></h1>
@@ -176,7 +186,11 @@
       </div> -->
       <div class="card-grid-space">
    
-         <a class="shadow card1" href="" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
+        <?php if($v->avatar != null): ?>
+        <a class="shadow card1" href="" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">    
+        <?php else: ?>
+        <a class="shadow card1" href="" style="background-image: url(/img/user.jpg);">  
+    <?php endif; ?>
            <div>
              
              <h1><?php echo e($v->name); ?></h1>
