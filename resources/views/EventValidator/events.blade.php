@@ -62,7 +62,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      Are you sure you wanna deny this Seminar?
+            Are you sure you wanna deny this Seminar?
       </div>
       <div class="modal-footer">
         <a type="button" class="btn btn-danger btn_deny">Deny</a>
@@ -98,7 +98,7 @@
         $('#DenyModal').modal('hide');
       });
         $('.btn_deny_seminar').click(function(){
-            var event_id= $('.btn_deny_seminar').attr("id");
+            var event_id= $(this).attr("id");
           
             var str='{{route("verify_event",[":id","d"])}}';
             str= str.replace(':id',event_id);
@@ -112,7 +112,7 @@
           $('#ValidateModal').modal('hide');
         });
           $('.btn_validate').click(function(){
-              var event_id= $('.btn_validate').attr("id");
+              var event_id= $(this).attr("id");
               var str='{{route("verify_event",[":id","v"])}}';
               str= str.replace(':id',event_id);
               $('#ValidateModal').modal('show');
