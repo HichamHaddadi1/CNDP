@@ -235,19 +235,18 @@ footer p {
            
             <?php $__empty_1 = true; $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
              <?php
-                 $viewer_pw = \App\Models\Room::where('id',$event->id_room)->first()->viewer_pw;
+                 //$viewer_pw = \App\Models\Room::where('id',$event->id_room)->first()->viewer_pw;
                  $ticketsP  = \App\Models\Tickit::where('room_id',$event->id_room)->where('event_id',$event->id)->count();
              ?>
               <tr>
                   <td><?php echo e($event->event_theme); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->starting_at)); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->ending_at)); ?></td>
-                  <?php if($event->id_room !=null): ?>
-                  <td><?php echo e($viewer_pw); ?></td>
-                  <?php endif; ?>
+                  <td><?php echo e($viewers_pw); ?></td>
                   <td><?php echo e($event->max_viewers); ?></td>
                   <td><?php echo e($event->isVerified); ?></td>
-                  <td <?php if($ticketsP==$event->max_viewers): ?> style="color:red"<?php endif; ?>><?php echo e($ticketsP.'/'.$event->max_viewers); ?></td>
+                  <td <?php if($ticketsP==$event->max_viewers): ?> style="color:red !important"<?php endif; ?>>
+                    <a href="" id="<?php echo e($event->id); ?>" data-toggle="modal" data-target="#list_pModal" class="list_p"><?php echo e($ticketsP.'/'.$event->max_viewers); ?></a></td>
 
                   <td colspan="2">
                     <?php if(\Carbon\Carbon::now()->lt($event->ending_at)): ?>
@@ -681,6 +680,57 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+  
+    <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="list_pModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+           
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Participants</th>
+            </tr>
+          </thead>
+          <tbody>
+         
+              
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.list_p').click(function(){
+    var event_id = $(this).attr('id');
+   $.ajax({
+      url: '/listparticipants/'+event_id,
+      method:"GET",
+      success:function (result){
+          console.log(result);
+        }
+      });
+    });
+</script>
+
+
+
 
 
 <script>

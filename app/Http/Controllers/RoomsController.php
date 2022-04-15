@@ -226,16 +226,16 @@ class RoomsController extends Controller
 
         
         $url = \Bigbluebutton::join([
-            'meetingID' => $room->id.'cmp',
+            'meetingID' => $room->id.'_'.$event_id.'cmp',
             'userName' => request()->get('txtName'),
-            'password' => $room->id.'cmp'//which user role want to join set password here
+            'password' => $room->id.'_'.$event_id.'cmp'//which user role want to join set password here
         ]);
         //dd($room->max_viewers);
         if($room->viewer_pw != request()->get('code'))
             {
                 return back()->with('errorsUnique' , 'Access code is wrong , try again !');
             }
-            if (Bigbluebutton::isMeetingRunning($room->id.'cmp') == false)
+            if (Bigbluebutton::isMeetingRunning($room->id.'_'.$event_id.'cmp') == false)
             {
              return back()->with('errorsUnique' , 'Meeting not started yet , wait until a moderator launch the event');
             }
@@ -377,10 +377,10 @@ class RoomsController extends Controller
         if(\Bigbluebutton::isMeetingRunning($room->id) == false){
         $createMeeting = \Bigbluebutton::initCreateMeeting([
             'userName' => Auth::user()->name,
-            'meetingID' => $room->id.'cmp',
+            'meetingID' => $room->id.'_'. $event->id.'cmp',
             'meetingName' => $event->event_theme,
             'moderatorPW' => Auth::user()->email, //moderator password set here
-            'attendeePW' => $room->id.'cmp',
+            'attendeePW' => $room->id.'_'. $event->id.'cmp',
             'endCallbackUrl'  => route('dashboard', compact(['room' , 'event'])),
             'logoutUrl' => route('dashboard'),
             'record'=>true,
@@ -390,14 +390,14 @@ class RoomsController extends Controller
             // 'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
 
         ]);
-
+        //dd( $createMeeting);
         \Bigbluebutton::create($createMeeting);
 
         //here we start the meeting
         $url =\Bigbluebutton::start([
-            'meetingID' => $room->id.'cmp',
+            'meetingID' => $room->id.'_'. $event->id.'cmp',
             'moderatorPW' => Auth::user()->email, //moderator password set here
-            'attendeePW' => $room->id.'cmp', //attendee password here
+            'attendeePW' => $room->id.'_'. $event->id.'cmp', //attendee password here
             'userName' => Auth::user()->name,//for join meeting
             //'maxParticipants'=>$room->max_viewers,
         ]);

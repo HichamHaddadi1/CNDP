@@ -229,8 +229,9 @@ class EventsController extends Controller
         ->paginate(10);
         $rooms = Room::all();
         $rooms_count = $rooms->count();
-        //dd($events);
-         return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count','oldevents','roomcheck'));
+        $viewers_pw =Room::where('id_user',Auth::user()->id)->first()->viewer_pw;
+        //dd($viewers_pw);
+         return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count','oldevents','roomcheck','viewers_pw'));
 
     }
 
@@ -259,8 +260,11 @@ class EventsController extends Controller
         }
         $rooms = Room::all();
         $rooms_count = $rooms->count();
+        $roomcheck=Room::where('id_user',Auth::user()->id)->get();
+        $viewers_pw =Room::where('id_user',Auth::user()->id)->first()->viewer_pw;
+     
         // Return the search view with the resluts compacted
-            return view('streamers.events', compact('events' , 'rooms','oldevents','rooms_count'));
+            return view('streamers.events', compact('events' , 'rooms','oldevents','rooms_count','roomcheck','viewers_pw'));
     }
 
 
@@ -433,5 +437,12 @@ class EventsController extends Controller
 
         $event->delete();
         return back()->with('success', __('Successfully Deleted'));
+    }
+
+    public function getlistParticipants($event_id)
+    {
+        $p=Db::table('users')->join('tickits','users.id','tickits.user_id')->where('tickits.event_id',$event_id)->get();
+        //dd($p);
+        return response()->json($p);
     }
 }

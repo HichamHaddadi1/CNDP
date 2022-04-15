@@ -114,7 +114,7 @@ label[for="file-uploadupdate"]:hover {
     @endif
     <table class="table table-hover">
  {{-- Search Box --}}
- <form action="{{ route('search_room_streamer') }}" method="GET">
+ {{-- <form action="{{ route('search_room_streamer') }}" method="GET">
  <div class="row">
   <div class="col-lg-4 col-lg-offset-4">
     <div class="input-group">
@@ -123,7 +123,7 @@ label[for="file-uploadupdate"]:hover {
     </div>
   </div>
 </div>
-</form>
+</form> --}}
     <thead>
       <tr>
         <th>Room Name</th>

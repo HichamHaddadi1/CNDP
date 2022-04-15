@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth','can:dashboard_admin']],function(){
     Route::get('admin/users' , [MainController::class , 'admin_users'])->name('admin.users');
     Route::get('admin/recordings' ,  [RoomsController::class , 'admin_recordings'])->name('admin.recordigns');
     //Route::get('admin', [MainController::class , 'admin'])->name('admin');
-    Route::get('admin/rooms/{id}', [RoomsController::class ,'startMeeting'])->name('admin.rooms_start');
+    Route::get('admin/rooms/{id}/{event_id}', [RoomsController::class ,'startMeeting'])->name('admin.rooms_start');
 
     Route::get('admin/events_req' , [MainController::class , 'getpendingEvents'])->name('admin.events.pending');
 
@@ -97,7 +97,7 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess']],function(){
         }
         elseif(auth()->user()->role == 3)
         {
-            return redirect('schedule');
+            return redirect('user/events');
         }
         elseif(Auth::user()->role)
         {
@@ -112,7 +112,7 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess','can:dashboard_str
  /***************   Streamers Paths     ****************/
  Route::get('streamer/presentation',[MainController::class , 'streamer_presentation'])->name('streamer.presentation');
  Route::post('streamer/presentation',[MainController::class , 'streamer_present_upload'])->name('streamer.presentation.upload');
-
+    Route::get('listparticipants/{id}',[EventsController::class,'getlistParticipants'])->name('p_list');
    // Route::get('/streamer', [MainController::class , 'streamer'])->name('streamer');
    Route::get('streamer/rooms', [RoomsController::class ,'show'])->name('streamers.rooms');
    //if any problem Here with LoggedUser go to show methode and remove it from there and make it back at streamer in MainController

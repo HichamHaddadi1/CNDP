@@ -129,7 +129,8 @@ class ViewersController extends Controller
         $event          =       Event::find($event_id);
         $max_viewers    =       Event::where('id',$event_id)->first()->max_viewers;
         //    max_viewers 
-       $tickits = Tickit::where('room_id',$room_id);
+       $tickits = Tickit::where('room_id',$room_id)
+       ->where('event_id',$event_id);
        $tickitsCount = $tickits->count();
        
         /*Preventing multi applying*/

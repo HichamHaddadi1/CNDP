@@ -53,7 +53,7 @@
                 <hr class="my-4"> 
                 <div class="d-flex">
               <div class="col">
-                <a class="d-block text-center mt-2 text-uppercase color-red" href="{{route('register')}}">Not a member yet ? Sign Up</a>
+                <a class="d-block text-center mt-2 text-uppercase color-red" href="{{route('join_us')}}">Not a member yet ? Sign Up</a>
                 </div>
                 <div class="offset-0 border-left pl-2"></div>
                 <div class="col">

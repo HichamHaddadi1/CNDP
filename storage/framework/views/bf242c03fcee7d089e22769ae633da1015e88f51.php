@@ -116,16 +116,7 @@ label[for="file-uploadupdate"]:hover {
     <?php endif; ?>
     <table class="table table-hover">
  
- <form action="<?php echo e(route('search_room_streamer')); ?>" method="GET">
- <div class="row">
-  <div class="col-lg-4 col-lg-offset-4">
-    <div class="input-group">
-      <input type="search" id="search" name="search" class="form-control" placeholder="Search ">
-      <button type="submit" class="btn btn-outline-primary">search</button>
-    </div>
-  </div>
-</div>
-</form>
+ 
     <thead>
       <tr>
         <th>Room Name</th>

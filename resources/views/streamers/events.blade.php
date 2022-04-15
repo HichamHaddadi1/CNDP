@@ -234,19 +234,18 @@ footer p {
            
             @forelse ($events as $event )
              @php
-                 $viewer_pw = \App\Models\Room::where('id',$event->id_room)->first()->viewer_pw;
+                 //$viewer_pw = \App\Models\Room::where('id',$event->id_room)->first()->viewer_pw;
                  $ticketsP  = \App\Models\Tickit::where('room_id',$event->id_room)->where('event_id',$event->id)->count();
              @endphp
               <tr>
                   <td>{{ $event->event_theme }}</td>
                   <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
                   <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
-                  @if($event->id_room !=null)
-                  <td>{{ $viewer_pw}}</td>
-                  @endif
+                  <td>{{ $viewers_pw}}</td>
                   <td>{{ $event->max_viewers}}</td>
                   <td>{{ $event->isVerified}}</td>
-                  <td @if($ticketsP==$event->max_viewers) style="color:red"@endif>{{ $ticketsP.'/'.$event->max_viewers}}</td>
+                  <td @if($ticketsP==$event->max_viewers) style="color:red !important"@endif>
+                    <a href="" id="{{$event->id}}" data-toggle="modal" data-target="#list_pModal" class="list_p">{{ $ticketsP.'/'.$event->max_viewers}}</a></td>
 
                   <td colspan="2">
                     @if(\Carbon\Carbon::now()->lt($event->ending_at))
@@ -617,6 +616,57 @@ footer p {
             </div>
         </div>
     </div>
+  
+    <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="list_pModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+           
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Participants</th>
+            </tr>
+          </thead>
+          <tbody>
+         
+              
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{--Script for show list of participants--}}
+<script>
+  $('.list_p').click(function(){
+    var event_id = $(this).attr('id');
+   $.ajax({
+      url: '/listparticipants/'+event_id,
+      method:"GET",
+      success:function (result){
+          console.log(result);
+        }
+      });
+    });
+</script>
+
+
+
 
 
 <script>
