@@ -33,6 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.0.3/fullcalendar.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
@@ -51,7 +52,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     line-height: 1.33;
     color :white;
 }
-
+  .fc-event-time{
+    display: none !important;
+  }
 </style>
   </head>
 <body class="hold-transition sidebar-mini">
@@ -120,6 +123,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
            
+            <a href="{{ url('user/applied') }}" class="nav-link active">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                My Seminarists 
+              </p>
+            </a>
+
             <a href="{{ url('/contact') }}" class="nav-link active">
               <i class="nav-icon fas fa-question"></i>
               <p>

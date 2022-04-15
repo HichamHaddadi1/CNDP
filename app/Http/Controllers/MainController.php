@@ -385,6 +385,10 @@ class MainController extends Controller
         }
 
     }
+    public function user_applied_calender()
+    {
+        return view('normal_users.applied_seminars');
+    } 
 }
 /******************************************************************/
 

@@ -1,7 +1,7 @@
-@extends('layouts.viewer_layout')
 
 
-@section('viewer_content')
+
+<?php $__env->startSection('viewer_content'); ?>
 <link rel="stylesheet" href="\css\joinus.css">
 <link rel="stylesheet" href="\css\contactstylemain.css">
 <style>
@@ -24,7 +24,7 @@
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laborum beatae dolorem ipsa dolores. Reprehenderit, eum quod sapiente nostrum cum quos</p>
             </div>
             <div class="card-footer">
-              <a href="{{route('userRegister')}}" class="nav-link btn btn-primary" style="font-size: 12px"> Register as User </a>
+              <a href="<?php echo e(route('userRegister')); ?>" class="nav-link btn btn-primary" style="font-size: 12px"> Register as User </a>
             </div>
           </div>
         </div></div>
@@ -39,7 +39,7 @@
              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laborum beatae dolorem ipsa dolores. Reprehenderit, eum quod sapiente nostrum cum quos</p>
             </div>
             <div class="card-footer">
-              <a href="{{route('register')}}" class="nav-link btn btn-primary" style="font-size: 12px"> Register as Seminarist </a>
+              <a href="<?php echo e(route('register')); ?>" class="nav-link btn btn-primary" style="font-size: 12px"> Register as Seminarist </a>
             </div>
           </div>
         </div></div>
@@ -52,4 +52,5 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.viewer_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/Viewer/join_us.blade.php ENDPATH**/ ?>

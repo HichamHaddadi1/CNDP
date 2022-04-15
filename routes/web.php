@@ -149,7 +149,7 @@ Route::group( ['middleware' =>['auth','can:dashboard_user']],function(){
 Route::get('user/profile', [MainController::class , 'user_profile'])->name('user.profile');
 
 Route::get('user/events',[MainController::class , 'user_events'])->name('userEvents');
-
+Route::get('user/applied',[MainController::class , 'user_applied_calender'])->name('applied_calender');
 });
 
 /***Routes for the events validator */
@@ -211,7 +211,7 @@ Route::get('/validator/statistics',[EVController::class , 'showStatistics'])->na
 //this one is for passing the JSON data to the fulCalendar
     Route::get('/test' , [EventsController::class , 'index'])->name('test');
     Route::get('/adminev' , [EventsController::class , 'adminEvents'])->name('test');
-
+    Route::get('/appliedev' , [EventsController::class , 'userEventsApplied'])->name('userEventsApplied');
     // test for full calendar
     // end test calendar
     Route::get('/join_us',[ViewersController::class,'join_us'])->name('join_us');

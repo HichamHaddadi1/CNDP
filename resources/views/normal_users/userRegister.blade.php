@@ -103,16 +103,19 @@
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
             </div>
         
-          <div class="col-sm-12">
-              <input type="checkbox" class="form-check d-inline @error('check') is-invalid @enderror" id="checkbox" name="check"><label for="chb" class="form-check-label" required>&nbsp; I accept all terms and conditions.
-              </label>
-              @error('check')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-          </div>
           
+          <div class="col-sm-12">
+            <p style="color:#5B9BD5;font-style: italic;font-weight: bold">Conformément à la loi 09-08, vous disposez d’un droit d’accès, de rectification et d’opposition au traitement de vos données personnelles. Ce traitement a été notifié auprès de la CNDP via la déclaration n° D-CEX-764/2021 du 15/11/2021</p>
+         </div>
+         <div class="col-sm-12">
+            <input type="checkbox" class="form-check d-inline @error('check') is-invalid @enderror" id="checkbox" name="check"><label for="chb" class="form-check-label" required>&nbsp; I accept all <a href="" data-toggle="modal" data-target="#exampleModalLong">Terms and Conditions<a>.
+            </label>
+            @error('check')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+        </div>
           <div class="col-sm-12 form-group mb-0">
              <button class="btn btn-primary float-right">Submit</button>
           </div>
@@ -121,5 +124,35 @@
       </form>
   </div>
 
+
+  <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Terms & Conditions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color:#5B9BD5;font-style: italic;font-weight: bold;text-align: justify">
+            Les informations recueillies font l’objet d’un traitement destiné à <strong style="color:#444444">la gestion des événements</strong> de la CNDP-CDAI.
+
+            Conformément à la loi n° 09-08 promulguée par le Dahir 1-09-15 du 18 février 2009, relative à la protection des personnes physiques à l’égard du traitement des données à caractère personnel, vous bénéficiez d’un droit d’accès et de rectification aux informations qui vous concernent, que vous pouvez exercer en vous adressant à mesdroits@cndp.ma
+            
+            Vous pouvez également, pour des motifs légitimes, vous opposer à ce que les données qui vous concernent fassent l’objet d’un traitement. Ce traitement a été notifié auprès de la CNDP via la déclaration n° D-CEX-764/2021 du 15/11/2021
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   
 @endsection

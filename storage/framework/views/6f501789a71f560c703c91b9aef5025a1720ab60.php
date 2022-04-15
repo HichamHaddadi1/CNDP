@@ -66,11 +66,11 @@
           <?php
             $l=0;
           ?>
- <?php if($v->avatar != null): ?>
- <a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
-<?php else: ?>.
-<a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/img/user.jpg);">  
-<?php endif; ?>
+         <?php if($v->avatar != null): ?>
+                <a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">
+          <?php else: ?>
+                <a class="card1" href="<?php echo e(route('join' , [$v->id_room,Crypt::encrypt($v->id)])); ?>" style="background-image: url(/img/user.jpg);">  
+          <?php endif; ?>
 
       
              <div>

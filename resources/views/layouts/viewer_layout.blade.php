@@ -164,6 +164,10 @@
       display: block;
   }
 }
+
+.fc-event-time{
+    display: none !important;
+  }
 </style>
     </head>
     <body class="section">
@@ -203,16 +207,14 @@
                 </ul>
                 <ul class="navbar-nav  pull-right">
                   @if(Auth::check()==false)
-                  {{-- <li class="nav-item">
+                  <li class="nav-item">
                     <a class="nav-link join_us_l" href="{{route('join_us')}}">
                       Join US</a>
-
-                  </li>  --}}
-                  <li class="nav-item">
+                  </li> 
+                  {{-- <li class="nav-item">
                     <a class="nav-link join_us_l" href="{{route('register')}}">
                       Become a Seminairist</a>
-
-                  </li>
+                  </li> --}}
                 <li  class="nav-item">
                     <a href="{{ route('login') }}" class="btn nav-link" >Log-in</a>
                 </li>

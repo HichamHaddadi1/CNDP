@@ -158,6 +158,9 @@ footer p {
 .red_req{
   color: red;
 }
+.tb_header{
+  font-size: 13px;
+}
   </style>
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
@@ -212,13 +215,14 @@ footer p {
 
           <thead>
             <tr>
-              <th scope="col">Seminar Theme</th>
-              <th scope="col">Starts at</th>
-              <th scope="col">End at</th>
-              <th scope="col">Password</th>
-              <th scope="col">Max attendees</th>
-              <th scope="col">State</th>
-              <th scope="col" style="text-align: center;">Actions</th>
+              <th class="tb_header" scope="col">Seminar Theme</th>
+              <th class="tb_header" scope="col">Starts at</th>
+              <th class="tb_header" scope="col">End at</th>
+              <th class="tb_header" scope="col">Password</th>
+              <th class="tb_header" scope="col">Max attendees</th>
+              <th class="tb_header" scope="col">State</th>
+              <th class="tb_header" scope="col">Participants</th>
+              <th class="tb_header" scope="col" style="text-align: center;">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -229,15 +233,20 @@ footer p {
             @endphp
            
             @forelse ($events as $event )
-           
+             @php
+                 $viewer_pw = \App\Models\Room::where('id',$event->id_room)->first()->viewer_pw;
+                 $ticketsP  = \App\Models\Tickit::where('room_id',$event->id_room)->where('event_id',$event->id)->count();
+             @endphp
               <tr>
                   <td>{{ $event->event_theme }}</td>
                   <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
                   <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
-                  <td>{{\App\Models\Room::where('id',$event->id_room)->first()->viewer_pw}}</td>
+                  @if($event->id_room !=null)
+                  <td>{{ $viewer_pw}}</td>
+                  @endif
                   <td>{{ $event->max_viewers}}</td>
                   <td>{{ $event->isVerified}}</td>
-
+                  <td @if($ticketsP==$event->max_viewers) style="color:red"@endif>{{ $ticketsP.'/'.$event->max_viewers}}</td>
 
                   <td colspan="2">
                     @if(\Carbon\Carbon::now()->lt($event->ending_at))

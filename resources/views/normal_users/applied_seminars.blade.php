@@ -1,24 +1,11 @@
+@extends('normal_users.user_layout')
+
+@section('user_content')
 
 
-
-<?php $__env->startSection('streamer_content'); ?>
-
-<style> 
-  .link_guide{
-color:rgb(39, 39, 39) !important;
-   }
-   .link_guide:hover{
-color:rgb(90, 30, 255) !important;
-   }
-  </style>
 
 <div class="container">
-  <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-    <strong>Note : </strong> here you can find your paste and upcoming Seminar, if it's empty go create one at  ><b><span ><a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/rooms')); ?>"> <i class="nav-icon fas fa-door-open"></i> Rooms</a></span></b> > then create your first Seminar <b> <span class="link_guide"> <a style="color: rgb(37, 37, 37)" class="link_guide" href="<?php echo e(url('streamer/events')); ?>"><i class="nav-icon fas fa-bolt"></i> Seminar</a></span></b>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+<h2 class="m-3">Seminars Applied</h2>
 <div class="response"></div>
 
 <div id='calendar'></div>  
@@ -29,32 +16,41 @@ color:rgb(90, 30, 255) !important;
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
       <!-- Modal Header -->
-      <div class="modal-header">
-          <h4 class="modal-title ml-auto">Seminar Informations</h4>
+      <div class="modal-header bg-info">
+          <h4 class="modal-title ml-auto">Seminars Informations</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <!-- Modal body -->
       <div class="modal-body">
       <div class="form-group">
-
-      <div class="form-group">
+    <div class="row mb-3">
+      <div class="col">
           <label for="title">Title</label>
-          <input type="text" class="form-control" id="event-title" readonly="readonly">
-      </div>
-      <div class="row mb-3">
-      <div class="col">
-          <label for="start">Starting at</label>
-          <input type="text" class="form-control" id="event-start" readonly="readonly">
+          <input type="text" class="form-control" id="event-title" readonly>
       </div>
       <div class="col">
-          <label for="end">Ending at</label>
-          <input type="text" class="form-control" id="event-end" readonly="readonly">
+          <label for="title">Presenter</label>
+          <input type="text" class="form-control" id="event-presenter" readonly>
       </div>
-    </div>
+      </div>
       <div class="form-group">
+          <label for="start">Start</label>
+          <input type="text" class="form-control" id="event-start" readonly>
+      </div>
+      <div class="form-group">
+          <label for="end">End</label>
+          <input type="text" class="form-control" id="event-end"readonly>
+      </div>
+      <!-- <div class="form-group">
     <label for="invite-link">Invite Link <span class="text-muted" id="copy"></span></label>
       <input type="text" class="form-control" id="invite-link" onclick="myFunction()" value="" readonly>
+      </div> -->
+      <div class="form-group ">
+        <a href="" class="btn btn-outline-primary btn-md form-control  " id="invite-link"><i class="fas fa-door-open"></i>&nbsp; Join Meeting</a>
       </div>
+      
+      
+     
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
@@ -67,28 +63,33 @@ color:rgb(90, 30, 255) !important;
 
 
 
+
+
+
 <script>
     function myFunction() {
   /* Get the text field */
   var copyText = document.getElementById("invite-link");
+
   /* Select the text field */
   copyText.select();
   copyText.setSelectionRange(0, 99999); /* For mobile devices */
 
    /* Copy the text inside the text field */
   navigator.clipboard.writeText(copyText.value);
-  $('#schedule-edit').on('hidden.bs.modal', function () {
-    document.getElementById("copy").innerHTML = "<span class='text-success'></span>";
-  });
   document.getElementById("copy").innerHTML = "<span class='text-success'>Copied to clipboard</span>";
   /* Alert the copied text */
 //   alert("Copied the text: " + copyText.value);
 }
 </script>
+
 <script>
 
   $(document).ready(function () {
-        var SITEURL = "<?php echo e(url('/')); ?>";
+
+         
+
+        var SITEURL = "{{url('/')}}";
 
         $.ajaxSetup({
 
@@ -99,8 +100,7 @@ color:rgb(90, 30, 255) !important;
           }
 
         });
-
-        /******************************************************************************************/
+       /******************************************************************************************/
  //CheckPastDate dec2hex :: Integer -> String
 // i.e. 0-255 -> '00'-'ff'
 function dec2hex (dec) {
@@ -116,22 +116,17 @@ function dec2hex (dec) {
 
 
 /******************************************************************************************/  
-
+      
         var calendar = $('#calendar').fullCalendar({
-             
+
+          
             editable: true,
 
-            events: SITEURL + "/test",
-            
-            header: {
-              left: 'today,month,agendaWeek,agendaDay',
-              center: 'title',
-              right: 'prevYear,prev,next,nextYear'
-            },
-              
-          
+            events: SITEURL + "/appliedev",
+            displayEventTime: false,
 
-            eventColor: '#'+Math.floor(Math.random()*16777215).toString(16),
+            eventColor: '#007bff',
+
 
             eventRender: function (event, element, view) {
 
@@ -148,24 +143,42 @@ function dec2hex (dec) {
             },
 
             eventClick: function(event){
-            console.log(event.id_room);
+            //console.log(event);
+            //console.log(event.user[0]['fname'] , event.user[0]['lname']);
             var room_id = event.id_room;
-            console.log(room_id);
-            var url =  `<?php echo e(route('join')); ?>/${room_id}/${event.id_event}/${generateId()}`;
-            $('#invite-link').val(url);
+            //console.log(room_id);
+            var url =  `{{route('join')}}/${room_id}/${event.id_event}/${generateId()}`;
+            $('#invite-link').attr('href' , url);
             $('#event-title').val(event.title);
+            $('#event-presenter').val(event.user[0]['fname'] +' '+  event.user[0]['lname']);
             $('#event-start').val(event.start.toISOString().replace('T' , " at ").replace(':00' , ""));
             $('#event-end').val(event.end.toISOString().replace('T' , " at ").replace(':00' , ""));
             
             $("#schedule-edit").modal();
 
             },
+            
+
+
+
+            // eventClick: function(event) {
+            //     $("#exampleModal").modal("show");
+            // },
 
             selectable: true,
+            tooltip :true,
+            selectHelper: true,
 
+
+           
+
+            
+
+ 
 
         });
 
+        
   });
 
  
@@ -175,5 +188,4 @@ function dec2hex (dec) {
   new ClipboardJS('.btn');
 </script>
 
-  <?php $__env->stopSection(); ?>
-<?php echo $__env->make('streamers.streamer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/streamers/planning.blade.php ENDPATH**/ ?>
+@endsection

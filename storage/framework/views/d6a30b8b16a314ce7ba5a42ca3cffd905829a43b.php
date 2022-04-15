@@ -1,6 +1,6 @@
-@extends('normal_users.user_layout')
 
-@section('user_content')
+
+<?php $__env->startSection('user_content'); ?>
 
 
 
@@ -140,7 +140,7 @@
 
          
 
-        var SITEURL = "{{url('/')}}";
+        var SITEURL = "<?php echo e(url('/')); ?>";
 
         $.ajaxSetup({
 
@@ -222,7 +222,7 @@ function dec2hex (dec) {
             //console.log(event.user[0]['fname'] , event.user[0]['lname']);
             
             //console.log(room_id);
-            var url =  `{{route('join')}}/${room_id}/${event.id_event}/${generateId()}`;
+            var url =  `<?php echo e(route('join')); ?>/${room_id}/${event.id_event}/${generateId()}`;
             $('#invite-link').attr('href' , url);
             $('#event-title').val(event.title);
             $('#event-presenter').val(event.user[0]['fname'] +' '+  event.user[0]['lname']);
@@ -264,4 +264,5 @@ function dec2hex (dec) {
   new ClipboardJS('.btn');
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('normal_users.user_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/normal_users/user_events.blade.php ENDPATH**/ ?>

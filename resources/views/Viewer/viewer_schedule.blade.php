@@ -46,13 +46,15 @@ margin-bottom: 10%;
 }
 }
 </style>
-<div class="event_info "style="">
-  <h3 class="display-4">Seminars Schedule</h3>
+
+<div class="event_info"style="">
+  <h3 class="display-5">Seminars Schedule</h3>
   <div class="alert alert-info p-3 ">
-  <p class="text-muted h3">All the Seminars are listed here , and you can have access to all of them and be part of <strong>CNDP</strong> community</p>
+  <p class="text-muted h6">All the Seminars are listed here , and you can have access to all of them and be part of <strong>CNDP</strong> community</p>
   </div>
 </div>
 
+</div>
 @php
 $schedule = url()->current();
     if(!Auth::check())
@@ -119,7 +121,7 @@ $schedule = url()->current();
        </div>
             <button type="submit" class="btn btn-info btn-md form-control"  id="apply_event">&nbsp Apply </button>
 
-        
+     
             @endif
             {{-- <a href="" class="btn btn-outline-primary btn-md form-control" id="invite-link"><i class="fas fa-door-open"></i>&nbsp Join Meeting</a> --}}
           <div class="text-center alert alert-info justify-content-center" id="msg_warning"></div>
@@ -278,15 +280,13 @@ function dec2hex (dec) {
                    
                 events: SITEURL + "/adminev",
                 
-                displayEventTime: true,
+                displayEventTime: false,
                 
-                eventColor: '#'+Math.floor(Math.random()*16777215).toString(16),
-    
+                eventColor: '#007bff',
+                aspectRatio: 1,
                 eventTextColor:'#ffffff',
     
                 eventRender: function(event, el) {
-
-               
 
                 },
                 eventClick: function(event){
@@ -369,7 +369,7 @@ function dec2hex (dec) {
            //console.log(calendar);
             
       });
-  
+  calendar.updateSize();
     </script>
     <script>
       function CheckPastDate() {

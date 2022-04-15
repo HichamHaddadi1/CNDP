@@ -54,6 +54,11 @@ $join_us = url()->current();
         Redirecting ...
       </span> --}}
       <div class="container w-40 p-3 ">
+        @if (Session::get('applied'))
+        <div class="alert-danger text-center mb-3 p-3">
+                      <strong id="msg_err">{{Session::get('applied')}} <a class="btn btn-outline-info" href="/schedule">Apply on Calender</a></strong>
+                      </div>
+          @endif
         @if (Session::get('errorsUnique'))
         <div class="alert-danger text-center mb-3 p-3">
                       <strong id="msg_err">{{Session::get('errorsUnique')}} </strong>

@@ -51,6 +51,11 @@ $join_us = url()->current();
         <?php echo csrf_field(); ?>
 
       <div class="container w-40 p-3 ">
+        <?php if(Session::get('applied')): ?>
+        <div class="alert-danger text-center mb-3 p-3">
+                      <strong id="msg_err"><?php echo e(Session::get('applied')); ?> <a class="btn btn-outline-info" href="/schedule">Apply on Calender</a></strong>
+                      </div>
+          <?php endif; ?>
         <?php if(Session::get('errorsUnique')): ?>
         <div class="alert-danger text-center mb-3 p-3">
                       <strong id="msg_err"><?php echo e(Session::get('errorsUnique')); ?> </strong>

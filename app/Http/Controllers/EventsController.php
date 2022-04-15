@@ -40,12 +40,58 @@ class EventsController extends Controller
 
         return $this->eventsToArrayAdmin(Event::all());
     }
+    public function userEventsApplied()
+    {
+     $events= Db::table('events')->join('tickits','tickits.event_id','events.id')
+     ->where('tickits.user_id',auth()->user()->id)
+     ->get();
+     
+        return $this->AppliedeventsToArray($events);
+    }
+
+    public function AppliedeventsToArray($events)
+    {
+        $eventsArray=[];
+
+          foreach($events as $event)
+        {
+            $color="#444";
+            //dd($event->ending_at > Carbon::now());
+            if($event->ending_at > Carbon::now())
+            {
+                $color="#007bff";
+            }
+            $data=[
+                'title' => $event->event_theme,
+                'start' => $event->starting_at,
+                'end'   => $event->ending_at,
+                'id_user' =>$event->id_user,
+                'id_room' =>$event->id_room,
+                'user' => User::where('id' , '=' , $event->id_user)->get(),
+                'isVerified' =>$event->isVerified,
+                'id_event' => $event->id,
+                'color' =>$color
+            ];
+           array_push($eventsArray,$data);
+           
+        }
+
+        return response()->json($eventsArray);
+
+
+    }
     public function eventsToArray($events)
     {
         $eventsArray=[];
 
           foreach($events as $event)
         {
+            $color="#444";
+            //dd($event->ending_at > Carbon::now());
+            if($event->ending_at < Carbon::now())
+            {
+                $color="#007bff";
+            }
              if ($event->id_user == Auth::user()->id && $event->isVerified == 'Verified')
               {
 
@@ -55,7 +101,8 @@ class EventsController extends Controller
                 'end'   => $event->ending_at,
                 'id_user' =>$event->id_user,
                 'id_room' =>$event->id_room,
-                'id_event' => $event->id
+                'id_event' => $event->id,
+                'color' => $color
             ];
            array_push($eventsArray,$data);
             }
@@ -72,6 +119,12 @@ class EventsController extends Controller
         // dd($user);
           foreach($events as $event)
         {
+            $color="#444";
+            //dd($event->ending_at > Carbon::now());
+            if($event->ending_at > Carbon::now())
+            {
+                $color="#007bff";
+            }
             if ($event->isVerified == 'Verified' )
             {
             $data=[
@@ -82,7 +135,8 @@ class EventsController extends Controller
                 'id_room' =>$event->id_room,
                 'user' => User::where('id' , '=' , $event->id_user)->get(),
                 'isVerified' =>$event->isVerified,
-                'id_event' => $event->id
+                'id_event' => $event->id,
+                'color'  => $color
             ];
            array_push($eventsArray,$data);
         }

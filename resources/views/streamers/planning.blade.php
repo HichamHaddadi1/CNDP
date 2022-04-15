@@ -131,7 +131,7 @@ function dec2hex (dec) {
               
           
 
-            eventColor: '#'+Math.floor(Math.random()*16777215).toString(16),
+            eventColor: '#007bff',
 
             eventRender: function (event, element, view) {
 

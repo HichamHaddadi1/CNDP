@@ -158,6 +158,9 @@ footer p {
 .red_req{
   color: red;
 }
+.tb_header{
+  font-size: 13px;
+}
   </style>
 <div class="container">
   <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
@@ -213,13 +216,14 @@ footer p {
 
           <thead>
             <tr>
-              <th scope="col">Seminar Theme</th>
-              <th scope="col">Starts at</th>
-              <th scope="col">End at</th>
-              <th scope="col">Password</th>
-              <th scope="col">Max attendees</th>
-              <th scope="col">State</th>
-              <th scope="col" style="text-align: center;">Actions</th>
+              <th class="tb_header" scope="col">Seminar Theme</th>
+              <th class="tb_header" scope="col">Starts at</th>
+              <th class="tb_header" scope="col">End at</th>
+              <th class="tb_header" scope="col">Password</th>
+              <th class="tb_header" scope="col">Max attendees</th>
+              <th class="tb_header" scope="col">State</th>
+              <th class="tb_header" scope="col">Participants</th>
+              <th class="tb_header" scope="col" style="text-align: center;">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -230,15 +234,20 @@ footer p {
             ?>
            
             <?php $__empty_1 = true; $__currentLoopData = $events; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $event): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-           
+             <?php
+                 $viewer_pw = \App\Models\Room::where('id',$event->id_room)->first()->viewer_pw;
+                 $ticketsP  = \App\Models\Tickit::where('room_id',$event->id_room)->where('event_id',$event->id)->count();
+             ?>
               <tr>
                   <td><?php echo e($event->event_theme); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->starting_at)); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->ending_at)); ?></td>
-                  <td><?php echo e(\App\Models\Room::where('id',$event->id_room)->first()->viewer_pw); ?></td>
+                  <?php if($event->id_room !=null): ?>
+                  <td><?php echo e($viewer_pw); ?></td>
+                  <?php endif; ?>
                   <td><?php echo e($event->max_viewers); ?></td>
                   <td><?php echo e($event->isVerified); ?></td>
-
+                  <td <?php if($ticketsP==$event->max_viewers): ?> style="color:red"<?php endif; ?>><?php echo e($ticketsP.'/'.$event->max_viewers); ?></td>
 
                   <td colspan="2">
                     <?php if(\Carbon\Carbon::now()->lt($event->ending_at)): ?>

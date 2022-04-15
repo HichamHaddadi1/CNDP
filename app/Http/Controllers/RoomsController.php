@@ -216,7 +216,7 @@ class RoomsController extends Controller
             $multiCounter    =   $multi_apply->count();
             if($multiCounter==0)
             {
-            return back()->with('errorsUnique' , 'you have to apply to this seminar before trying to join');
+            return back()->with('applied' , 'you have to apply to this seminar before trying to join');
             }
 
 
