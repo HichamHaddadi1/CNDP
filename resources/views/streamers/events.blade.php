@@ -638,7 +638,7 @@ footer p {
               <th scope="col">Participants</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="list_tbody">
          
               
 
@@ -655,11 +655,17 @@ footer p {
 <script>
   $('.list_p').click(function(){
     var event_id = $(this).attr('id');
+    const tbody=$('#list_tbody');
+    $('#list_tbody').html('');
    $.ajax({
       url: '/listparticipants/'+event_id,
       method:"GET",
       success:function (result){
-          console.log(result);
+         for(var i=0 ;i<result.length;i++)
+         {
+            var tr='<tr><td>'+(i+1)+'</td><td>'+result[i].name+'</td></tr>'
+            tbody.append(tr);
+         }
         }
       });
     });
