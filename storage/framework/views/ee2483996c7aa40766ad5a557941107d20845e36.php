@@ -83,8 +83,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-5">
     <!-- Brand Logo -->
     <a href="<?php echo e(url('/')); ?>" class="brand-link" target="_blank">
-      <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-normal">Tamkine</span>
+     
+      <span class="brand-text font-weight-normal">CNDP</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">

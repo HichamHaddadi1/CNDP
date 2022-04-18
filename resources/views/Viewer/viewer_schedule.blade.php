@@ -290,7 +290,7 @@ function dec2hex (dec) {
 
                 },
                 eventClick: function(event){
-                //console.log(event);
+                console.log(event);
                 //console.log(event.user[0]['fname'] , event.user[0]['lname']);
                 //console.log(room_id);
                 //console.log(event);

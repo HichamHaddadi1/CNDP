@@ -52,10 +52,11 @@ class EventsController extends Controller
     public function AppliedeventsToArray($events)
     {
         $eventsArray=[];
-
+       
           foreach($events as $event)
         {
             $color="#444";
+           
             //dd($event->ending_at > Carbon::now());
             if($event->ending_at > Carbon::now())
             {
@@ -69,7 +70,7 @@ class EventsController extends Controller
                 'id_room' =>$event->id_room,
                 'user' => User::where('id' , '=' , $event->id_user)->get(),
                 'isVerified' =>$event->isVerified,
-                'id_event' => $event->id,
+                'id_event' => $event->event_id,
                 'color' =>$color
             ];
            array_push($eventsArray,$data);
