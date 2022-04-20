@@ -75,7 +75,7 @@
       
              <div>
                <div class="live-dot"></div>
-               <h1><?php echo e($v->name); ?></h1>
+               <h1><?php echo e($v->event_theme); ?></h1>
                <p><?php echo e($v->event_desc); ?></p>
                <!--<div class="date">{--{$date_soon->toFormattedDateString()}--}</div>-->
                <div class="tags">
@@ -112,6 +112,7 @@
   <h6 class="shadow-sm mb-1 rounded" id="h4_soon"><i class="far fa-clock" style="color: white"></i>
    STREAMING SOON</h6>
   <div class="owl-carousel">
+   
       <?php $__currentLoopData = $users_rooms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     
       <?php
@@ -126,7 +127,7 @@
         <?php endif; ?>
           <div>
             
-            <h1><?php echo e($v->name); ?></h1>
+            <h1><?php echo e($v->event_theme); ?></h1>
             <p><?php echo e($v->event_desc); ?></p>
             <div class="date"><?php echo e($date_soon->toFormattedDateString()); ?></div>
             <div class="tags">
@@ -176,11 +177,11 @@
       <!--<div class="card shadow mb-5 bg-white rounded" style="width: 18rem;" style="text-align: center">
         <span class="later"><i class='fas fa-dot-circle' style="color:rgba(82, 82, 82, 0.623)"></i>
           OFFLINE</span>       
-        <img id="card_img" class="rounded mx-auto d-block" src="/upload/<?php echo e($v->avatar); ?>"/>
+        <img id="card_img" class="rounded mx-auto d-block" src="/upload/"/>
           <div class="card-body ">
-            <h5 class="card-title text-center"><?php echo e($v->name); ?></h5>
-            <p class="card-text text-left"><?php echo e($v->room_desc); ?></p>
-            <p class="card-text text-left"><?php echo e($v->event_theme); ?></p>
+            <h5 class="card-title text-center"></h5>
+            <p class="card-text text-left"></p>
+            <p class="card-text text-left"></p>
             <p class="card-text" id="plus_tard_statue">Later</p>
           </div>
       </div> -->
@@ -193,7 +194,7 @@
     <?php endif; ?>
            <div>
              
-             <h1><?php echo e($v->name); ?></h1>
+             <h1><?php echo e($v->event_theme); ?></h1>
              <p><?php echo e($v->event_desc); ?></p>
              <div class="date"><?php echo e($date_soon->toFormattedDateString()); ?></div>
              <div class="tags">

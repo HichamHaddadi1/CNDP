@@ -120,7 +120,7 @@ function dec2hex (dec) {
         var calendar = $('#calendar').fullCalendar({
 
           
-            editable: true,
+            editable: false,
 
             events: SITEURL + "/appliedev",
             displayEventTime: false,
