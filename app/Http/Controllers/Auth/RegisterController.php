@@ -58,19 +58,36 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
+
+        if(request()->input('user_type') == 's')
+        {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required' , 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required' , 'string', 'min:8' , 'confirmed'],
-            'language' ,
-            'country' ,
-            'avatar' ,
             'address' =>'required' ,
             'gender' =>'required' ,
             'fname' =>'required' ,
             'lname' =>'required' ,
+            'language' => 'required',
+            'country' =>'required',
         ]);
-
+    }
+    else
+    {
+        return Validator::make($data, [
+            'name'      =>   ['required' , 'string', 'max:255'],
+            'email'     =>   ['required' , 'string', 'email', 'max:255', 'unique:users'],
+            'password'  =>   ['required' , 'string', 'min:8', 'confirmed'],
+            'address'   =>  'required' ,
+            'gender'    =>  'required' ,
+            'fname'     =>  'required' ,
+            'lname'     =>  'required' ,
+            'language',
+            'country' ,
+        ]);
+    }
 
 
     }

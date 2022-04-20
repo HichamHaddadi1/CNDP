@@ -63,15 +63,15 @@ class EventsController extends Controller
                 $color="#007bff";
             }
             $data=[
-                'title' => $event->event_theme,
-                'start' => $event->starting_at,
-                'end'   => $event->ending_at,
-                'id_user' =>$event->id_user,
-                'id_room' =>$event->id_room,
-                'user' => User::where('id' , '=' , $event->id_user)->get(),
-                'isVerified' =>$event->isVerified,
-                'id_event' => $event->event_id,
-                'color' =>$color
+                'title'         =>   $event->event_theme,
+                'start'         =>   $event->starting_at,
+                'end'           =>   $event->ending_at,
+                'id_user'       =>   $event->id_user,
+                'id_room'       =>   $event->id_room,
+                'user'          =>   User::where('id' , '=' , $event->id_user)->get(),
+                'isVerified'    =>   $event->isVerified,
+                'id_event'      =>   $event->event_id,
+                'color'         =>   $color
             ];
            array_push($eventsArray,$data);
            

@@ -20,7 +20,7 @@ color:rgb(90, 30, 255) !important;
     </button>
   </div>
 <div class="response"></div>
-
+<img src="\img\guide.png" id="guide_" style="width: 20%;">
 <div id='calendar'></div>  
 
 </div>

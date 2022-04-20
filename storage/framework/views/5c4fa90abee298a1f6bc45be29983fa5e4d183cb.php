@@ -1,7 +1,11 @@
 
 
 <?php $__env->startSection('viewer_content'); ?>
-
+    <style>
+        .req{
+            color:red;
+        }
+    </style>
    
     <div class="container">
             
@@ -16,7 +20,7 @@
             <h2 class="text-center" style="font-weight: bold;">Become a Seminarist</h2>
         <div class="row jumbotron">
             <div class="col-sm-6 form-group">
-                <label for="name-f">First Name</label>
+                <label for="name-f">First Name <small class="req"> * </small></label>
                 <input type="text"  class="form-control <?php $__errorArgs = ['fname'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -38,9 +42,9 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
             </div>
-
+                 <input type="hidden" name="user_type" value="s">
             <div class="col-sm-6 form-group">
-                <label for="name-l">Last name</label>
+                <label for="name-l">Last name <small class="req"> * </small></label>
                 <input type="text" class="form-control <?php $__errorArgs = ['lname'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -63,7 +67,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-sm-6 form-group">
-                <label for="name-l">Username</label>
+                <label for="name-l">Username <small class="req"> * </small></label>
                 <input type="text" class="form-control <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -86,7 +90,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-sm-6 form-group">
-                <label for="email">Email</label>
+                <label for="email">Email <small class="req"> * </small></label>
                 <input type="email" class="form-control <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -109,7 +113,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-sm-6 form-group">
-                <label for="address-1">Address Line-1</label>
+                <label for="address-1">Address Line-1 <small class="req"> * </small></label>
                 <input type="address" class="form-control <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -126,13 +130,13 @@ $message = $__bag->first($__errorArgs[0]); ?>
                 <span class="invalid-feedback" role="alert">
                     <strong><?php echo e($message); ?></strong>
                 </span>
-            <?php unset($message);
+                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-sm-6 form-group">
-                <label for="country">Country</label>
+                <label for="country">Country <small class="req"> * </small></label>
                 <select name="country" id="country" class="form-control custom-select browser-default <?php $__errorArgs = ['country'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -140,7 +144,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>">
+unset($__errorArgs, $__bag); ?>" required>
                     <option value="none" selected disabled hidden>Select Your Country</option>
                     <option value="Afghanistan">Afghanistan</option>
                     <option value="Åland Islands">Åland Islands</option>
@@ -401,7 +405,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-sm-6 form-group">
-                <label for="gender">Gender</label>
+                <label for="gender">Gender <small class="req"> * </small></label>
                 <select id="gender" name="gender" id="gender" class="form-control browser-default custom-select <?php $__errorArgs = ['gender'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -409,25 +413,20 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>">
+unset($__errorArgs, $__bag); ?>" required>
+                <option disabled hidden selected>Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
-            <?php $__errorArgs = ['gender'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <span class="invalid-feedback" role="alert">
-                            <strong><?php echo e($message); ?></strong>
-                        </span>
-                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
+            <?php if($errors->has('gender')): ?>
+                    <span class="invalid-feedback" role="alert">
+                                    <strong><?php echo e($errors->first('gender')); ?></strong>
+                    </span> 
+            <?php endif; ?>
+           
             </div>
             <div class="col-sm-6 form-group">
-                <label for="language">Language</label>
+                <label for="language">Language <small class="req"> * </small></label>
                 <select id="language" name="language" id="language" class="form-control browser-default custom-select <?php $__errorArgs = ['language'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -436,6 +435,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" >
+                <option disabled hidden selected>Language</option>
                 <option value="arabic">Arabic</option>
                 <option value="frensh">Frensh</option>
                 <option value="english">English</option>
@@ -448,7 +448,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
                         <span class="invalid-feedback" role="alert">
                             <strong><?php echo e($message); ?></strong>
                         </span>
-                    <?php unset($message);
+            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
@@ -456,7 +456,7 @@ unset($__errorArgs, $__bag); ?>
          
         
             <div class="col-sm-6 form-group">
-                <label for="pass">Password</label>
+                <label for="pass">Password <small class="req"> * </small></label>
                 <input type="Password" name="password" id="password" class="form-control <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -479,7 +479,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
             <div class="col-sm-6 form-group">
-                <label for="pass2">Confirm Password</label>
+                <label for="pass2">Confirm Password <small class="req"> * </small></label>
                 <input type="Password" name="password_confirmation" id="password_confirmation" class="form-control <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

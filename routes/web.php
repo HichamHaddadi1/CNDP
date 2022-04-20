@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth','can:dashboard_admin']],function(){
     Route::get('admin/rooms', [RoomsController::class ,'adminRooms'])->name('admin.rooms');
     Route::get('admin/users' , [MainController::class , 'admin_users'])->name('admin.users');
     Route::get('admin/recordings' ,  [RoomsController::class , 'admin_recordings'])->name('admin.recordigns');
+    Route::get('admin/history',[RoomsController::class,'admin_hestory'])->name('admin_hestory');
     //Route::get('admin', [MainController::class , 'admin'])->name('admin');
     Route::get('admin/rooms/{id}/{event_id}', [RoomsController::class ,'startMeeting'])->name('admin.rooms_start');
 
@@ -128,7 +129,7 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess','can:dashboard_str
    Route::get('streamer/events', [EventsController::class ,'show'])->name('streamers.events');
    Route::post('streamer/events', [EventsController::class ,'store'])->name('streamers.events_add');
    Route::post('streamer/rooms/update', [EventsController::class ,'store'])->name('streamers.events_add');
-
+   Route::get('streamer/end_meeting/{id}',[RoomsController::class, 'end_of_meeting'])->name('end_of_meeting');
    Route::get('streamer/planning',[MainController::class , 'streamer_planning'])->name('streamer.planning');
    Route::post('streamer/planning', [EventsController::class ,'store']);
    Route::get('streamer/profile', [MainController::class , 'streamer_profile'])->name('streamer.profile');

@@ -144,7 +144,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     Seminars Calendar
                   </p>
                 </a>
-              
+                <a href="<?php echo e(url('admin/history')); ?>" class="nav-link active">
+               
+                  <i class="nav-icon fas fa-history"></i>
+                  <p>
+                    History
+                  </p>
+                </a>
             
               
           </li>

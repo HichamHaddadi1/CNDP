@@ -464,7 +464,7 @@ class BigBlueButton
             $cookiefile     = tmpfile();
             $cookiefilepath = stream_get_meta_data($cookiefile)['uri'];
 
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
             curl_setopt($ch, CURLOPT_ENCODING, 'UTF-8');
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

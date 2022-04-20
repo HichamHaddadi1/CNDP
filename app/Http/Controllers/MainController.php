@@ -389,6 +389,8 @@ class MainController extends Controller
     {
         return view('normal_users.applied_seminars');
     } 
+
+  
 }
 /******************************************************************/
 

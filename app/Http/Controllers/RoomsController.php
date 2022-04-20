@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\history;
 use App\Models\Room;
 use App\Models\Tickit;
 use App\Models\User;
+
 use App\Providers\EventServiceProvider;
 use Carbon\Carbon;
 use DateTime;
@@ -220,11 +222,6 @@ class RoomsController extends Controller
             return back()->with('applied' , 'you have to apply to this seminar before trying to join');
             }
 
-
-
-
-
-
         
         $url = \Bigbluebutton::join([
             'meetingID' => $room->id.'_'.$event_id.'cmp',
@@ -366,13 +363,33 @@ class RoomsController extends Controller
     }
 
     }
+    public function end_of_meeting($id)
+    {
+      
+        $hr = history::findOrFail($id);
+        $hr->end_date=Carbon::now()->addHour();
 
+        $meeting_info = \Bigbluebutton::getMeetingInfo([
+            'meetingID' => $hr->room_id.'_'. $hr->event_id.'cmp',
+        
+        ]);
+        //dd($meeting_info);
+        $hr->save();
+        return redirect('/dashboard');
+    }
     public function startMeetingEvent($id , $_id)
     {
 
         $room = Room::findOrFail($id);
         /*$path = asset('presentations/main.pdf');*/
         $event = Event::findOrFail($_id);
+        $history= new history();
+        $history->start_date=Carbon::now()->addHour();
+        $history->user_id=Auth::user()->id;
+        $history->room_id=$room->id;
+        $history->event_id=$event->id;
+        $history->save();
+       
         $presentation=asset('uploads/images/'.$room->presentations);
         // dd($presentation);
         if(\Bigbluebutton::isMeetingRunning($room->id) == false){
@@ -381,9 +398,9 @@ class RoomsController extends Controller
             'meetingID' => $room->id.'_'. $event->id.'cmp',
             'meetingName' => $event->event_theme,
             'moderatorPW' => Auth::user()->email, //moderator password set here
-            'attendeePW' => $room->id.'_'. $event->id.'cmp',
-            'endCallbackUrl'  => route('dashboard', compact(['room' , 'event'])),
-            'logoutUrl' => route('dashboard'),
+            'attendeePW'  => $room->id.'_'. $event->id.'cmp',
+            'endCallbackUrl'  => route('end_of_meeting',$history->id),
+            'logoutUrl' => route('end_of_meeting',$history->id),
             'record'=>true,
             'presentation' => [
                 ['link' =>  $presentation, 'fileName' => $room->presentations]
@@ -402,49 +419,16 @@ class RoomsController extends Controller
             'userName' => Auth::user()->name,//for join meeting
             //'maxParticipants'=>$room->max_viewers,
         ]);
-        // dd($url);
+       
         $event->event_statue = 1;
         $event->update();
 
 
     }
 
-
-    // dd();
         return redirect()->to($url);
 
-             /**************Zineb test */
-
-            //  $createMeeting = \Bigbluebutton::initCreateMeeting([
-            //     'meetingID' => $room->id.'cmp',
-            //     'meetingName' => Auth::user()->name,
-            //     'attendeePW' => $room->viewer_pw,
-            //     'moderatorPW' => Auth::user()->email,
-            // ]);
-
-            // \Bigbluebutton::create($createMeeting);
-
-            // // return redirect()->to(
-            // //     Bigbluebutton::join([
-            // //        'meetingID' => $room->id.'cmp',
-            // //        'userName' => Auth::user()->name,
-            // //        'password' => Auth::user()->email //which user role want to join set password here
-            // //     ])
-            // //    );
-
-            // $url = \Bigbluebutton::start([
-            //     'meetingID' => $room->id,
-            //     'moderatorPW' => Auth::user()->email, //moderator password set here
-            //     'attendeePW' => $room->viewer_pw, //attendee password here
-            //     'userName' => Auth::user()->name,//for join meeting
-            //     'endCallbackUrl'  => route('streamers.rooms'),
-            //     'logoutUrl' => route('streamers.rooms'),
-            //     //'redirect' => false // only want to create and meeting and get join url then use this parameter
-            // ]);
-            //dd($url);
-
-     //return redirect()->to($url);
-
+          
     }
      /**
      * Remove the specified resource from storage.
@@ -465,5 +449,23 @@ class RoomsController extends Controller
 
         $room->delete();
         return back()->with('success', __('Successfully Deleted '));
+    }
+    public function admin_hestory()
+    {
+        $events = Event::where('isVerified', '=', 'Pending')->get();
+
+        $pending_events=$events->count();
+        $ev=Event::all();
+        $pending_rooms = Room::where('verified', '<=', 'pending' , 'AND' , 'verified', '!=', 'denied')->get();
+        $pending = $pending_rooms->count();
+        $s_requests = User::where('status' , '=' , 'pending')->get();
+        $streamers_requests = $s_requests->count();
+        $hr =Db::table('histories')->join('users','histories.user_id','users.id')
+        ->join('rooms', 'rooms.id','histories.room_id')
+        ->join('events','events.id','histories.event_id')
+        ->select('users.*','histories.*','rooms.*','events.*')->get();
+
+            //dd($hr);
+        return view('admin_hestorie',compact('streamers_requests','pending','pending_events','hr'));
     }
 }

@@ -51,9 +51,11 @@ margin-bottom: 10%;
   <h3 class="display-5">Seminars Schedule</h3>
   <div class="alert alert-info p-3 ">
   <p class="text-muted h6">All the Seminars are listed here , and you can have access to all of them and be part of <strong>CNDP</strong> community</p>
+
   </div>
 </div>
-
+<div class="container">
+<img src="\img\guide.png" id="guide_" style="width: 20%;">
 </div>
 @php
 $schedule = url()->current();

@@ -21,7 +21,7 @@
            <div class="card-body">
              <!-- <small class="card-meta mb-2">Become A</small>
               <h4 class="card-title mt-0 "><a class="text-white" herf="#">Viewer</a></h4>-->
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laborum beatae dolorem ipsa dolores. Reprehenderit, eum quod sapiente nostrum cum quos</p>
+              <p>You are a student, a parent or a teacher please click on register as a user and fill in the form to create an account in order to  follow and be up to date of all the seminars via the  calendar of your profile</p>
             </div>
             <div class="card-footer">
               <a href="{{route('userRegister')}}" class="nav-link btn btn-primary" style="font-size: 12px"> Register as User </a>
@@ -36,7 +36,7 @@
            <div class="card-body">
              <!-- <small class="card-meta mb-2">Become A</small>
               <h4 class="card-title mt-0 "><a class="text-white" herf="#">Streamer</a></h4>-->
-             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio laborum beatae dolorem ipsa dolores. Reprehenderit, eum quod sapiente nostrum cum quos</p>
+             <p>To share your expertise with those who need it, and benefit from all the features of  this platform to organize your seminars in the best possible way,, please click on register as a  seminarist and  fill in the  form</p>
             </div>
             <div class="card-footer">
               <a href="{{route('register')}}" class="nav-link btn btn-primary" style="font-size: 12px"> Register as Seminarist </a>
