@@ -241,7 +241,9 @@ footer p {
                   <td>{{ $event->event_theme }}</td>
                   <td>{{ str_replace('00:', '',$event->starting_at) }}</td>
                   <td>{{ str_replace('00:', '',$event->ending_at)  }}</td>
+                  @if($viewers_pw != null)
                   <td>{{ $viewers_pw}}</td>
+                  @endif
                   <td>{{ $event->max_viewers}}</td>
                   <td>{{ $event->isVerified}}</td>
                   <td @if($ticketsP==$event->max_viewers) style="color:red !important"@endif>

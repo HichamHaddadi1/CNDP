@@ -237,7 +237,16 @@ class RoomsController extends Controller
             {
              return back()->with('errorsUnique' , 'Meeting not started yet , wait until a moderator launch the event');
             }
-
+            $ticket_id    =   Tickit::where('user_id',Auth::user()->id)
+            ->where('room_id',$id)
+            ->where('event_id',$event_id)
+            ->first()->id;
+            //dd($ticket_id);
+            $tickets_update = Tickit::find($ticket_id);
+            $tickets_update->isJoined = 1;
+            $tickets_update->save();
+            //preventing users from joining the room
+            
         //     $meetingInfo=\Bigbluebutton::getMeetingInfo([
         //         'meetingID' => $room->id.'cmp',
         //          //moderator password set here

@@ -7,7 +7,7 @@
 <div class="container">
 <h2 class="m-3">Events Schedule</h2>
 <div class="response"></div>
-
+<img src="\img\guide.png" id="guide_" style="width: 20%;">
 <div id='calendar'></div>  
 
 </div>

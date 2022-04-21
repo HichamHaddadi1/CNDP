@@ -64,7 +64,7 @@
         <?php endif; ?>
          <td><?php echo e($room->created_at); ?></td>
         <td colspan="3">
-          <a class="btn btn-primary btn-sm" href="<?php echo e(route('admin.rooms_start' , $room->id)); ?>"><i class="fa fa-play fa-sm"></i> Start Room</a>
+          
           <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text=" <?php echo e(route('join',[$room->id,Crypt::encrypt($room->id)])); ?>">
             Copy Link
            </button> 

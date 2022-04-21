@@ -43,8 +43,8 @@
             <td><?php echo e($room->user->name); ?></td>
             <td><?php echo e($room->max_viewers); ?></td>
         <td colspan="2">
-          <a class="btn btn-success btn-sm" href="<?php echo e(route('update.verify_Room' , [$room->id,'v'])); ?>"><i class="fas fa-check fa-sm"></i> Verify</a>
-          <a class="btn btn-danger btn-sm" href="<?php echo e(route('update.verify_Room' , [$room->id,'d'])); ?>"><i class="fas fa-times"></i> Deny</a>
+          <a id="<?php echo e($room->id); ?>" data-toggle="modal" data-target="#VerifyModal" class="btn btn-success btn-sm btn_verify" href=""><i class="fas fa-check fa-sm"></i> Verify</a>
+          <a id="<?php echo e($room->id); ?>" data-toggle="modal" data-target="#DenyModal" class="btn btn-danger btn-sm btn_deny" href="<?php echo e(route('update.verify_Room' , [$room->id,'d'])); ?>"><i class="fas fa-times"></i> Deny</a>
         </td>
       </tr>
       <?php endif; ?>
@@ -62,7 +62,73 @@
     
   </span>
 </div>
+<div class="modal fade " id="VerifyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Verify Room</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure u wanna Verify this Room?
+      </div>
+      <div class="modal-footer">
+      
+        <a style="color:white" type="button" class="btn btn-success btn_c_v">Confirm Verification</a>
+        <a style="color:white" type="button" class="btn btn-info btn_cancel">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
 
- <?php $__env->stopSection(); ?>
+
+<div class="modal fade " id="DenyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deny Room</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure u wanna Deny this Room?
+      </div>
+      <div class="modal-footer">
+      
+        <a style="color:white" type="button" class="btn btn-danger btn_c_d">Confirm Denying</a>
+        <a style="color:white" type="button" class="btn btn-info btn_cancel">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // btn validate
+    $('.btn-close ,.btn_cancel').click(function(){
+      $('#VerifyModal').modal('hide');
+      $('#DenyModal').modal('hide');    
+    });
+      $('.btn_verify').click(function(){
+          var room_id= $(this).attr("id");
+        //console.log(room_id);
+          var str='<?php echo e(route("update.verify_Room" , [":id","v"])); ?>';
+          str= str.replace(':id',room_id);
+          $('#VerifyModal').modal('show');
+          $('.btn_c_v').attr('href',str);
+      });
+  </script>
+
+
+<script>
+  // btn validate
+      $('.btn_deny').click(function(){
+          var event_id= $(this).attr("id");
+        //console.log(room_id);
+          var str='<?php echo e(route("verify_event" , [":id","d"])); ?>';
+          str= str.replace(':id',event_id);
+          $('#DenyModal').modal('show');
+          $('.btn_c_d').attr('href',str);
+      });
+  </script>
+<?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('EventValidator.EV_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/EventValidator/pending_rooms.blade.php ENDPATH**/ ?>

@@ -230,8 +230,15 @@ class EventsController extends Controller
         ->paginate(10);
         $rooms = Room::all();
         $rooms_count = $rooms->count();
+        $room_exists = Room::where('id_user',Auth::user()->id)->get();
+        if(!$room_exists->isEmpty())
+        {
         $viewers_pw =Room::where('id_user',Auth::user()->id)->first()->viewer_pw;
-        //dd($viewers_pw);
+        }
+        else
+         {
+            $viewers_pw="";
+         }
          return view('streamers.events' , compact('events' , 'rooms' ,'rooms_count','oldevents','roomcheck','viewers_pw'));
 
     }

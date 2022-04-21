@@ -166,7 +166,7 @@ color:rgb(90, 30, 255) !important;
     });
       $('.delete_room').click(function(){
           var room_id= $(this).attr("id");
-        console.log(room_id);
+        //console.log(room_id);
           var str='<?php echo e(route("delete.room",":id")); ?>';
           str= str.replace(':id',room_id);
           $('#deleteModal').modal('show');

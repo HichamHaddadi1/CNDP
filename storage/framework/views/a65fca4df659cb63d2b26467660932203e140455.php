@@ -242,7 +242,9 @@ footer p {
                   <td><?php echo e($event->event_theme); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->starting_at)); ?></td>
                   <td><?php echo e(str_replace('00:', '',$event->ending_at)); ?></td>
+                  <?php if($viewers_pw != null): ?>
                   <td><?php echo e($viewers_pw); ?></td>
+                  <?php endif; ?>
                   <td><?php echo e($event->max_viewers); ?></td>
                   <td><?php echo e($event->isVerified); ?></td>
                   <td <?php if($ticketsP==$event->max_viewers): ?> style="color:red !important"<?php endif; ?>>
