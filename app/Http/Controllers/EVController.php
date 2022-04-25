@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Room;
 use App\Mail\EventsValidatorNotification as Evn;
 use App\Mail\ValidatedEvent;
+use App\Models\history;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
@@ -166,7 +167,7 @@ class EVController extends Controller
     }
     public function validator_all_rooms()
     {
-        $rooms = Db::table('rooms')->paginate(10);
+        $rooms = Db::table('rooms')->orderBy('last_usage','asc')->paginate(10);
         //dd($events);
         $p_events = Event::where('isVerified', '=', 'Pending')->get();
         $pending_events = $p_events->count();
@@ -292,5 +293,28 @@ class EVController extends Controller
 
 
 
+    }
+
+    public function room_history($room_id)
+    {
+        
+        $s_requests         =   User::where('status' , '=' , 'pending')->get();
+        $streamers_requests =   $s_requests->count();
+        $p_events           =   Event::where('isVerified', '=', 'Pending')->get();
+        $pending_events     =   $p_events->count();
+        $rooms              =   Room::all();
+        $p_rooms            =   Room::where('verified', '=', 'pending')->get();
+        $pending_rooms      =   $p_rooms->count();
+
+        /************************************************************************* */
+        $history            =   history::join('rooms','rooms.id','histories.room_id')
+                                       ->join('events','events.id','histories.event_id')
+                                       ->join('users','users.id','histories.user_id')
+                                       ->where('rooms.id',$room_id)
+                                       ->orderBy('histories.end_date', 'DESC')
+                                       ->paginate(10);
+
+                                      // dd($history);
+        return view('EventValidator.history',compact('history','pending_events','streamers_requests','pending_rooms','room_id'));
     }
 }

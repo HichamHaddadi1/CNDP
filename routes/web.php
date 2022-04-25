@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\EVController;
-
+use App\Http\Controllers\ImportExportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\ViewersController;
@@ -129,7 +129,7 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess','can:dashboard_str
    Route::get('streamer/events', [EventsController::class ,'show'])->name('streamers.events');
    Route::post('streamer/events', [EventsController::class ,'store'])->name('streamers.events_add');
    Route::post('streamer/rooms/update', [EventsController::class ,'store'])->name('streamers.events_add');
-   Route::get('streamer/end_meeting/{id}',[RoomsController::class, 'end_of_meeting'])->name('end_of_meeting');
+  
    Route::get('streamer/planning',[MainController::class , 'streamer_planning'])->name('streamer.planning');
    Route::post('streamer/planning', [EventsController::class ,'store']);
    Route::get('streamer/profile', [MainController::class , 'streamer_profile'])->name('streamer.profile');
@@ -138,7 +138,7 @@ Route::group( ['middleware' =>['auth','preventStreamerAccess','can:dashboard_str
    Route::resource('streamers', RoomsController::class);
 });
 
-
+Route::get('streamer/end_meeting/{id}/{room_id}/{event_id}',[RoomsController::class, 'end_of_meeting'])->name('end_of_meeting');
 /**To update user profiles  */
 Route::GET('admin/profile/{id}' , [MainController::class, 'update_profile'])->name('user_profile_update');
 /**end update users profiles  */
@@ -164,6 +164,7 @@ Route::get('validator/rooms',[EVController::class , 'validator_all_rooms'])->nam
 Route::get('validator/events/{id}/{mode}', [EVController ::class ,'verify_event'])->name('verify_event');
 Route::get('validator/rooms/pending/{id}/{mode}', [EVController ::class ,'verify_Room'])->name('update.verify_Room');
 Route::post('/rooms/update_', [EVController::class ,'updateRoomValidator'])->name('validator.room_update');
+Route::get('validator/history/{id}',[EVController::class,'room_history'])->name('ev_room_history');
 Route::get('/rooms/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
 Route::get('/validator/streamers/pending/{id}/{mode}', [EVController ::class ,'verify_streamer'])->name('validator_verify_streamer');
 Route::get('/validator/seminarists' , [EVController::class , 'validator_all_users'])->name('validator.users');
@@ -273,3 +274,10 @@ Route::get('mail', function () {
 Route::get('/test01',function(){
     return view('test01');
 });
+
+
+
+/*Excel import export*/
+Route::get('export/{room_id}',  [ImportExportController::class,'exportRoomData'])->name('export');
+Route::get('importExportView',  [ImportExportController::class,'importExportView']);
+Route::post('import',           [ImportExportController::class,'import'])->name('import');

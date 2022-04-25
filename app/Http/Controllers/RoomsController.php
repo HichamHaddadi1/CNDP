@@ -49,14 +49,18 @@ class RoomsController extends Controller
     function streamer_recordings()
     {
         $room = Room::where('id_user' , '=' , Auth::user()->id)->first();
-        // dd($room->id);
+        $events =Event::where('id_room',$room->id)->get();
+       
 
             if ($room) {
+                foreach($events as $ev)
+                {
                 $recs = \Bigbluebutton::getRecordings([
-                    'meetingID' => $room->id.'cmp',
+                    'meetingID' => $room->id.'_'.$ev->id.'cmp',
                     'state' => 'published'
                 ]);
-
+                }
+                //dd($recs);
                 // dd(date('c' , strtotime($recs[0]['startTime'])));
                 return view('streamers.recordings', compact(['recs' ,'room' ]));
             }
@@ -87,23 +91,24 @@ class RoomsController extends Controller
     function admin_recordings()
     {
         $events = Event::where('isVerified', '=', 'Pending')->get();
-
+        $ev_list = Event::all();
         $pending_events=$events->count();
         $room = Room::all();
        if ($room) {
-          for ($i=0; $i <count($room) ; $i++) {
+          for ($i=0; $i <count($ev_list) ; $i++) {
 
              $recs = \Bigbluebutton::getRecordings([
-                'meetingID' => $room[$i]->id.'cmp',
+                'meetingID' => $ev_list[$i]->id_room.'_'.$ev_list[$i]->id.'cmp',
                 'state' => 'published',
             ]);
+        }
             $pending_rooms = Room::where('verified', '<=', 'pending')->get();
             $pending = $pending_rooms->count();
             $s_requests = User::where('status' , '=' , 'pending')->get();
             $streamers_requests = $s_requests->count();
             // dd($recs);
             return view('admin_recordings', compact(['recs','room', 'pending' ,'streamers_requests' , 'pending_events']));
-       }
+       
 
     }
             $recs = [];
@@ -372,17 +377,17 @@ class RoomsController extends Controller
     }
 
     }
-    public function end_of_meeting($id)
+    public function end_of_meeting($id,$room_id,$event_id)
     {
-      
+       
         $hr = history::findOrFail($id);
+        $tk = Tickit::where('room_id',$room_id)
+                    ->where('event_id',$event_id)
+                    ->where('isJoined', 1)
+                    ->get();
+        $tk_counter = $tk->count();
         $hr->end_date=Carbon::now()->addHour();
-
-        $meeting_info = \Bigbluebutton::getMeetingInfo([
-            'meetingID' => $hr->room_id.'_'. $hr->event_id.'cmp',
-        
-        ]);
-        //dd($meeting_info);
+        $hr->nb_participants = $tk_counter;
         $hr->save();
         return redirect('/dashboard');
     }
@@ -391,10 +396,13 @@ class RoomsController extends Controller
 
         $room = Room::findOrFail($id);
         /*$path = asset('presentations/main.pdf');*/
+        $room->last_usage=Carbon::now()->addHour();
+        $room->save();
         $event = Event::findOrFail($_id);
         $history= new history();
         $history->start_date=Carbon::now()->addHour();
         $history->user_id=Auth::user()->id;
+        $history->end_date = $event->ending_at;
         $history->room_id=$room->id;
         $history->event_id=$event->id;
         $history->save();
@@ -403,16 +411,16 @@ class RoomsController extends Controller
         // dd($presentation);
         if(\Bigbluebutton::isMeetingRunning($room->id) == false){
         $createMeeting = \Bigbluebutton::initCreateMeeting([
-            'userName' => Auth::user()->name,
-            'meetingID' => $room->id.'_'. $event->id.'cmp',
-            'meetingName' => $event->event_theme,
-            'moderatorPW' => Auth::user()->email, //moderator password set here
-            'attendeePW'  => $room->id.'_'. $event->id.'cmp',
-            'endCallbackUrl'  => route('end_of_meeting',$history->id),
-            'logoutUrl' => route('end_of_meeting',$history->id),
-            'record'=>true,
-            'presentation' => [
-                ['link' =>  $presentation, 'fileName' => $room->presentations]
+            'userName'        => Auth::user()->name,
+            'meetingID'       => $room->id.'_'. $event->id.'cmp',
+            'meetingName'     => $event->event_theme,
+            'moderatorPW'     => Auth::user()->email, //moderator password set here
+            'attendeePW'      => $room->id.'_'. $event->id.'cmp',
+            'endCallbackUrl'  => route('end_of_meeting',[$history->id,$room->id,$event->id]),
+            'logoutUrl'       => route('end_of_meeting',[$history->id,$room->id,$event->id]),
+            'record'          => true,
+            'presentation'    => [
+                                   ['link' =>  $presentation, 'fileName' => $room->presentations]
             ],
             // 'moderatorOnlyMessage' => "<ul> <li>Share this link to invite other people: <a href='".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."' target='_blank'>".(route('join',['id'=>$room->id ,'_id'=>Crypt::encrypt('$event->id')]))."</a></li> "
 

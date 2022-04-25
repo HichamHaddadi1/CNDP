@@ -4,7 +4,7 @@
 <?php $__env->startSection('streamer_content'); ?>
   <div class="container">
     <div class="alert alert-info alert-dismissible fade show" role="alert" style="text-transform: capitalize">
-      <strong>Note :</strong> after you have finished your live stream you will find your records hestory but make sure you started recording at your stream top middle 
+      <strong>Note :</strong> after you have finished your live stream you will find your records history but make sure you started recording at your stream top middle 
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -18,7 +18,7 @@
       <?php endif; ?>
 <thead>
   <tr>
-  <th style="width: 2%;">#</th>
+  <th style="width: 5%;">#</th>
   <th style="width: 5%; text-align: center;">Type</th>
   <th style="width: 5%; text-align: center;">Participants</th>
   <th style="width: 15%; text-align: center;">Actions</th>

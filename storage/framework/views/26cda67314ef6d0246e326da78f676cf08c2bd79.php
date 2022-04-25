@@ -33,7 +33,7 @@ color:rgb(90, 30, 255) !important;
       </div>
   <?php endif; ?>
 
-    <table class="table table-hover">
+    <table class="table table-hover text-center">
  
  
     <thead>
@@ -44,6 +44,7 @@ color:rgb(90, 30, 255) !important;
         <th >Access Code</th>
         <th >State</th>
         <th >Created at</th>
+        <th >Last usage</th>
         <th >Options</th>
       </tr>
     </thead>
@@ -57,7 +58,7 @@ color:rgb(90, 30, 255) !important;
         <td><?php echo e($room->viewer_pw); ?></td>
         <td><?php echo e($room->verified); ?></td>
         <td><?php echo e($room->created_at); ?></td>
-
+        <td><?php echo e($room->last_usage); ?></td>
         <td colspan="3">
           <?php if($room->verified!='Pending' && $room->verified!='Denied'): ?>
 
@@ -66,9 +67,12 @@ color:rgb(90, 30, 255) !important;
 
        <?php if($room->verified!='Pending'): ?>
        
-       <a class="delete_room" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #dc3545" >Delete Room</button></a>
-       <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: Green" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
+       <a class="delete_room" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #dc3545" ><i class="fas fa-trash-alt"></i></button></a>
+       <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: rgb(19, 184, 19)" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
+       <a class="room_history" target="popup" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #8a0cff" >
+        <i class="fas fa-history"></i></button></a>
       </td>
+     
       <!-- Trigger -->
       </tr>
       <?php endif; ?>
@@ -90,7 +94,7 @@ color:rgb(90, 30, 255) !important;
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Room Confirmiation</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Delete Room Confirmation</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -158,7 +162,15 @@ color:rgb(90, 30, 255) !important;
   </div>
 </div>
 </form>
+<script>
 
+$('.room_history').click(function(){
+  var room_id= $(this).attr('id');
+  var str='<?php echo e(route("ev_room_history",":id")); ?>';
+    url= str.replace(':id',room_id);
+  window.open(url,'popup','width=1000,height=800')
+});
+</script>
 <script>
   // btn_c_delete
     $('.btn-close ,.btn_cancel').click(function(){
@@ -204,7 +216,7 @@ color:rgb(90, 30, 255) !important;
       method:"GET",
 
       success:function (result){
-        console.log(result.room.room_name);//.val(result.event.event_theme);
+        //console.log(result.room.room_name);//.val(result.event.event_theme);
         room_id.value=id;
         RoomNameUpdate.value=result.room.room_name;
         //MaxViewerUpdate.value=result.room.max_viewers;
