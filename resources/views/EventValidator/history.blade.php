@@ -1,8 +1,7 @@
-@extends('EventValidator.EV_layout')
+@extends('layouts.admin')
 
 
-
-@section('validator_content')
+@section('admin_content')
 <style>
   .div_export {
   background-color: white;

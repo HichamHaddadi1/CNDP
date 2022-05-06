@@ -48,9 +48,12 @@ class RoomsController extends Controller
      */
     function streamer_recordings()
     {
+        $events="";
         $room = Room::where('id_user' , '=' , Auth::user()->id)->first();
+        if($room)
+        {
         $events =Event::where('id_room',$room->id)->get();
-       
+        }
 
             if ($room) {
                 foreach($events as $ev)
@@ -231,7 +234,10 @@ class RoomsController extends Controller
         $url = \Bigbluebutton::join([
             'meetingID' => $room->id.'_'.$event_id.'cmp',
             'userName' => request()->get('txtName'),
-            'password' => $room->id.'_'.$event_id.'cmp'//which user role want to join set password here
+            'password' => $room->id.'_'.$event_id.'cmp',
+            'lockSettingsDisablePrivateChat'=> true,
+            'lockSettingsDisablePublicChat' => true,
+
         ]);
         //dd($room->max_viewers);
         if($room->viewer_pw != request()->get('code'))

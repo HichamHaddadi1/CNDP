@@ -38,9 +38,13 @@ return [
     //    'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'http://test-install.blindsidenetworks.com/bigbluebutton/'),
 
 
-       'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', 'iamWpIJCzaMgLNLiihwUJ47eVCEzyn4VCx8aPjB6E'),
-       'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'https://tutoring-room.tamkine.org/bigbluebutton/'),
+    //    'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', 'iamWpIJCzaMgLNLiihwUJ47eVCEzyn4VCx8aPjB6E'),
+    //    'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'https://tutoring-room.tamkine.org/bigbluebutton/'),
+//
+    'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', 'wtpDGUlHSaZ8wc2f5e5EjYFByxh0UyNyCigvRRdKnY'),
+    'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'https://conferences.tamkine.org/bigbluebutton/'),
     /**
+
 
 
      * For Multiple BigBlueButton Server Configurations

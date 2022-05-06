@@ -31,7 +31,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="fname" id="fname" placeholder="Enter your first name." >
+unset($__errorArgs, $__bag); ?>" name="fname" id="fname" placeholder="Enter your first name." value="<?php echo e(old("fname")); ?>">
               <?php $__errorArgs = ['fname'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -55,7 +55,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="lname" id="lname" placeholder="Enter your last name." >
+unset($__errorArgs, $__bag); ?>" name="lname" id="lname" placeholder="Enter your last name." value="<?php echo e(old("lname")); ?>">
               <?php $__errorArgs = ['lname'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -78,7 +78,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="name" id="name" placeholder="Please choose a username." >
+unset($__errorArgs, $__bag); ?>" name="name" id="name" placeholder="Please choose a username." value="<?php echo e(old("name")); ?>">
               <?php $__errorArgs = ['username'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -101,7 +101,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="email" id="email" placeholder="Enter your email." >
+unset($__errorArgs, $__bag); ?>" name="email" id="email" placeholder="Enter your email." value="<?php echo e(old("email")); ?>">
               <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -124,7 +124,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" name="address" id="address" placeholder="Locality/House/Street no." >
+unset($__errorArgs, $__bag); ?>" name="address" id="address" placeholder="Locality/House/Street no." value="<?php echo e(old("address")); ?>">
             <?php $__errorArgs = ['address'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -148,9 +148,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
-                <option disabled hidden selected>Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+                <option disabled hidden <?php if(old('gender')): ?> <?php else: ?> selected <?php endif; ?>>Gender</option>
+              <option value="male" <?php if(old('gender') == 'Male'): ?> selected <?php else: ?> <?php endif; ?>>Male</option>
+              <option value="female" <?php if(old('gender') == 'Female'): ?> selected <?php else: ?> <?php endif; ?>>Female</option>
           </select>
           <?php $__errorArgs = ['gender'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

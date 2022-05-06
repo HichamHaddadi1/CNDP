@@ -277,19 +277,27 @@ font-weight: bold;
   top: 12vh;
   
 }
+.start_date{
+  background-color: #007bff;
+color: white;
+padding: 5px;
+border-radius: 40px;
+font-size: 11px;
 
+}
 </style>
 
 <div  id="body">
   <!--IFRAME FACEBOOOK-->
   <div class="container my-auto col-6  live_list">
     <div class="list-group">
-     
+    
       <?php $__empty_1 = true; $__currentLoopData = $seminars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ev): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                
       <span data-toggle="tooltip" data-placement="top" title="Join Seminar" class=" m-1 list-group-item list-group-item-action text-center">
-      <?php echo e($ev->event_theme); ?> 
-     
+      <?php echo e($ev->event_theme); ?> &nbsp;
+      
+      <small class="start_date"><?php echo e($ev->starting_at); ?></small> 
       <a href="<?php echo e(route('join',['id'=>$ev->id_room ,'event_id'=>$ev->id,'_id'=>Crypt::encrypt('$event->id')])); ?>" class="btn_1 btn btn-primary float-right text-center"> 
       <i class="fas fa-play text-end"></i> 
       </a>

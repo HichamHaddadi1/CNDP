@@ -81,8 +81,8 @@ color:rgb(90, 30, 255) !important;
        {{-- {{ route('delete.room' , $room->id)}} --}}
        <a class="delete_room" id="{{$room->id}}"><button  class="btn btn-primary btn-sm" style="background-color: #dc3545" ><i class="fas fa-trash-alt"></i></button></a>
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: rgb(19, 184, 19)" data-id="{{ $room->id }}" ><i class="fas fa-edit" ></i></button></a>
-       <a class="room_history" target="popup" id="{{$room->id}}"><button  class="btn btn-primary btn-sm" style="background-color: #8a0cff" >
-        <i class="fas fa-history"></i></button></a>
+       {{-- <a class="room_history" target="popup" id="{{$room->id}}"><button  class="btn btn-primary btn-sm" style="background-color: #8a0cff" >
+        <i class="fas fa-history"></i></button></a> --}}
       </td>
      
       <!-- Trigger -->
@@ -110,11 +110,11 @@ color:rgb(90, 30, 255) !important;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       Are you sure u wanna delete this Room?
+        Are you sure you want to delete this Room?
       </div>
       <div class="modal-footer">
       
-        <a style="color:white" type="button" class="btn btn-danger btn_c_delete">Confirm Delete</a>
+        <a style="color:white" type="button" class="btn btn-danger btn_c_delete">Delete Confirmation</a>
         <a style="color:white" type="button" class="btn btn-info btn_cancel">Cancel</a>
       </div>
     </div>

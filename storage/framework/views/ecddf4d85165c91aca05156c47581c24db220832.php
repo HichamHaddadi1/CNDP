@@ -12,7 +12,7 @@
 }
 </style>
 <div class="container">
-<h2 class="m-3">room_descStreamers Rooms</h2>
+<h2 class="m-3"> Rooms</h2>
 <?php if(Session::get('success')): ?>
       <div class="alert alert-success mt-3" role="alert">
         <?php echo e(Session::get('success')); ?>
@@ -39,6 +39,7 @@
         <th scope="col">Room Description</th>
         <th scope="col">User</th>
         <th scope="col">Access Code</th>
+        <th scope="col">last Usage</th>
         <th scope="col">Room Statue</th>
         <th scope="col">Created at</th>
         <th scope="col">Options</th>
@@ -57,6 +58,7 @@
         <?php else: ?>
         <td><?php echo e($room->viewer_pw); ?></td>
         <?php endif; ?>
+        <td><?php echo e($room->last_usage); ?></td>
         <?php if(\Bigbluebutton::isMeetingRunning($room->id.'cmp') == false): ?>
         <td><img src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" style="width: 10px; height:10px;" /> Offline</td>
         <?php else: ?>
@@ -66,9 +68,11 @@
         <td colspan="3">
           
           <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text=" <?php echo e(route('join',[$room->id,Crypt::encrypt($room->id)])); ?>">
-            Copy Link
+            <i class="fas fa-copy"></i>
            </button> 
-       <a  href="<?php echo e(route('delete.room' , $room->id)); ?>"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a>
+       <a  href="<?php echo e(route('delete.room' , $room->id)); ?>"><button class="btn btn-primary btn-sm" style="background-color: #dc3545"><i class="fas fa-trash-alt"></i></button></a>
+       <a class="room_history" target="popup" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #8a0cff" >
+        <i class="fas fa-history"></i></button></a>
         </td>
         
       </tr>
@@ -79,7 +83,15 @@
     </tbody>
   
   </table>
-  
+  <script>
+
+    $('.room_history').click(function(){
+      var room_id= $(this).attr('id');
+      var str='<?php echo e(route("ev_room_history",":id")); ?>';
+        url= str.replace(':id',room_id);
+      window.open(url,'popup','width=1000,height=800')
+    });
+    </script>
     <span class="pagination justify-content-center" >
     <?php echo e($rooms->links()); ?>
 

@@ -169,12 +169,17 @@ footer p {
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  @if($errors->any())
+  <!--Creation validation-->
+  @if($errors->has('event_theme') || $errors->has('max_viewers') || $errors->has('starting_at') || $errors->has('ending_at') || $errors->has('event_desc'))
   <div class="alert alert-danger" role="alert">
     <b>Error!</b> Please go re-add seminar => <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
   @endif
-
+  @if($errors->has('event_themeUpdate') || $errors->has('max_viewersUpdate') || $errors->has('starting_at_Update') || $errors->has('ending_at_Update') || $errors->has('event_desc_Update'))
+  <div class="alert alert-danger" role="alert">
+    <b>Error!</b> Please go Update seminar => <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#EditEvent"><i class="fas fa-plus"></i> Update Seminar</button>
+  </div>
+  @endif
 @if (Session::get('success'))
       <div class="alert alert-success mt-3" role="alert">
         {{ Session::get('success') }}
@@ -186,6 +191,7 @@ footer p {
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
 @endif
+@if(!$events->isEmpty())
   <form action="{{ route('search_event_streamer') }}" method="GET">
     <div class="row">
      <div class="col-lg-4 col-lg-offset-4">
@@ -196,7 +202,7 @@ footer p {
      </div>
    </div>
    </form>
-
+@endif
    <br><br><br>
    <div class="p-5 bg-white rounded shadow mb-5">
     <!-- Rounded tabs -->
@@ -500,25 +506,25 @@ footer p {
       <div class="modal-body mx-3">
         <div class="md-form mb-3">
             <label data-error="wrong" data-success="right" for="orangeForm-email">SEMINAR Theme <small class="red_req">*</small></label>
-            <input type="text" id="RoomNameUpdate" name="event_themeUpdate" class="form-control validate"   >
+            <input type="text" id="RoomNameUpdate" name="event_themeUpdate" class="form-control validate"   value="{{old('event_themeUpdate')}}">
         </div>
         <div class="md-form mb-3">
           <label data-error="wrong" data-success="right" for="orangeForm-email">Max Viewers <small class="red_req">*</small></label>
-          <input type="number" id="max_viewersUpdate" name="max_viewersUpdate" class="form-control validate"   >
+          <input type="number" id="max_viewersUpdate" name="max_viewersUpdate" class="form-control validate"   value="{{old("max_viewersUpdate")}}">
         </div>
         <div class="time-picker">
             <div class="row">
               <div class="col">
                 <div class="md-orm ">
                   <label class="col-form-label text-right">Start at <small class="red_req">*</small></label>
-                  <input type="text" id="startingUpdate" name="starting_at_Update" autocomplete="off" value="" class="form-control form-control-solid datetimepicker-input" id="kt_datetimepicker_5" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_6" onfocusout="checkDates()" />
+                  <input type="text" id="startingUpdate" name="starting_at_Update" autocomplete="off" value="{{old('starting_at_Update')}}" class="form-control form-control-solid datetimepicker-input" id="kt_datetimepicker_5" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_6" onfocusout="checkDates()" />
                   <span for="end" id="start_error_update" class="text-danger error-text start_error_update"></span>
                 </div>
                 </div>
                 <div class="col">
             <div class="md-orm ">
                   <label class="col-form-label text-right">End at <small class="red_req">*</small></label>
-                  <input type="text" id="EndingUpdate" name="ending_at_Update" autocomplete="off" value="" class="form-control form-control-solid datetimepicker-input" id="kt_datetimepicker_4" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_6"   />
+                  <input type="text" id="EndingUpdate" name="ending_at_Update" autocomplete="off" value="{{old('ending_at_Update')}}" class="form-control form-control-solid datetimepicker-input" id="kt_datetimepicker_4" placeholder="Select date & time"  data-toggle="datetimepicker" data-target="#kt_datetimepicker_6"   />
             </div>
             </div>
              </div>
@@ -526,7 +532,7 @@ footer p {
         <div class="md-form ">
             <label data-error="wrong" data-success="right" for="orangeForm-pass">Event Description <small class="red_req">*</small></label>
             {{-- <input type="text" id="RoomDesc" class="form-control validate"> --}}
-            <textarea name="event_desc_Update" id="DescUpdate" class="form-control validate " cols="30" rows="6" maxlength="300" ></textarea>
+            <textarea name="event_desc_Update" id="DescUpdate"  class="form-control validate " cols="30" rows="6" maxlength="300" >{{old('event_desc_Update')}}</textarea>
           <div id="countL1"></div>
         </div>
       <div class="modal-footer d-flex justify-content-center">

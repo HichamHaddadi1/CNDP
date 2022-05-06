@@ -69,8 +69,7 @@ color:rgb(90, 30, 255) !important;
        
        <a class="delete_room" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #dc3545" ><i class="fas fa-trash-alt"></i></button></a>
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" id="editRoom" style="background-color: rgb(19, 184, 19)" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
-       <a class="room_history" target="popup" id="<?php echo e($room->id); ?>"><button  class="btn btn-primary btn-sm" style="background-color: #8a0cff" >
-        <i class="fas fa-history"></i></button></a>
+       
       </td>
      
       <!-- Trigger -->

@@ -21,7 +21,7 @@
         <div class="row jumbotron">
             <div class="col-sm-6 form-group">
                 <label for="name-f">First Name <small class="req"> * </small></label>
-                <input type="text"  class="form-control @error('fname') is-invalid @enderror" name="fname" id="fname" placeholder="Enter your first name." >
+                <input type="text"  class="form-control @error('fname') is-invalid @enderror" name="fname" id="fname" placeholder="Enter your first name." value="{{old('fname')}}">
                 @error('fname')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
                  <input type="hidden" name="user_type" value="s">
             <div class="col-sm-6 form-group">
                 <label for="name-l">Last name <small class="req"> * </small></label>
-                <input type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" id="lname" placeholder="Enter your last name." >
+                <input type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" id="lname" placeholder="Enter your last name." value="{{old('lname')}}">
                 @error('lname')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-6 form-group">
                 <label for="name-l">Username <small class="req"> * </small></label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Please choose a username." >
+                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="Please choose a username." value="{{old('name')}}">
                 @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
             </div>
             <div class="col-sm-6 form-group">
                 <label for="email">Email <small class="req"> * </small></label>
-                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Enter your email." >
+                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Enter your email." value="{{old('email')}}">
                 @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
             </div>
             <div class="col-sm-6 form-group">
                 <label for="address-1">Address Line-1 <small class="req"> * </small></label>
-                <input type="address" class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Locality/House/Street no." >
+                <input type="address" class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Locality/House/Street no." value="{{old('address')}}">
                 @error('address')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

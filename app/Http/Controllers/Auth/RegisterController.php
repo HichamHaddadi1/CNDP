@@ -63,15 +63,15 @@ class RegisterController extends Controller
         if(request()->input('user_type') == 's')
         {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required' , 'string', 'email', 'max:255', 'unique:users'],
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required' , 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required' , 'string', 'min:8' , 'confirmed'],
-            'address' =>'required' ,
-            'gender' =>'required' ,
-            'fname' =>'required' ,
-            'lname' =>'required' ,
+            'address'  => 'required' ,
+            'gender'   => 'required' ,
+            'fname'    => 'required' ,
+            'lname'    => 'required' ,
             'language' => 'required',
-            'country' =>'required',
+            'country'  => 'required',
         ]);
     }
     else

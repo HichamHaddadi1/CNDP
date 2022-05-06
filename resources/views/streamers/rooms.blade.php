@@ -213,7 +213,7 @@ label[for="file-uploadupdate"]:hover {
             
             <div class="md-form mb-3">
               <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
-              <input type="number" id="MaxViewer" name="viewer_pw" class="form-control validate">
+              <input type="number" id="MaxViewer" name="viewer_pw" class="form-control validate" onkeypress="return onlyNumberKey(event)">
               @if($errors->has('viewer_pw'))
               <span class="text-danger" role="alert">
               <small> <strong>{{ $errors->first('viewer_pw') }}</strong></small>
@@ -293,7 +293,7 @@ label[for="file-uploadupdate"]:hover {
          
             <div class="md-form mb-3">
               <label data-error="wrong" data-success="right" for="orangeForm-email">Viewer Password <small class="red_req">*</small></label>
-              <input type="text" id="viewer_pwUpdate" name="viewer_pwupdate" class="form-control validate">
+              <input type="text" id="viewer_pwUpdate" name="viewer_pwupdate" class="form-control validate" onkeypress="return onlyNumberKey(event)">
               <small class="text-error viewer_pwupdate_error"  style="color:red;"></small>
             </div>
         
@@ -328,7 +328,16 @@ label[for="file-uploadupdate"]:hover {
   </div>
 </div>
 </form>
-
+<script>
+  function onlyNumberKey(evt) {
+        
+      // Only ASCII character in that range allowed
+      var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+      if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+          return false;
+      return true;
+  }
+</script>
 <script src="\js\sweetalert2.js"></script>
 <script>
   new ClipboardJS('.btn');

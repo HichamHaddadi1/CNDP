@@ -1,8 +1,7 @@
 
 
 
-
-<?php $__env->startSection('validator_content'); ?>
+<?php $__env->startSection('admin_content'); ?>
 <style>
   .div_export {
   background-color: white;
@@ -52,4 +51,4 @@
    </span> 
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('EventValidator.EV_layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/EventValidator/history.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\Seminaire-CNDP\resources\views/EventValidator/history.blade.php ENDPATH**/ ?>

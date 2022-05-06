@@ -12,7 +12,7 @@
 }
 </style>
 <div class="container">
-<h2 class="m-3">room_descStreamers Rooms</h2>
+<h2 class="m-3"> Rooms</h2>
 @if (Session::get('success'))
       <div class="alert alert-success mt-3" role="alert">
         {{ Session::get('success') }}
@@ -38,6 +38,7 @@
         <th scope="col">Room Description</th>
         <th scope="col">User</th>
         <th scope="col">Access Code</th>
+        <th scope="col">last Usage</th>
         <th scope="col">Room Statue</th>
         <th scope="col">Created at</th>
         <th scope="col">Options</th>
@@ -56,6 +57,7 @@
         @else
         <td>{{ $room->viewer_pw }}</td>
         @endif
+        <td>{{$room->last_usage}}</td>
         @if(\Bigbluebutton::isMeetingRunning($room->id.'cmp') == false)
         <td><img src="https://img.icons8.com/emoji/48/000000/red-circle-emoji.png" style="width: 10px; height:10px;" /> Offline</td>
         @else
@@ -65,9 +67,11 @@
         <td colspan="3">
           {{-- <a class="btn btn-primary btn-sm" href="{{ route('admin.rooms_start' , $room->id)}}"><i class="fa fa-play fa-sm"></i> Start Room</a> --}}
           <button class="btn btn-primary btn-sm" style="color: white" data-clipboard-text=" {{ route('join',[$room->id,Crypt::encrypt($room->id)])}}">
-            Copy Link
+            <i class="fas fa-copy"></i>
            </button> 
-       <a  href="{{ route('delete.room' , $room->id)}}"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a>
+       <a  href="{{ route('delete.room' , $room->id)}}"><button class="btn btn-primary btn-sm" style="background-color: #dc3545"><i class="fas fa-trash-alt"></i></button></a>
+       <a class="room_history" target="popup" id="{{$room->id}}"><button  class="btn btn-primary btn-sm" style="background-color: #8a0cff" >
+        <i class="fas fa-history"></i></button></a>
         </td>
         
       </tr>
@@ -78,7 +82,15 @@
     </tbody>
   
   </table>
-  
+  <script>
+
+    $('.room_history').click(function(){
+      var room_id= $(this).attr('id');
+      var str='{{route("ev_room_history",":id")}}';
+        url= str.replace(':id',room_id);
+      window.open(url,'popup','width=1000,height=800')
+    });
+    </script>
     <span class="pagination justify-content-center" >
     {{$rooms->links()}}
     </span>

@@ -303,9 +303,10 @@ class EVController extends Controller
         $p_events           =   Event::where('isVerified', '=', 'Pending')->get();
         $pending_events     =   $p_events->count();
         $rooms              =   Room::all();
-        $p_rooms            =   Room::where('verified', '=', 'pending')->get();
-        $pending_rooms      =   $p_rooms->count();
-
+       
+        $pending_rooms = Room::where('verified', '=', 'pending')->get();
+        $pending = $pending_rooms->count();
+      
         /************************************************************************* */
         $history            =   history::join('rooms','rooms.id','histories.room_id')
                                        ->join('events','events.id','histories.event_id')
@@ -315,6 +316,6 @@ class EVController extends Controller
                                        ->paginate(10);
 
                                       // dd($history);
-        return view('EventValidator.history',compact('history','pending_events','streamers_requests','pending_rooms','room_id'));
+        return view('EventValidator.history',compact('history','pending','streamers_requests','pending_rooms','room_id','pending_events'));
     }
 }

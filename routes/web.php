@@ -164,7 +164,7 @@ Route::get('validator/rooms',[EVController::class , 'validator_all_rooms'])->nam
 Route::get('validator/events/{id}/{mode}', [EVController ::class ,'verify_event'])->name('verify_event');
 Route::get('validator/rooms/pending/{id}/{mode}', [EVController ::class ,'verify_Room'])->name('update.verify_Room');
 Route::post('/rooms/update_', [EVController::class ,'updateRoomValidator'])->name('validator.room_update');
-Route::get('validator/history/{id}',[EVController::class,'room_history'])->name('ev_room_history');
+
 Route::get('/rooms/{id}/edit/' ,[EVController::class , 'roomedit'])->name('edit_room');
 Route::get('/validator/streamers/pending/{id}/{mode}', [EVController ::class ,'verify_streamer'])->name('validator_verify_streamer');
 Route::get('/validator/seminarists' , [EVController::class , 'validator_all_users'])->name('validator.users');
@@ -174,7 +174,7 @@ Route::get('/validator/statistics',[EVController::class , 'showStatistics'])->na
 
 });
 
-
+Route::get('validator/history/{id}',[EVController::class,'room_history'])->name('ev_room_history');
 // Route::get('user/login',[MainController::class , 'login_user'])->name('userLogin');
 
 
