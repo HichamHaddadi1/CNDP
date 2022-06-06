@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- end scripts -->
 
 <style>
-  .btn-circle.btn-xl {
+.btn-circle.btn-xl {
     width: 70px;
     height: 70px;
     padding: 18px 16px;
@@ -52,9 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     line-height: 1.33;
     color :white;
 }
-  .fc-event-time{
-    display: none !important;
-  }
+ 
 </style>
   </head>
 <body class="hold-transition sidebar-mini">
@@ -126,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="{{ url('user/applied') }}" class="nav-link active">
               <i class="nav-icon fas fa-user"></i>
               <p>
-                My Seminarists 
+                My Seminars
               </p>
             </a>
 

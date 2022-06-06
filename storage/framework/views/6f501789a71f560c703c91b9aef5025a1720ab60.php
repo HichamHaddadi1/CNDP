@@ -118,7 +118,7 @@
       <?php
       $date_soon=\Carbon\Carbon::create($v->starting_at);
       ?>
-      <?php if(\Carbon\Carbon::now()->lte($v->starting_at) && $v->event_statue==false && \Carbon\Carbon::now()->diffInHours($v->starting_at)<24 && $v->isVerified=="Verified"): ?>
+      <?php if(\Carbon\Carbon::now()->lte($v->starting_at) && $v->event_statue==false && \Carbon\Carbon::now()->diffInHours($v->starting_at)<48 && $v->isVerified=="Verified"): ?>
       <div class="card-grid-space">
         <?php if($v->avatar != null): ?>
             <a class="shadow card1" href="" style="background-image: url(/upload/<?php echo e($v->avatar); ?>);">    
@@ -173,7 +173,7 @@
       <?php
       $date_soon=\Carbon\Carbon::create($v->starting_at);
       ?>
-      <?php if(\Carbon\Carbon::now()->lte($v->starting_at) && \Carbon\Carbon::now()->diffInHours($v->starting_at)>24 && $v->isVerified=="Verified"): ?>
+      <?php if(\Carbon\Carbon::now()->lte($v->starting_at) && \Carbon\Carbon::now()->diffInHours($v->starting_at)>48 && $v->isVerified=="Verified"): ?>
       <!--<div class="card shadow mb-5 bg-white rounded" style="width: 18rem;" style="text-align: center">
         <span class="later"><i class='fas fa-dot-circle' style="color:rgba(82, 82, 82, 0.623)"></i>
           OFFLINE</span>       

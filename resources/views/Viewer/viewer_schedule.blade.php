@@ -45,6 +45,15 @@ margin-bottom: 10%;
   margin-top:1%;
 }
 }
+.event_capacity span{
+  background-color:#17a2b8;
+  color: white;
+  font-weight: bold;
+  max-width: 50px;
+  padding: 8px;
+  border-radius: 50px;
+  
+}
 </style>
 
 <div class="event_info"style="">
@@ -78,11 +87,12 @@ $schedule = url()->current();
       <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header bg-info">
-              <h4 class="modal-title ml-auto " style="color:white;">Event Informations</h4>
+              <h4 class="modal-title ml-auto " style="color:white;">Seminar Informations</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <!-- Modal body -->
           <div class="modal-body">
+           
           <div class="form-group">
             <input type="hidden" id="room_id">
             <input type="hidden" id="event_id">
@@ -104,6 +114,10 @@ $schedule = url()->current();
               <label for="end">End</label>
               <input type="text" class="form-control" id="event-end"readonly>
           </div>
+          <div class="text-center event_capacity m-2">
+             <strong>Seminar Capacity : </strong>
+            <span></span>
+           </div>
           <!-- <div class="form-group">
           <label for="invite-link">Invite Link <span class="text-muted" id="copy"></span></label>
           <input type="text" class="form-control" id="invite-link" onclick="myFunction()" value="" readonly>
@@ -115,7 +129,7 @@ $schedule = url()->current();
             <a href="{{route('userRegister')}}" class="btn btn-outline-primary btn-md form-control"><i class="fas fa-user-plus"></i>&nbsp Register</a>
             @else
         <div class="text-center" id="appliedbtn" style="display: none">
-            <button type="button" class="btn btn-lg btn-success" disabled>Applied <i class="fas fa-check"></i></button>
+            <button type="button" class="btn btn-lg btn-success form-control" id="apply_remover">Applied <i class="fas fa-check"></i></button>
         </div>
         <br>
        <div class="text-center" id="joinbtn" style="display: none">
@@ -131,7 +145,7 @@ $schedule = url()->current();
           </div>
           <!-- Modal footer -->
           <div class="modal-footer">
-             
+           
           </div>
       </div>
     </div>
@@ -159,7 +173,7 @@ $schedule = url()->current();
      const room_id = $('#room_id'),event_id =$('#event_id');
       $('#apply_event').click(function(){
         $('#apply_event').show();
-        console.log(event_id.val());
+        //console.log(event_id.val());
       $.ajax({
 
       url: '/schedule/'+room_id.val()+'/'+event_id.val(),
@@ -250,13 +264,13 @@ $schedule = url()->current();
               
             });
             $("#dropdown").on("change", function(event) {
-              console.log(jQuery("#dropdown option:selected").text());
+              //console.log(jQuery("#dropdown option:selected").text());
               var filterKey = jQuery("#dropdown option:selected").text();
               var array = $.getJSON("/adminev");
          
             });
  
-                 /******************************************************************************************/
+ /******************************************************************************************/
  //CheckPastDate dec2hex :: Integer -> String
 // i.e. 0-255 -> '00'-'ff'
 function dec2hex (dec) {
@@ -292,7 +306,7 @@ function dec2hex (dec) {
 
                 },
                 eventClick: function(event){
-                console.log(event);
+                //console.log(event);
                 //console.log(event.user[0]['fname'] , event.user[0]['lname']);
                 //console.log(room_id);
                 //console.log(event);
@@ -312,20 +326,20 @@ function dec2hex (dec) {
                     dataType: 'json',
 
                     success:function (result){
-                    if (result.status == 0) {
-                        $('#appliedbtn').show();
-                        $('#apply_event').hide();
-                        $('#joinbtn').show();
-                      } else if (result.status == 1) {
-                        $('#appliedbtn').hide();
-                        $('#apply_event').show();
-                        $('#joinbtn').hide();
-                      } 
-                    }
+                            if (result.status == 0) {
+                                $('#appliedbtn').show();
+                                $('#apply_event').hide();
+                                $('#joinbtn').show();
+                              } else if (result.status == 1) {
+                                $('#appliedbtn').hide();
+                                $('#apply_event').show();
+                                $('#joinbtn').hide();
+                              } 
+                            }
                     });
   /*FIll the inputs*/
                 var room_id = event.id_room;
-             
+             //console.log(event.event_capacity);
                 var url = `{{route('join')}}/${room_id}/${event.id_event}/${generateId()}`;
                 $('#invite-link').attr('href' , url);
                 $('#event-title').val(event.title);
@@ -334,6 +348,8 @@ function dec2hex (dec) {
                 $('#event-presenter').val(event.user[0]['fname'] +' '+  event.user[0]['lname']);
                 $('#event-start').val(event.start.toISOString().replace('T' , " at ").replace(':00' , ""));
                 $('#event-end').val(event.end.toISOString().replace('T' , " at ").replace(':00' , ""));
+                $('.event_capacity span').text(event.event_capacity);
+                $('#apply_remover').val(event.id_event);
                  /*applied logic*/
                
 
@@ -384,7 +400,24 @@ function dec2hex (dec) {
     </script>
 
 
-    
+    <script>
+
+      $('#apply_remover').click(function(){
+         
+        var event_id = $(this).val();
+        $.ajax({
+          url: 'remove_apply/' + event_id,
+          type: 'GET',
+          dataType: 'json',
+          success: function(response) {
+            //console.log(response);
+          },
+        });
+      });
+
+     
+
+    </script>
 
     
 

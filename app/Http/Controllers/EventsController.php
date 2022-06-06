@@ -56,7 +56,9 @@ class EventsController extends Controller
           foreach($events as $event)
         {
             $color="#444";
-           
+           $max_viewers = Event::where('id',$event->id)->first()->max_viewers;
+           $ordered = Tickit::where('event_id',$event->id)->get();
+           $ordered_count = count($ordered);
             //dd($event->ending_at > Carbon::now());
             if($event->ending_at > Carbon::now())
             {
@@ -71,7 +73,8 @@ class EventsController extends Controller
                 'user'          =>   User::where('id' , '=' , $event->id_user)->get(),
                 'isVerified'    =>   $event->isVerified,
                 'id_event'      =>   $event->event_id,
-                'color'         =>   $color
+                'color'         =>   $color,
+                'event_capacity'=>    $ordered_count.' / '.$max_viewers,     
             ];
            array_push($eventsArray,$data);
            
@@ -121,6 +124,9 @@ class EventsController extends Controller
           foreach($events as $event)
         {
             $color="#444";
+            $max_viewers = Event::where('id',$event->id)->first()->max_viewers;
+            $ordered = Tickit::where('event_id',$event->id)->get();
+            $ordered_count = count($ordered);
             //dd($event->ending_at > Carbon::now());
             if($event->ending_at > Carbon::now())
             {
@@ -137,7 +143,8 @@ class EventsController extends Controller
                 'user' => User::where('id' , '=' , $event->id_user)->get(),
                 'isVerified' =>$event->isVerified,
                 'id_event' => $event->id,
-                'color'  => $color
+                'color'  => $color,
+                'event_capacity'=>    $ordered_count.' / '.$max_viewers,     
             ];
            array_push($eventsArray,$data);
         }
@@ -219,6 +226,8 @@ class EventsController extends Controller
     {
         $roomcheck=Room::where('id_user',Auth::user()->id)->get();
         $data = DB::table('events')->get();
+
+       
         //  $name = DB::table('users')->select('user_name')->where('id_user','=',$data->id_user);
         $events =DB::table('events')
         ->where('ending_at','>=',Carbon::now()->format('Y-m-d G:i'))

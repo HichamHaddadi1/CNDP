@@ -140,13 +140,14 @@ label[for="file-uploadupdate"]:hover {
 
 
         <td colspan="3">
-          <?php if($room->verified!='Pending' && $room->verified!='Denied'): ?>
+          <?php if($room->verified!='Pending' && $room->verified!='denied'): ?>
 
 
        <?php endif; ?>
 
-       <?php if($room->verified!='Pending'): ?>
+       <?php if($room->verified=='Pending' || $room->verified=='denied'): ?>
        
+          <?php else: ?>
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" style="background-color: Green" data-id="<?php echo e($room->id); ?>" ><i class="fas fa-edit" ></i></button></a>
        <?php endif; ?>
 

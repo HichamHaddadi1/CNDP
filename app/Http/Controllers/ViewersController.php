@@ -32,7 +32,13 @@ class ViewersController extends Controller
      
        return view('Viewer.viewer_events',compact('users_rooms'));
     }
+    public function remove_apply($id)
+    {
 
+        Tickit::where('user_id',Auth::user()->id)->where('event_id',$id)->delete();
+       return response()->json(['success' => 'Removed Successfully']); 
+       
+    }
     public function contact()
     {
         return view('Viewer.viewer_contact_us');
@@ -132,7 +138,11 @@ class ViewersController extends Controller
        $tickits = Tickit::where('room_id',$room_id)
        ->where('event_id',$event_id);
        $tickitsCount = $tickits->count();
-       
+       $deny_tickts_owner  =   Event::where('id',$event_id)->first()->id_user;
+       if($deny_tickts_owner == auth()->user()->id)
+       {
+            return response()->json(['status' => 0, 'message' => "you cant't apply on your own event"]);
+       }
         /*Preventing multi applying*/
         $multi_apply     =   Tickit::where('user_id',Auth::user()->id)
                                     ->where('room_id',$room_id)
@@ -154,7 +164,7 @@ class ViewersController extends Controller
             'message'    => '' ,
             'event_name' => 'Seminar Theme :'. $event->event_theme,
             'event_pw'   => 'Password :'.$room->viewer_pw,
-            'actionUrl' => route('join',['id'=>$event->id_room ,'event_id'=>$event->id,'_id'=>Crypt::encrypt('$event->id')])
+            'actionUrl'  => route('join',['id'=>$event->id_room ,'event_id'=>$event->id,'_id'=>Crypt::encrypt('$event->id')])
             ];
        
         $tickit=new Tickit([
@@ -170,6 +180,7 @@ class ViewersController extends Controller
 
     public function applyCheck($room_id,$event_id)
     {
+
         $multi_apply     =   Tickit::where('user_id',Auth::user()->id)
                                    ->where('room_id',$room_id)
                                    ->where('event_id',$event_id)->get();

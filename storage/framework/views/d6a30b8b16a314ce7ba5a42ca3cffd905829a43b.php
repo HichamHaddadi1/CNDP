@@ -139,7 +139,6 @@
   $(document).ready(function () {
 
          
-
         var SITEURL = "<?php echo e(url('/')); ?>";
 
         $.ajaxSetup({

@@ -97,11 +97,11 @@ color:rgb(90, 30, 255) !important;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       Are you sure u wanna delete this Room?
+        Are you sure you want to delete this Room?
       </div>
       <div class="modal-footer">
       
-        <a style="color:white" type="button" class="btn btn-danger btn_c_delete">Confirm Delete</a>
+        <a style="color:white" type="button" class="btn btn-danger btn_c_delete">Delete Confirmation</a>
         <a style="color:white" type="button" class="btn btn-info btn_cancel">Cancel</a>
       </div>
     </div>

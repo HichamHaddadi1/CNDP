@@ -224,7 +224,7 @@ Route::get('validator/history/{id}',[EVController::class,'room_history'])->name(
     Route::post('send', [ContactUsController::class, 'send'])->name('contact.send');
     Route::get('/schedule',[ViewersController::class,'schedule'])->name('viewer_schedule');
     Route::get('/schedule/{id}/{_id}',[ViewersController::class,'applyForEvent'])->name('viewer_apply');
-    
+    route::get('/remove_apply/{id}',[ViewersController::class,'remove_apply'])->name('remove.apply');
     Route::get('/check/{id}/{_id}',[ViewersController::class,'applyCheck'])->name('viewer_apply');
     // /**********************Streamers Routes  */
     // Route::get('/streamer', function(){

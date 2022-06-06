@@ -148,9 +148,9 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
-                <option disabled hidden <?php if(old('gender')): ?> <?php else: ?> selected <?php endif; ?>>Gender</option>
-              <option value="male" <?php if(old('gender') == 'Male'): ?> selected <?php else: ?> <?php endif; ?>>Male</option>
-              <option value="female" <?php if(old('gender') == 'Female'): ?> selected <?php else: ?> <?php endif; ?>>Female</option>
+                <option disabled hidden  selected >Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
           </select>
           <?php $__errorArgs = ['gender'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

@@ -70,7 +70,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure u wanna Verify this Room?
+        Are you sure you want to Verify this Room?
       </div>
       <div class="modal-footer">
       
@@ -90,7 +90,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Are you sure u wanna Deny this Room?
+        Are you sure you want to Deny this Room?
       </div>
       <div class="modal-footer">
       
@@ -123,7 +123,7 @@
       $('.btn_deny').click(function(){
           var event_id= $(this).attr("id");
         //console.log(room_id);
-          var str='<?php echo e(route("verify_event" , [":id","d"])); ?>';
+          var str='<?php echo e(route("update.verify_Room" , [":id","d"])); ?>';
           str= str.replace(':id',event_id);
           $('#DenyModal').modal('show');
           $('.btn_c_d').attr('href',str);

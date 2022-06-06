@@ -67,7 +67,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       Are you sure u wanna deny this Seminar?
+       Are you sure you want to deny this Seminar?
       </div>
       <div class="modal-footer">
       
@@ -91,7 +91,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       Are you sure u wanna validate this Seminar?
+        Are you sure you want to validate this Seminar?
       </div>
       <div class="modal-footer">
       

@@ -186,7 +186,7 @@ footer p {
       </div>
 @endif
 
-@if(!$roomcheck->isEmpty())
+@if(!$roomcheck->isEmpty() && $roomcheck[0]->verified =="verified" )
   <div class="btn mb-4 mr-4" style="float: right">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
@@ -269,6 +269,11 @@ footer p {
                          <span data-toggle="tooltip" title="Share link">
                           <button  type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-share-alt"></i> </button>
                          </span>
+
+                         
+                              
+                          @else
+                          <button data-toggle="tooltip" title="Edit Seminar"  class="btn btn-success btn-sm editBtn" data-id="{{ $event->id }}" ><i class="fas fa-pen"></i></button>
                       
                       @endif
                       @if($event->isVerified !='Pending' )
@@ -279,10 +284,6 @@ footer p {
                         Seminers Expired
                       @endif
                      
-                          
-                     
-                          
-                      
                   </td>
               </tr>
            @empty

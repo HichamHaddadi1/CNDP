@@ -165,9 +165,7 @@
   }
 }
 
-.fc-event-time{
-    display: none !important;
-  }
+
 </style>
     </head>
     <body class="section">

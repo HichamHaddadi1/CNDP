@@ -141,19 +141,15 @@ label[for="file-uploadupdate"]:hover {
         <tr>
         <td>{{ $room->room_name }}</td>
         <td class="room_desc">{{ $room->room_desc }}</td>
-        {{-- <td >{{ $room->max_viewers }}</td> --}}
         <td>{{$room->viewer_pw}}</td>
         <td>{{$room->verified}}</td>
-
-
         <td colspan="3">
-          @if($room->verified!='Pending' && $room->verified!='Denied')
-
-
+       @if($room->verified!='Pending' && $room->verified!='denied')
        @endif
 
-       @if($room->verified!='Pending')
+       @if($room->verified=='Pending' || $room->verified=='denied')
        {{-- <a  href="{{ route('delete.room' , $room->id)}}"><button class="btn btn-primary btn-sm" style="background-color: #dc3545">Delete Room</button></a> --}}
+          @else
        <a  href="#"><button class="btn btn-primary btn-sm editRoom" style="background-color: Green" data-id="{{ $room->id }}" ><i class="fas fa-edit" ></i></button></a>
        @endif
 

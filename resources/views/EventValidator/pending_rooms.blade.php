@@ -122,7 +122,7 @@
       $('.btn_deny').click(function(){
           var event_id= $(this).attr("id");
         //console.log(room_id);
-          var str='{{ route("verify_event" , [":id","d"])}}';
+          var str='{{ route("update.verify_Room" , [":id","d"])}}';
           str= str.replace(':id',event_id);
           $('#DenyModal').modal('show');
           $('.btn_c_d').attr('href',str);

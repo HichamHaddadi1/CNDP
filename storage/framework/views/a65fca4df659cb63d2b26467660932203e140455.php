@@ -187,7 +187,7 @@ footer p {
       </div>
 <?php endif; ?>
 
-<?php if(!$roomcheck->isEmpty()): ?>
+<?php if(!$roomcheck->isEmpty() && $roomcheck[0]->verified =="verified" ): ?>
   <div class="btn mb-4 mr-4" style="float: right">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalRegisterForm"><i class="fas fa-plus"></i> Add Seminar</button>
   </div>
@@ -270,6 +270,11 @@ footer p {
                          <span data-toggle="tooltip" title="Share link">
                           <button  type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-share-alt"></i> </button>
                          </span>
+
+                         
+                              
+                          <?php else: ?>
+                          <button data-toggle="tooltip" title="Edit Seminar"  class="btn btn-success btn-sm editBtn" data-id="<?php echo e($event->id); ?>" ><i class="fas fa-pen"></i></button>
                       
                       <?php endif; ?>
                       <?php if($event->isVerified !='Pending' ): ?>
@@ -280,10 +285,6 @@ footer p {
                         Seminers Expired
                       <?php endif; ?>
                      
-                          
-                     
-                          
-                      
                   </td>
               </tr>
            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
